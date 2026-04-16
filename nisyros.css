@@ -107,7 +107,7 @@ body::before {
 .nav-links { display: flex; flex-direction: column; align-items: center; gap: 0; list-style: none; }
 .nav-links li a {
   display: block; font-family: bookmania, Georgia, serif; font-weight: 400;
-  font-size: clamp(1.6rem, 7vw, 5rem); letter-spacing: -0.01em; line-height: 1;
+  font-size: clamp(2.4rem, 7vw, 5rem); letter-spacing: 0.12em; line-height: 1;
   color: rgba(255,255,255,0.8);
   text-decoration: none; padding: 0; text-align: center;
   transition: color 0.2s;
@@ -373,7 +373,7 @@ hr.wine-slash { border: none; border-top: 2px solid var(--red); width: 48px; mar
   background: linear-gradient(to top, rgba(41,37,35,0.65) 0%, rgba(41,37,35,0.08) 55%);
 }
 .faces-slide-caption { position: absolute; bottom: 48px; left: 48px; right: 48px; }
-.faces-slide-label { font-size: var(--h6); letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+.faces-slide-label { font-size: var(--h6); letter-spacing: 0.35em; text-transform: uppercase; color: #fff; margin-bottom: 8px; }
 .faces-slide-text { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: var(--h3); line-height: 1.0; letter-spacing: -0.01em; color: #fff; }
 
 .faces-prev, .faces-next {

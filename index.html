@@ -389,12 +389,9 @@ document.querySelectorAll('#m1 .reveal').forEach((el, i) => {
 (function() {
   var slides = document.querySelectorAll('.faces-slide');
   var dots   = document.querySelectorAll('.faces-dot');
-  var cur = 0, autoT, facesVisible = false;
-  function startAuto() { clearInterval(autoT); autoT = setInterval(() => goTo(cur + 1), 5000); }
-  function stopAuto()  { clearInterval(autoT); }
+  var cur = 0;
   function goTo(idx) {
     if (idx >= slides.length) {
-      stopAuto();
       var facesEl = document.getElementById('faces');
       var next = facesEl ? facesEl.nextElementSibling : null;
       if (next) navScrollTo(next);
@@ -403,15 +400,7 @@ document.querySelectorAll('#m1 .reveal').forEach((el, i) => {
     slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
     cur = (idx + slides.length) % slides.length;
     slides[cur].classList.add('active'); dots[cur].classList.add('active');
-    if (facesVisible) startAuto();
   }
-  var facesObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      facesVisible = e.isIntersecting;
-      if (facesVisible) startAuto(); else stopAuto();
-    });
-  }, { threshold: 0.5 });
-  facesObs.observe(document.getElementById('faces'));
   document.getElementById('faces-prev').addEventListener('click', () => goTo(cur - 1));
   document.getElementById('faces-next').addEventListener('click', () => goTo(cur + 1));
   dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
