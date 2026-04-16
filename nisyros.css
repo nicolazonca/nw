@@ -122,8 +122,8 @@ body::before {
   stroke: var(--ink); stroke-width: 1.5;
   fill: none; stroke-linecap: round; stroke-linejoin: round;
 }
-.scroll-chevron-left { left: 12px; }
-.scroll-chevron-right { right: 12px; }
+.scroll-chevron-left { left: 0px; }
+.scroll-chevron-right { right: 0px; }
 #credo .scroll-chevron svg, .page .scroll-chevron svg { stroke: var(--bg); }
 
 /* BOUNCE animation — only on the very first right chevron shown */
