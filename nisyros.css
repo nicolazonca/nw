@@ -78,11 +78,12 @@ body::before {
 .nav-links li a {
   display: block; font-family: bookmania, Georgia, serif; font-weight: 400;
   font-size: clamp(1.6rem, 7vw, 5rem); letter-spacing: -0.01em;
-  color: rgba(255,255,255,0.6);
-  text-decoration: none; padding: 8px 0; text-align: center;
+  color: #fff;
+  text-decoration: none; padding: 0; text-align: center;
   transition: color 0.2s;
 }
-.nav-links li a:hover, .nav-links li a.active { color: #fff; }
+.nav-links li a:hover { color: var(--red); }
+.nav-links li a.active { color: var(--red); }
 
 .section-anchor { display: block; height: 0; margin: 0; padding: 0; pointer-events: none; scroll-margin-top: var(--nav-h); }
 
