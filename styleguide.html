@@ -20,14 +20,14 @@
       --stone: #C7BCA3;
       --muted: #494441;
 
-      /* ── DISPLAY SCALE ── */
+      /* ── PROPOSED DISPLAY SCALE ── */
       --d-xl: clamp(3.5rem, 10vw, 9rem);
       --d-lg: clamp(3rem, 8.5vw, 7.5rem);
       --d-md: clamp(2.5rem, 7vw, 6rem);
       --d-sm: clamp(1.6rem, 5vw, 3.5rem);
       --d-xs: clamp(1.2rem, 3vw, 2.4rem);
 
-      /* ── TEXT SCALE ── */
+      /* ── PROPOSED TEXT SCALE ── */
       --t-lg: clamp(0.9rem, 2vw, 1.2rem);
       --t-md: clamp(0.82rem, 1.8vw, 1rem);
       --t-sm: clamp(0.65rem, 1.8vw, 0.85rem);
@@ -52,105 +52,85 @@
       background: var(--bg);
       color: var(--ink);
       font-family: bookmania, Georgia, serif;
-      padding: 64px 48px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 64px 48px 120px;
     }
-
     @media (max-width: 639px) {
-      body { padding: 40px 24px; }
+      body { padding: 40px 24px 80px; }
     }
 
     /* ── PAGE HEADER ── */
-    .sg-header {
-      border-bottom: 2px solid var(--ink);
-      padding-bottom: 32px;
-      margin-bottom: 64px;
-    }
-    .sg-header h1 {
-      font-family: bookmania, Georgia, serif;
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .sg-header p {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 300;
-      font-size: 0.75rem;
-      color: var(--stone);
-      margin-top: 6px;
-      letter-spacing: 0.05em;
-    }
-
-    /* ── SECTION ── */
-    .sg-section {
-      margin-bottom: 80px;
-    }
-    .sg-section-title {
+    .sg-page-title {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
       font-size: 0.65rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 40px;
+      color: var(--stone);
+      margin-bottom: 4px;
+    }
+    .sg-page-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--stone);
+      opacity: 0.6;
+      margin-bottom: 48px;
+    }
+    .sg-divider {
+      border: none;
+      border-top: 2px solid var(--ink);
+      margin-bottom: 64px;
     }
 
-    /* ── SCALE ROW ── */
+    /* ── SECTION TITLE ── */
+    .sg-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 40px;
+      margin-top: 72px;
+    }
+    .sg-section-label:first-of-type { margin-top: 0; }
+
+    /* ── ROW ── */
     .sg-row {
-      display: flex;
-      align-items: baseline;
-      gap: 32px;
-      padding: 24px 0;
+      padding: 28px 0;
       border-top: 1px solid rgba(43,39,37,0.1);
     }
     .sg-row:last-child {
       border-bottom: 1px solid rgba(43,39,37,0.1);
     }
-    .sg-meta {
-      flex: 0 0 200px;
-      min-width: 0;
-    }
-    .sg-varname {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 400;
-      font-size: 0.7rem;
-      color: var(--red);
-      display: block;
-      margin-bottom: 4px;
-    }
-    .sg-value {
+
+    /* small meta line above the sample */
+    .sg-label {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
-      font-size: 0.6rem;
-      color: var(--muted);
-      display: block;
-      margin-bottom: 4px;
-      word-break: break-all;
-    }
-    .sg-mobile-value {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 300;
-      font-size: 0.6rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
       color: var(--stone);
-      display: block;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
     }
-    .sg-usage {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 300;
-      font-size: 0.6rem;
-      color: var(--muted);
-      display: block;
-      margin-top: 8px;
-      opacity: 0.7;
-    }
-    .sg-preview {
-      flex: 1;
-      min-width: 0;
+    .sg-label strong {
+      color: var(--red);
+      font-weight: 400;
     }
 
-    /* ── DISPLAY PREVIEWS ── */
-    .prev-d-xl {
+    /* ────────────────────────────────────────
+       DISPLAY SAMPLES — exact properties from nisyros.css
+       ──────────────────────────────────────── */
+
+    /* .big */
+    .sg-d-xl {
       font-family: bookmania, Georgia, serif;
       font-weight: 400;
       font-size: var(--d-xl);
@@ -158,7 +138,9 @@
       letter-spacing: -0.02em;
       color: var(--ink);
     }
-    .prev-d-lg {
+
+    /* .big.md */
+    .sg-d-lg {
       font-family: bookmania, Georgia, serif;
       font-weight: 400;
       font-size: var(--d-lg);
@@ -166,7 +148,9 @@
       letter-spacing: -0.02em;
       color: var(--ink);
     }
-    .prev-d-md {
+
+    /* .big.sm — same rhythm as .big */
+    .sg-d-md-big {
       font-family: bookmania, Georgia, serif;
       font-weight: 400;
       font-size: var(--d-md);
@@ -174,7 +158,19 @@
       letter-spacing: -0.02em;
       color: var(--ink);
     }
-    .prev-d-sm {
+
+    /* .wine-name — slightly looser */
+    .sg-d-md-wine {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--d-md);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    /* .contact-value */
+    .sg-d-sm-contact {
       font-family: bookmania, Georgia, serif;
       font-weight: 400;
       font-size: var(--d-sm);
@@ -182,7 +178,19 @@
       letter-spacing: -0.01em;
       color: var(--ink);
     }
-    .prev-d-xs {
+
+    /* .faces-slide-text */
+    .sg-d-sm-faces {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--d-sm);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    /* .collection-name */
+    .sg-d-xs {
       font-family: bookmania, Georgia, serif;
       font-weight: 400;
       font-size: var(--d-xs);
@@ -190,250 +198,306 @@
       color: var(--ink);
     }
 
-    /* ── TEXT PREVIEWS ── */
-    .prev-t-lg {
+    /* ────────────────────────────────────────
+       TEXT SAMPLES — exact properties from nisyros.css
+       ──────────────────────────────────────── */
+
+    /* .quote */
+    .sg-t-lg-quote {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
       font-size: var(--t-lg);
       line-height: 1.65;
       color: var(--muted);
     }
-    .prev-t-md {
+
+    /* .wine-type */
+    .sg-t-lg-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: var(--t-lg);
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    /* .wine-body-text / .collection-desc */
+    .sg-t-md {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
       font-size: var(--t-md);
       line-height: 1.7;
       color: var(--muted);
     }
-    .prev-t-sm {
+
+    /* .contact-sub */
+    .sg-t-md-sub {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
-      font-size: var(--t-sm);
-      line-height: 1.5;
+      font-size: var(--t-md);
+      line-height: 1.75;
       color: var(--muted);
-      letter-spacing: 0.05em;
     }
-    .prev-t-xs {
+
+    /* .slide-counter */
+    .sg-t-sm-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--t-sm);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    /* .wine-number */
+    .sg-t-sm-number {
+      font-family: bookmania, Georgia, serif;
+      font-size: var(--t-sm);
+      line-height: 1;
+      letter-spacing: 0.4em;
+      color: var(--red);
+    }
+
+    /* .wine-body-label */
+    .sg-t-xs-label-bk {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--t-xs);
+      line-height: 1.4;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    /* .contact-label */
+    .sg-t-xs-label-mono {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
       font-size: var(--t-xs);
       line-height: 1.4;
-      color: var(--muted);
-      letter-spacing: 0.3em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      color: var(--red);
     }
 
-    /* ── COLOUR PALETTE ── */
+    /* .wine-spec */
+    .sg-t-xs-spec {
+      font-family: bookmania, Georgia, serif;
+      font-size: var(--t-xs);
+      line-height: 1.3;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-left: 2px solid var(--red);
+      padding-left: 8px;
+    }
+
+    /* ── COLOURS ── */
     .sg-colors {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin-top: 8px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(43,39,37,0.1);
+      border-bottom: 1px solid rgba(43,39,37,0.1);
     }
-    .sg-color {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .sg-color-swatch {
-      width: 64px;
-      height: 64px;
-      border-radius: 2px;
-      border: 1px solid rgba(43,39,37,0.1);
-    }
-    .sg-color-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.58rem;
-      color: var(--muted);
-    }
-    .sg-color-hex {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.58rem;
-      color: var(--stone);
-    }
-
-    /* ── CURRENT LABEL ── */
-    .sg-current {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--stone);
-      padding: 2px 6px;
-      margin-top: 4px;
-    }
+    .sg-color { display: flex; flex-direction: column; gap: 6px; }
+    .sg-swatch { width: 48px; height: 48px; border-radius: 2px; border: 1px solid rgba(43,39,37,0.1); }
+    .sg-cname { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--muted); }
+    .sg-chex  { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--stone); }
   </style>
 </head>
 <body>
 
-  <header class="sg-header">
-    <h1>Nisyros Wines — Typography Styleguide</h1>
-    <p>Proposed scale · not yet applied to the site</p>
-  </header>
+  <p class="sg-page-title">Nisyros Wines · Typography Styleguide</p>
+  <p class="sg-page-sub">Proposed scale · not yet applied to the site</p>
+  <hr class="sg-divider">
 
-  <!-- ── DISPLAY SCALE ── -->
-  <section class="sg-section">
-    <p class="sg-section-title">Display scale — bookmania serif</p>
+  <!-- ═══════════════════════════════════════
+       DISPLAY SCALE
+  ════════════════════════════════════════ -->
+  <p class="sg-section-label">Display scale — bookmania serif</p>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--d-xl</span>
-        <span class="sg-value">clamp(3.5rem, 10vw, 9rem)</span>
-        <span class="sg-mobile-value">mobile: 3.8rem</span>
-        <span class="sg-usage">→ .big</span>
-      </div>
-      <div class="sg-preview">
-        <div class="prev-d-xl">Nisyros</div>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--d-xl</strong>
+      <span>clamp(3.5rem, 10vw, 9rem) · mobile 3.8rem</span>
+      <span>→ .big</span>
+      <span>wt 400 · lh 0.92 · ls -0.02em</span>
     </div>
+    <div class="sg-d-xl">Nisyros</div>
+  </div>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--d-lg</span>
-        <span class="sg-value">clamp(3rem, 8.5vw, 7.5rem)</span>
-        <span class="sg-mobile-value">mobile: 3.2rem</span>
-        <span class="sg-usage">→ .big.md</span>
-      </div>
-      <div class="sg-preview">
-        <div class="prev-d-lg">Volcanic</div>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--d-lg</strong>
+      <span>clamp(3rem, 8.5vw, 7.5rem) · mobile 3.2rem</span>
+      <span>→ .big.md</span>
+      <span>wt 400 · lh 0.92 · ls -0.02em</span>
     </div>
+    <div class="sg-d-lg">Volcanic</div>
+  </div>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--d-md</span>
-        <span class="sg-value">clamp(2.5rem, 7vw, 6rem)</span>
-        <span class="sg-mobile-value">mobile: 2.4rem</span>
-        <span class="sg-usage">→ .big.sm, .wine-name</span>
-      </div>
-      <div class="sg-preview">
-        <div class="prev-d-md">Roudià</div>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--d-md</strong>
+      <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span>
+      <span>→ .big.sm</span>
+      <span>wt 400 · lh 0.92 · ls -0.02em</span>
     </div>
+    <div class="sg-d-md-big">The Island</div>
+  </div>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--d-sm</span>
-        <span class="sg-value">clamp(1.6rem, 5vw, 3.5rem)</span>
-        <span class="sg-mobile-value">mobile: 1.6rem</span>
-        <span class="sg-usage">→ .contact-value, .faces-slide-text</span>
-      </div>
-      <div class="sg-preview">
-        <div class="prev-d-sm">By appointment</div>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--d-md</strong>
+      <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span>
+      <span>→ .wine-name</span>
+      <span>wt 400 · lh 1.0 · ls -0.01em</span>
     </div>
+    <div class="sg-d-md-wine">Roudià</div>
+  </div>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--d-xs</span>
-        <span class="sg-value">clamp(1.2rem, 3vw, 2.4rem)</span>
-        <span class="sg-mobile-value">mobile: 1.2rem</span>
-        <span class="sg-usage">→ .collection-name</span>
-      </div>
-      <div class="sg-preview">
-        <div class="prev-d-xs">Monopàtia</div>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--d-sm</strong>
+      <span>clamp(1.6rem, 5vw, 3.5rem) · mobile 1.6rem</span>
+      <span>→ .contact-value</span>
+      <span>wt 400 · lh 1.0 · ls -0.01em</span>
     </div>
+    <div class="sg-d-sm-contact">By appointment</div>
+  </div>
 
-  </section>
-
-  <!-- ── TEXT SCALE ── -->
-  <section class="sg-section">
-    <p class="sg-section-title">Text scale — JetBrains Mono</p>
-
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--t-lg</span>
-        <span class="sg-value">clamp(0.9rem, 2vw, 1.2rem)</span>
-        <span class="sg-mobile-value">mobile: 1rem</span>
-        <span class="sg-usage">→ .quote, .tagline, .credo .sub</span>
-      </div>
-      <div class="sg-preview">
-        <p class="prev-t-lg">Dry-farmed Athiri from old Dodecanesian terraces — hand-tended, extremely low yields, harvested when the decision can no longer be delayed.</p>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--d-sm</strong>
+      <span>clamp(1.6rem, 5vw, 3.5rem) · mobile 1.6rem</span>
+      <span>→ .faces-slide-text</span>
+      <span>wt 400 · lh 0.95 · ls -0.02em</span>
     </div>
+    <div class="sg-d-sm-faces">The people behind<br>every bottle.</div>
+  </div>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--t-md</span>
-        <span class="sg-value">clamp(0.82rem, 1.8vw, 1rem)</span>
-        <span class="sg-mobile-value">mobile: 0.9rem</span>
-        <span class="sg-usage">→ .wine-body-text, .contact-sub, .collection-desc</span>
-      </div>
-      <div class="sg-preview">
-        <p class="prev-t-md">Minimal intervention. Whole-cluster pressed, temperature-controlled ferment in stainless steel. Nothing added, nothing removed.</p>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--d-xs</strong>
+      <span>clamp(1.2rem, 3vw, 2.4rem) · mobile 1.2rem</span>
+      <span>→ .collection-name</span>
+      <span>wt 400 · lh 1.1</span>
     </div>
+    <div class="sg-d-xs">Monopàtia</div>
+  </div>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--t-sm</span>
-        <span class="sg-value">clamp(0.65rem, 1.8vw, 0.85rem)</span>
-        <span class="sg-mobile-value">mobile: 0.75rem</span>
-        <span class="sg-usage">→ .slide-counter, .wine-number</span>
-      </div>
-      <div class="sg-preview">
-        <p class="prev-t-sm">01 — WHITE &nbsp;&nbsp; 3 / 8</p>
-      </div>
+  <!-- ═══════════════════════════════════════
+       TEXT SCALE
+  ════════════════════════════════════════ -->
+  <p class="sg-section-label">Text scale — JetBrains Mono</p>
+
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-lg</strong>
+      <span>clamp(0.9rem, 2vw, 1.2rem) · mobile 1rem</span>
+      <span>→ .quote</span>
+      <span>wt 300 · lh 1.65</span>
     </div>
+    <div class="sg-t-lg-quote">We are a small operation on a small island.<br>We answer every message ourselves.</div>
+  </div>
 
-    <div class="sg-row">
-      <div class="sg-meta">
-        <span class="sg-varname">--t-xs</span>
-        <span class="sg-value">clamp(0.52rem, 1.4vw, 0.7rem)</span>
-        <span class="sg-mobile-value">mobile: 0.65rem</span>
-        <span class="sg-usage">→ .wine-body-label, .contact-label, .wine-spec</span>
-      </div>
-      <div class="sg-preview">
-        <p class="prev-t-xs">Story &nbsp;&nbsp;&nbsp; Winemaking &nbsp;&nbsp;&nbsp; PGI Dodecanese</p>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-lg</strong>
+      <span>clamp(0.9rem, 2vw, 1.2rem) · mobile 1rem</span>
+      <span>→ .wine-type</span>
+      <span>wt 300 · lh 1.4</span>
     </div>
+    <div class="sg-t-lg-type">Athiri · Amphora White</div>
+  </div>
 
-  </section>
-
-  <!-- ── COLOURS ── -->
-  <section class="sg-section">
-    <p class="sg-section-title">Colour palette</p>
-    <div class="sg-colors">
-      <div class="sg-color">
-        <div class="sg-color-swatch" style="background:#F5F2EE;"></div>
-        <span class="sg-color-name">--bg</span>
-        <span class="sg-color-hex">#F5F2EE</span>
-      </div>
-      <div class="sg-color">
-        <div class="sg-color-swatch" style="background:#EDE7DB;"></div>
-        <span class="sg-color-name">--bg-alt</span>
-        <span class="sg-color-hex">#EDE7DB</span>
-      </div>
-      <div class="sg-color">
-        <div class="sg-color-swatch" style="background:#2B2725;"></div>
-        <span class="sg-color-name">--ink</span>
-        <span class="sg-color-hex">#2B2725</span>
-      </div>
-      <div class="sg-color">
-        <div class="sg-color-swatch" style="background:#C46E4B;"></div>
-        <span class="sg-color-name">--red</span>
-        <span class="sg-color-hex">#C46E4B</span>
-      </div>
-      <div class="sg-color">
-        <div class="sg-color-swatch" style="background:#EA9332;"></div>
-        <span class="sg-color-name">--amber</span>
-        <span class="sg-color-hex">#EA9332</span>
-      </div>
-      <div class="sg-color">
-        <div class="sg-color-swatch" style="background:#C7BCA3;"></div>
-        <span class="sg-color-name">--stone / --faded</span>
-        <span class="sg-color-hex">#C7BCA3</span>
-      </div>
-      <div class="sg-color">
-        <div class="sg-color-swatch" style="background:#494441;"></div>
-        <span class="sg-color-name">--muted</span>
-        <span class="sg-color-hex">#494441</span>
-      </div>
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-md</strong>
+      <span>clamp(0.82rem, 1.8vw, 1rem) · mobile 0.9rem</span>
+      <span>→ .wine-body-text · .collection-desc</span>
+      <span>wt 300 · lh 1.7</span>
     </div>
-  </section>
+    <div class="sg-t-md">Athiri, part skin-contact, rested in amphora.<br>Unclarified, unfiltered. Wild ferment, no additions.</div>
+  </div>
+
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-md</strong>
+      <span>clamp(0.82rem, 1.8vw, 1rem) · mobile 0.9rem</span>
+      <span>→ .contact-sub</span>
+      <span>wt 300 · lh 1.75</span>
+    </div>
+    <div class="sg-t-md-sub">We welcome visitors who want to understand<br>what we do. Write to us first.</div>
+  </div>
+
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-sm</strong>
+      <span>clamp(0.65rem, 1.8vw, 0.85rem) · mobile 0.75rem</span>
+      <span>→ .slide-counter</span>
+      <span>JetBrains Mono · ls 0.05em</span>
+    </div>
+    <div class="sg-t-sm-counter">3 / 8</div>
+  </div>
+
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-sm</strong>
+      <span>clamp(0.65rem, 1.8vw, 0.85rem) · mobile 0.75rem</span>
+      <span>→ .wine-number</span>
+      <span>bookmania · ls 0.4em · color --red</span>
+    </div>
+    <div class="sg-t-sm-number">01 — WHITE</div>
+  </div>
+
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-xs</strong>
+      <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span>
+      <span>→ .wine-body-label</span>
+      <span>bookmania · wt 400 · ls 0.3em · uppercase</span>
+    </div>
+    <div class="sg-t-xs-label-bk">Story</div>
+  </div>
+
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-xs</strong>
+      <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span>
+      <span>→ .contact-label</span>
+      <span>JetBrains Mono · wt 300 · ls 0.2em · uppercase</span>
+    </div>
+    <div class="sg-t-xs-label-mono">Location</div>
+  </div>
+
+  <div class="sg-row">
+    <div class="sg-label">
+      <strong>--t-xs</strong>
+      <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span>
+      <span>→ .wine-spec</span>
+      <span>bookmania · ls 0.22em · uppercase · border-left --red</span>
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;">
+      <span class="sg-t-xs-spec">PGI Dodecanese</span>
+      <span class="sg-t-xs-spec">Dry-farmed · Hand-harvested</span>
+      <span class="sg-t-xs-spec">Minimal intervention</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       COLOURS
+  ════════════════════════════════════════ -->
+  <p class="sg-section-label">Colour palette</p>
+  <div class="sg-colors">
+    <div class="sg-color"><div class="sg-swatch" style="background:#F5F2EE;"></div><span class="sg-cname">--bg</span><span class="sg-chex">#F5F2EE</span></div>
+    <div class="sg-color"><div class="sg-swatch" style="background:#EDE7DB;"></div><span class="sg-cname">--bg-alt</span><span class="sg-chex">#EDE7DB</span></div>
+    <div class="sg-color"><div class="sg-swatch" style="background:#2B2725;"></div><span class="sg-cname">--ink</span><span class="sg-chex">#2B2725</span></div>
+    <div class="sg-color"><div class="sg-swatch" style="background:#C46E4B;"></div><span class="sg-cname">--red</span><span class="sg-chex">#C46E4B</span></div>
+    <div class="sg-color"><div class="sg-swatch" style="background:#EA9332;"></div><span class="sg-cname">--amber</span><span class="sg-chex">#EA9332</span></div>
+    <div class="sg-color"><div class="sg-swatch" style="background:#C7BCA3;"></div><span class="sg-cname">--stone / --faded</span><span class="sg-chex">#C7BCA3</span></div>
+    <div class="sg-color"><div class="sg-swatch" style="background:#494441;"></div><span class="sg-cname">--muted</span><span class="sg-chex">#494441</span></div>
+  </div>
 
 </body>
 </html>
