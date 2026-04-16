@@ -101,18 +101,28 @@
       border-bottom: 1px solid rgba(43,39,37,0.1);
     }
 
-    /* small meta line above the sample */
+    /* label block above each sample */
     .sg-label {
+      margin-bottom: 16px;
+    }
+    .sg-label-class {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      font-size: 0.78rem;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .sg-label-meta {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
       font-size: 0.58rem;
       color: var(--muted);
-      margin-bottom: 20px;
       display: flex;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
     }
-    .sg-label strong {
+    .sg-label-meta strong {
       color: var(--red);
       font-weight: 400;
     }
@@ -310,70 +320,56 @@
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--d-xl</strong>
-      <span>clamp(3.5rem, 10vw, 9rem) · mobile 3.8rem</span>
-      <span>→ .big</span>
-      <span>wt 400 · lh 0.92 · ls -0.02em</span>
+      <span class="sg-label-class">.big</span>
+      <span class="sg-label-meta"><strong>--d-xl</strong> <span>clamp(3.5rem, 10vw, 9rem) · mobile 3.8rem</span> <span>wt 400 · lh 0.92 · ls -0.02em</span></span>
     </div>
     <div class="sg-d-xl">Nisyros</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--d-lg</strong>
-      <span>clamp(3rem, 8.5vw, 7.5rem) · mobile 3.2rem</span>
-      <span>→ .big.md</span>
-      <span>wt 400 · lh 0.92 · ls -0.02em</span>
+      <span class="sg-label-class">.big.md</span>
+      <span class="sg-label-meta"><strong>--d-lg</strong> <span>clamp(3rem, 8.5vw, 7.5rem) · mobile 3.2rem</span> <span>wt 400 · lh 0.92 · ls -0.02em</span></span>
     </div>
     <div class="sg-d-lg">Volcanic</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--d-md</strong>
-      <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span>
-      <span>→ .big.sm</span>
-      <span>wt 400 · lh 0.92 · ls -0.02em</span>
+      <span class="sg-label-class">.big.sm</span>
+      <span class="sg-label-meta"><strong>--d-md</strong> <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span> <span>wt 400 · lh 0.92 · ls -0.02em</span></span>
     </div>
     <div class="sg-d-md-big">The Island</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--d-md</strong>
-      <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span>
-      <span>→ .wine-name</span>
-      <span>wt 400 · lh 1.0 · ls -0.01em</span>
+      <span class="sg-label-class">.wine-name</span>
+      <span class="sg-label-meta"><strong>--d-md</strong> <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span> <span>wt 400 · lh 1.0 · ls -0.01em</span></span>
     </div>
     <div class="sg-d-md-wine">Roudià</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--d-sm</strong>
-      <span>clamp(1.6rem, 5vw, 3.5rem) · mobile 1.6rem</span>
-      <span>→ .contact-value</span>
-      <span>wt 400 · lh 1.0 · ls -0.01em</span>
+      <span class="sg-label-class">.contact-value</span>
+      <span class="sg-label-meta"><strong>--d-sm</strong> <span>clamp(1.6rem, 5vw, 3.5rem) · mobile 1.6rem</span> <span>wt 400 · lh 1.0 · ls -0.01em</span></span>
     </div>
     <div class="sg-d-sm-contact">By appointment</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--d-sm</strong>
-      <span>clamp(1.6rem, 5vw, 3.5rem) · mobile 1.6rem</span>
-      <span>→ .faces-slide-text</span>
-      <span>wt 400 · lh 0.95 · ls -0.02em</span>
+      <span class="sg-label-class">.faces-slide-text</span>
+      <span class="sg-label-meta"><strong>--d-sm</strong> <span>clamp(1.6rem, 5vw, 3.5rem) · mobile 1.6rem</span> <span>wt 400 · lh 0.95 · ls -0.02em</span></span>
     </div>
     <div class="sg-d-sm-faces">The people behind<br>every bottle.</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--d-xs</strong>
-      <span>clamp(1.2rem, 3vw, 2.4rem) · mobile 1.2rem</span>
-      <span>→ .collection-name</span>
-      <span>wt 400 · lh 1.1</span>
+      <span class="sg-label-class">.collection-name</span>
+      <span class="sg-label-meta"><strong>--d-xs</strong> <span>clamp(1.2rem, 3vw, 2.4rem) · mobile 1.2rem</span> <span>wt 400 · lh 1.1</span></span>
     </div>
     <div class="sg-d-xs">Monopàtia</div>
   </div>
@@ -385,90 +381,72 @@
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-lg</strong>
-      <span>clamp(0.9rem, 2vw, 1.2rem) · mobile 1rem</span>
-      <span>→ .quote</span>
-      <span>wt 300 · lh 1.65</span>
+      <span class="sg-label-class">.quote</span>
+      <span class="sg-label-meta"><strong>--t-lg</strong> <span>clamp(0.9rem, 2vw, 1.2rem) · mobile 1rem</span> <span>wt 300 · lh 1.65</span></span>
     </div>
     <div class="sg-t-lg-quote">We are a small operation on a small island.<br>We answer every message ourselves.</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-lg</strong>
-      <span>clamp(0.9rem, 2vw, 1.2rem) · mobile 1rem</span>
-      <span>→ .wine-type</span>
-      <span>wt 300 · lh 1.4</span>
+      <span class="sg-label-class">.wine-type</span>
+      <span class="sg-label-meta"><strong>--t-lg</strong> <span>clamp(0.9rem, 2vw, 1.2rem) · mobile 1rem</span> <span>wt 300 · lh 1.4</span></span>
     </div>
     <div class="sg-t-lg-type">Athiri · Amphora White</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-md</strong>
-      <span>clamp(0.82rem, 1.8vw, 1rem) · mobile 0.9rem</span>
-      <span>→ .wine-body-text · .collection-desc</span>
-      <span>wt 300 · lh 1.7</span>
+      <span class="sg-label-class">.wine-body-text &nbsp;·&nbsp; .collection-desc</span>
+      <span class="sg-label-meta"><strong>--t-md</strong> <span>clamp(0.82rem, 1.8vw, 1rem) · mobile 0.9rem</span> <span>wt 300 · lh 1.7</span></span>
     </div>
     <div class="sg-t-md">Athiri, part skin-contact, rested in amphora.<br>Unclarified, unfiltered. Wild ferment, no additions.</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-md</strong>
-      <span>clamp(0.82rem, 1.8vw, 1rem) · mobile 0.9rem</span>
-      <span>→ .contact-sub</span>
-      <span>wt 300 · lh 1.75</span>
+      <span class="sg-label-class">.contact-sub</span>
+      <span class="sg-label-meta"><strong>--t-md</strong> <span>clamp(0.82rem, 1.8vw, 1rem) · mobile 0.9rem</span> <span>wt 300 · lh 1.75</span></span>
     </div>
     <div class="sg-t-md-sub">We welcome visitors who want to understand<br>what we do. Write to us first.</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-sm</strong>
-      <span>clamp(0.65rem, 1.8vw, 0.85rem) · mobile 0.75rem</span>
-      <span>→ .slide-counter</span>
-      <span>JetBrains Mono · ls 0.05em</span>
+      <span class="sg-label-class">.slide-counter</span>
+      <span class="sg-label-meta"><strong>--t-sm</strong> <span>clamp(0.65rem, 1.8vw, 0.85rem) · mobile 0.75rem</span> <span>JetBrains Mono · ls 0.05em</span></span>
     </div>
     <div class="sg-t-sm-counter">3 / 8</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-sm</strong>
-      <span>clamp(0.65rem, 1.8vw, 0.85rem) · mobile 0.75rem</span>
-      <span>→ .wine-number</span>
-      <span>bookmania · ls 0.4em · color --red</span>
+      <span class="sg-label-class">.wine-number</span>
+      <span class="sg-label-meta"><strong>--t-sm</strong> <span>clamp(0.65rem, 1.8vw, 0.85rem) · mobile 0.75rem</span> <span>bookmania · ls 0.4em</span></span>
     </div>
     <div class="sg-t-sm-number">01 — WHITE</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-xs</strong>
-      <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span>
-      <span>→ .wine-body-label</span>
-      <span>bookmania · wt 400 · ls 0.3em · uppercase</span>
+      <span class="sg-label-class">.wine-body-label</span>
+      <span class="sg-label-meta"><strong>--t-xs</strong> <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span> <span>bookmania · wt 400 · ls 0.3em · uppercase</span></span>
     </div>
     <div class="sg-t-xs-label-bk">Story</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-xs</strong>
-      <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span>
-      <span>→ .contact-label</span>
-      <span>JetBrains Mono · wt 300 · ls 0.2em · uppercase</span>
+      <span class="sg-label-class">.contact-label</span>
+      <span class="sg-label-meta"><strong>--t-xs</strong> <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span> <span>JetBrains Mono · wt 300 · ls 0.2em · uppercase</span></span>
     </div>
     <div class="sg-t-xs-label-mono">Location</div>
   </div>
 
   <div class="sg-row">
     <div class="sg-label">
-      <strong>--t-xs</strong>
-      <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span>
-      <span>→ .wine-spec</span>
-      <span>bookmania · ls 0.22em · uppercase · border-left --red</span>
+      <span class="sg-label-class">.wine-spec</span>
+      <span class="sg-label-meta"><strong>--t-xs</strong> <span>clamp(0.52rem, 1.4vw, 0.7rem) · mobile 0.65rem</span> <span>bookmania · ls 0.22em · uppercase</span></span>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap;">
       <span class="sg-t-xs-spec">PGI Dodecanese</span>
