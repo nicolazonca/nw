@@ -399,7 +399,7 @@ hr.wine-slash { border: none; border-top: 2px solid var(--red); width: 48px; mar
 .contact-social-link { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); transition: color 0.2s; }
 .contact-social-link:hover { color: var(--red); }
 .contact-social-link svg { width: clamp(28px, 5vw, 40px); height: clamp(28px, 5vw, 40px); }
-.contact-social-name { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: clamp(1.2rem, 5vw, 3.5rem); line-height: 1.0; text-transform: capitalize; }
+.contact-social-name { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: clamp(1.2rem, 5vw, 3.5rem); line-height: 1.0; }
 /* smaller variant for "By appointment" / "Limited allocation" */
 .contact-value--sm { font-size: clamp(1.2rem, 5vw, 3.5rem); }
 
