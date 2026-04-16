@@ -595,21 +595,6 @@ document.querySelectorAll('.scroll-hint-down').forEach(el => {
   });
 });
 
-/* Nav auto-hide on mouse inactivity */
-(function() {
-  var navEl = document.getElementById('nav');
-  var hideTimer;
-  function showNav() {
-    navEl.classList.remove('nav-hidden');
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(function() {
-      if (!navOverlay.classList.contains('open')) navEl.classList.add('nav-hidden');
-    }, 2000);
-  }
-  document.addEventListener('mousemove', showNav);
-  document.addEventListener('touchstart', showNav, { passive: true });
-})();
-
 /* Active nav */
 var navLinks = document.querySelectorAll('#nav-links-list a');
 var navObs = new IntersectionObserver(entries => {
