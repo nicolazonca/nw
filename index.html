@@ -595,17 +595,19 @@ document.querySelectorAll('.scroll-hint-down').forEach(el => {
   });
 });
 
-/* Nav visibility — visible only on manifesto */
+/* Nav auto-hide on mouse inactivity */
 (function() {
   var navEl = document.getElementById('nav');
-  var mWrapper = document.getElementById('manifesto-wrapper');
-  if (!navEl || !mWrapper) return;
-  var navVis = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      navEl.classList.toggle('nav-hidden', !e.isIntersecting);
-    });
-  }, { threshold: 0.1 });
-  navVis.observe(mWrapper);
+  var hideTimer;
+  function showNav() {
+    navEl.classList.remove('nav-hidden');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function() {
+      if (!navOverlay.classList.contains('open')) navEl.classList.add('nav-hidden');
+    }, 2000);
+  }
+  document.addEventListener('mousemove', showNav);
+  document.addEventListener('touchstart', showNav, { passive: true });
 })();
 
 /* Active nav */
