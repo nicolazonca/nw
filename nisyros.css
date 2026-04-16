@@ -457,7 +457,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   #wines-scroll { overscroll-behavior: contain; overflow-y: hidden; }
   .page { flex-direction: column; padding: calc(var(--nav-h) + 48px) 24px 40px; gap: 20px; height: 100%; min-height: auto; overflow: hidden; align-items: center; justify-content: center; }
   .panel-text { text-align: left; width: 100%; }
-  .panel-illust { width: clamp(140px, 52vw, 220px); align-self: center; margin-right: 0; padding-bottom: 0; }
+  .panel-illust { width: clamp(140px, 52vw, 220px); align-self: center; margin-right: 0; padding-bottom: 0; margin-bottom: 48px; }
   .quote { margin-top: 8px; }
   #faces, #contact { scroll-margin-top: var(--nav-h); }
   #hero { padding: calc(var(--nav-h) + 20px) 24px 40px; height: 100dvh; min-height: auto; align-items: center; justify-content: center; overflow: hidden; }
@@ -489,6 +489,8 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .wine-vintages { margin-top: 2px; margin-bottom: 4px; }
   .faces-slide-caption { bottom: 32px; left: 24px; right: 24px; }
   .faces-header-overlay { left: 24px; top: calc(var(--nav-h) + 20px); }
+  .scroll-chevron { width: 52px; height: 52px; }
+  .scroll-chevron svg { width: 28px; height: 28px; }
   .faces-prev, .faces-next { width: 56px; height: 56px; }
   .faces-prev svg, .faces-next svg { width: 32px; height: 32px; }
   #contact .section-header { padding: 0 24px 32px; }
@@ -498,7 +500,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
 
 /* ── TABLET / DESKTOP ── */
 @media (min-width: 640px) {
-  .page { padding: calc(var(--nav-h) + 24px) 64px 32px; gap: 48px; }
+  .page { padding: calc(var(--nav-h) + 24px) 100px 32px; gap: 48px; }
   hr.slash { width: 80px; }
   #contact .section-header { padding: 0 48px 56px; }
   .collections-grid { grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
