@@ -363,15 +363,15 @@ hr.wine-slash { border: none; border-top: 2px solid var(--red); width: 48px; mar
 .contact-grid { display: grid; grid-template-columns: 1fr; }
 .contact-block { padding: 40px 28px; border-bottom: 1px solid rgba(41,37,35,0.1); position: relative; }
 .contact-block:last-child { border-bottom: none; }
-.contact-label { font-family: 'JetBrains Mono', monospace; font-weight: 300; font-size: clamp(0.55rem, 1.5vw, 0.7rem); letter-spacing: 0.2em; color: var(--red); margin-bottom: 12px; }
-.contact-value { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: clamp(1.6rem, 7vw, 5rem); line-height: 1.0; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 12px; text-transform: capitalize; }
+.contact-label { font-family: 'JetBrains Mono', monospace; font-weight: 300; font-size: clamp(0.55rem, 1.5vw, 0.7rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.contact-value { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: clamp(1.2rem, 5vw, 3.5rem); line-height: 1.0; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 12px; text-transform: capitalize; }
 .contact-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
 .contact-value a:hover { color: var(--red); }
 .contact-sub { font-family: 'JetBrains Mono', monospace; font-weight: 300; font-size: clamp(0.78rem, 1.8vw, 0.95rem); color: var(--muted); line-height: 1.75; }
 .contact-social-link { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); transition: color 0.2s; }
 .contact-social-link:hover { color: var(--red); }
 .contact-social-link svg { width: clamp(28px, 5vw, 40px); height: clamp(28px, 5vw, 40px); }
-.contact-social-name { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: clamp(1.4rem, 5vw, 3rem); line-height: 1.0; }
+.contact-social-name { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: clamp(1.2rem, 5vw, 3.5rem); line-height: 1.0; text-transform: capitalize; }
 /* smaller variant for "By appointment" / "Limited allocation" */
 .contact-value--sm { font-size: clamp(1.2rem, 5vw, 3.5rem); }
 
