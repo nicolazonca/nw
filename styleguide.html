@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nisyros Wines — Styleguide</title>
+  <link rel="stylesheet" href="https://use.typekit.net/rfs3kxf.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:    #F5F2EE;
+      --bg-alt:#EDE7DB;
+      --ink:   #2B2725;
+      --red:   #C46E4B;
+      --amber: #EA9332;
+      --stone: #C7BCA3;
+      --muted: #494441;
+
+      /* ── DISPLAY SCALE ── */
+      --d-xl: clamp(3.5rem, 10vw, 9rem);
+      --d-lg: clamp(3rem, 8.5vw, 7.5rem);
+      --d-md: clamp(2.5rem, 7vw, 6rem);
+      --d-sm: clamp(1.6rem, 5vw, 3.5rem);
+      --d-xs: clamp(1.2rem, 3vw, 2.4rem);
+
+      /* ── TEXT SCALE ── */
+      --t-lg: clamp(0.9rem, 2vw, 1.2rem);
+      --t-md: clamp(0.82rem, 1.8vw, 1rem);
+      --t-sm: clamp(0.65rem, 1.8vw, 0.85rem);
+      --t-xs: clamp(0.52rem, 1.4vw, 0.7rem);
+    }
+
+    @media (max-width: 639px) {
+      :root {
+        --d-xl: 3.8rem;
+        --d-lg: 3.2rem;
+        --d-md: 2.4rem;
+        --d-sm: 1.6rem;
+        --d-xs: 1.2rem;
+        --t-lg: 1rem;
+        --t-md: 0.9rem;
+        --t-sm: 0.75rem;
+        --t-xs: 0.65rem;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: bookmania, Georgia, serif;
+      padding: 64px 48px;
+    }
+
+    @media (max-width: 639px) {
+      body { padding: 40px 24px; }
+    }
+
+    /* ── PAGE HEADER ── */
+    .sg-header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 32px;
+      margin-bottom: 64px;
+    }
+    .sg-header h1 {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .sg-header p {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: 0.75rem;
+      color: var(--stone);
+      margin-top: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTION ── */
+    .sg-section {
+      margin-bottom: 80px;
+    }
+    .sg-section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 40px;
+    }
+
+    /* ── SCALE ROW ── */
+    .sg-row {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(43,39,37,0.1);
+    }
+    .sg-row:last-child {
+      border-bottom: 1px solid rgba(43,39,37,0.1);
+    }
+    .sg-meta {
+      flex: 0 0 200px;
+      min-width: 0;
+    }
+    .sg-varname {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      font-size: 0.7rem;
+      color: var(--red);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .sg-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: 0.6rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+      word-break: break-all;
+    }
+    .sg-mobile-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: 0.6rem;
+      color: var(--stone);
+      display: block;
+    }
+    .sg-usage {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: 0.6rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+    .sg-preview {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ── DISPLAY PREVIEWS ── */
+    .prev-d-xl {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--d-xl);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .prev-d-lg {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--d-lg);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .prev-d-md {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--d-md);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .prev-d-sm {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--d-sm);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .prev-d-xs {
+      font-family: bookmania, Georgia, serif;
+      font-weight: 400;
+      font-size: var(--d-xs);
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    /* ── TEXT PREVIEWS ── */
+    .prev-t-lg {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: var(--t-lg);
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .prev-t-md {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: var(--t-md);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .prev-t-sm {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: var(--t-sm);
+      line-height: 1.5;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .prev-t-xs {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 300;
+      font-size: var(--t-xs);
+      line-height: 1.4;
+      color: var(--muted);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
+    /* ── COLOUR PALETTE ── */
+    .sg-colors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .sg-color {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sg-color-swatch {
+      width: 64px;
+      height: 64px;
+      border-radius: 2px;
+      border: 1px solid rgba(43,39,37,0.1);
+    }
+    .sg-color-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+    }
+    .sg-color-hex {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--stone);
+    }
+
+    /* ── CURRENT LABEL ── */
+    .sg-current {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--stone);
+      padding: 2px 6px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="sg-header">
+    <h1>Nisyros Wines — Typography Styleguide</h1>
+    <p>Proposed scale · not yet applied to the site</p>
+  </header>
+
+  <!-- ── DISPLAY SCALE ── -->
+  <section class="sg-section">
+    <p class="sg-section-title">Display scale — bookmania serif</p>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--d-xl</span>
+        <span class="sg-value">clamp(3.5rem, 10vw, 9rem)</span>
+        <span class="sg-mobile-value">mobile: 3.8rem</span>
+        <span class="sg-usage">→ .big</span>
+      </div>
+      <div class="sg-preview">
+        <div class="prev-d-xl">Nisyros</div>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--d-lg</span>
+        <span class="sg-value">clamp(3rem, 8.5vw, 7.5rem)</span>
+        <span class="sg-mobile-value">mobile: 3.2rem</span>
+        <span class="sg-usage">→ .big.md</span>
+      </div>
+      <div class="sg-preview">
+        <div class="prev-d-lg">Volcanic</div>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--d-md</span>
+        <span class="sg-value">clamp(2.5rem, 7vw, 6rem)</span>
+        <span class="sg-mobile-value">mobile: 2.4rem</span>
+        <span class="sg-usage">→ .big.sm, .wine-name</span>
+      </div>
+      <div class="sg-preview">
+        <div class="prev-d-md">Roudià</div>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--d-sm</span>
+        <span class="sg-value">clamp(1.6rem, 5vw, 3.5rem)</span>
+        <span class="sg-mobile-value">mobile: 1.6rem</span>
+        <span class="sg-usage">→ .contact-value, .faces-slide-text</span>
+      </div>
+      <div class="sg-preview">
+        <div class="prev-d-sm">By appointment</div>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--d-xs</span>
+        <span class="sg-value">clamp(1.2rem, 3vw, 2.4rem)</span>
+        <span class="sg-mobile-value">mobile: 1.2rem</span>
+        <span class="sg-usage">→ .collection-name</span>
+      </div>
+      <div class="sg-preview">
+        <div class="prev-d-xs">Monopàtia</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── TEXT SCALE ── -->
+  <section class="sg-section">
+    <p class="sg-section-title">Text scale — JetBrains Mono</p>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--t-lg</span>
+        <span class="sg-value">clamp(0.9rem, 2vw, 1.2rem)</span>
+        <span class="sg-mobile-value">mobile: 1rem</span>
+        <span class="sg-usage">→ .quote, .tagline, .credo .sub</span>
+      </div>
+      <div class="sg-preview">
+        <p class="prev-t-lg">Dry-farmed Athiri from old Dodecanesian terraces — hand-tended, extremely low yields, harvested when the decision can no longer be delayed.</p>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--t-md</span>
+        <span class="sg-value">clamp(0.82rem, 1.8vw, 1rem)</span>
+        <span class="sg-mobile-value">mobile: 0.9rem</span>
+        <span class="sg-usage">→ .wine-body-text, .contact-sub, .collection-desc</span>
+      </div>
+      <div class="sg-preview">
+        <p class="prev-t-md">Minimal intervention. Whole-cluster pressed, temperature-controlled ferment in stainless steel. Nothing added, nothing removed.</p>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--t-sm</span>
+        <span class="sg-value">clamp(0.65rem, 1.8vw, 0.85rem)</span>
+        <span class="sg-mobile-value">mobile: 0.75rem</span>
+        <span class="sg-usage">→ .slide-counter, .wine-number</span>
+      </div>
+      <div class="sg-preview">
+        <p class="prev-t-sm">01 — WHITE &nbsp;&nbsp; 3 / 8</p>
+      </div>
+    </div>
+
+    <div class="sg-row">
+      <div class="sg-meta">
+        <span class="sg-varname">--t-xs</span>
+        <span class="sg-value">clamp(0.52rem, 1.4vw, 0.7rem)</span>
+        <span class="sg-mobile-value">mobile: 0.65rem</span>
+        <span class="sg-usage">→ .wine-body-label, .contact-label, .wine-spec</span>
+      </div>
+      <div class="sg-preview">
+        <p class="prev-t-xs">Story &nbsp;&nbsp;&nbsp; Winemaking &nbsp;&nbsp;&nbsp; PGI Dodecanese</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── COLOURS ── -->
+  <section class="sg-section">
+    <p class="sg-section-title">Colour palette</p>
+    <div class="sg-colors">
+      <div class="sg-color">
+        <div class="sg-color-swatch" style="background:#F5F2EE;"></div>
+        <span class="sg-color-name">--bg</span>
+        <span class="sg-color-hex">#F5F2EE</span>
+      </div>
+      <div class="sg-color">
+        <div class="sg-color-swatch" style="background:#EDE7DB;"></div>
+        <span class="sg-color-name">--bg-alt</span>
+        <span class="sg-color-hex">#EDE7DB</span>
+      </div>
+      <div class="sg-color">
+        <div class="sg-color-swatch" style="background:#2B2725;"></div>
+        <span class="sg-color-name">--ink</span>
+        <span class="sg-color-hex">#2B2725</span>
+      </div>
+      <div class="sg-color">
+        <div class="sg-color-swatch" style="background:#C46E4B;"></div>
+        <span class="sg-color-name">--red</span>
+        <span class="sg-color-hex">#C46E4B</span>
+      </div>
+      <div class="sg-color">
+        <div class="sg-color-swatch" style="background:#EA9332;"></div>
+        <span class="sg-color-name">--amber</span>
+        <span class="sg-color-hex">#EA9332</span>
+      </div>
+      <div class="sg-color">
+        <div class="sg-color-swatch" style="background:#C7BCA3;"></div>
+        <span class="sg-color-name">--stone / --faded</span>
+        <span class="sg-color-hex">#C7BCA3</span>
+      </div>
+      <div class="sg-color">
+        <div class="sg-color-swatch" style="background:#494441;"></div>
+        <span class="sg-color-name">--muted</span>
+        <span class="sg-color-hex">#494441</span>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
