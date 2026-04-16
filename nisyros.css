@@ -199,7 +199,7 @@ body::before {
 .illust-wine       { fill: var(--red); opacity: 0.75; }
 .illust-wine-amber { fill: var(--amber); opacity: 0.7; }
 .illust-accent     { fill: none; stroke: var(--red); stroke-width: 2; stroke-linecap: round; }
-.panel-illust      { flex: 0 0 auto; width: clamp(100px, 22vw, 280px); opacity: 0.85; margin-right: 52px; align-self: flex-end; padding-bottom: clamp(40px, 6vh, 64px); }
+.panel-illust      { flex: 0 0 auto; width: clamp(160px, 30vw, 400px); opacity: 0.85; margin-right: 52px; align-self: flex-end; padding-bottom: clamp(40px, 6vh, 64px); }
 .panel-illust svg, .panel-illust img  { width: 100%; height: auto; display: block; }
 
 /* ── PAGE BLOCKS ── */
@@ -457,7 +457,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   #wines-scroll { overscroll-behavior: contain; overflow-y: hidden; }
   .page { flex-direction: column; padding: calc(var(--nav-h) + 48px) 24px 40px; gap: 20px; height: 100%; min-height: auto; overflow: hidden; align-items: center; justify-content: center; }
   .panel-text { text-align: left; width: 100%; }
-  .panel-illust { width: clamp(80px, 30vw, 140px); align-self: center; }
+  .panel-illust { width: clamp(140px, 52vw, 220px); align-self: center; margin-right: 0; padding-bottom: 0; }
   .quote { margin-top: 8px; }
   #faces, #contact { scroll-margin-top: var(--nav-h); }
   #hero { padding: calc(var(--nav-h) + 20px) 24px 40px; height: 100dvh; min-height: auto; align-items: center; justify-content: center; overflow: hidden; }
