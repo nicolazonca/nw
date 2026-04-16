@@ -179,16 +179,6 @@
       letter-spacing: -0.01em;
       color: var(--ink);
     }
-    /* h2 display variant — .big.sm (manifesto only) */
-    .s-h2--display {
-      font-family: bookmania, Georgia, serif;
-      font-weight: 400;
-      font-size: var(--h2);
-      line-height: 0.92;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-
     /* h3 — .contact-value, .faces-slide-text (unified) */
     .s-h3 {
       font-family: bookmania, Georgia, serif;
@@ -218,50 +208,14 @@
     }
 
     /* h6 — small labels, each keeps own ls */
-    .s-h6-counter {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 300;
-      font-size: var(--h6);
-      line-height: 1;
-      letter-spacing: 0.05em;
-      color: var(--ink);
-    }
-    .s-h6-number {
-      font-family: bookmania, Georgia, serif;
-      font-weight: 400;
-      font-size: var(--h6);
-      line-height: 1;
-      letter-spacing: 0.35em;
-      color: var(--red);
-    }
-    .s-h6-body-label {
-      font-family: bookmania, Georgia, serif;
-      font-weight: 400;
-      font-size: var(--h6);
-      line-height: 1.4;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--red);
-    }
-    .s-h6-contact-label {
+    .s-h6 {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 300;
       font-size: var(--h6);
       line-height: 1.4;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--red);
-    }
-    .s-h6-spec {
-      font-family: bookmania, Georgia, serif;
-      font-weight: 400;
-      font-size: var(--h6);
-      line-height: 1.3;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
       color: var(--ink);
-      border-left: 2px solid var(--red);
-      padding-left: 8px;
     }
 
     /* p — body text */
@@ -311,18 +265,9 @@
   <div class="sg-row">
     <div class="sg-label">
       <span class="sg-label-level">h2</span><span class="sg-label-classes">.wine-name · .big.sm</span>
-      <div class="sg-label-meta"><strong>--h2</strong> <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span> <span>bookmania · wt 400</span></div>
-      <div class="sg-note">⚑ due varianti di lh/ls — stessa dimensione, contesti diversi</div>
+      <div class="sg-label-meta"><strong>--h2</strong> <span>clamp(2.5rem, 7vw, 6rem) · mobile 2.4rem</span> <span>bookmania · wt 400 · lh 1.0 · ls -0.01em</span></div>
     </div>
     <div class="s-h2">Roudià</div>
-    <div class="sg-variant">
-      <div class="sg-variant-label">.big.sm — manifesto display (lh 0.92 · ls -0.02em)</div>
-      <div class="s-h2--display">No labels<br>defines Us</div>
-    </div>
-    <div class="sg-variant">
-      <div class="sg-variant-label">.wine-name — nome vino (lh 1.0 · ls -0.01em)</div>
-      <div class="s-h2">Apiri · Atmida · Roudià</div>
-    </div>
   </div>
 
   <!-- H3 -->
@@ -358,33 +303,10 @@
   <div class="sg-row">
     <div class="sg-label">
       <span class="sg-label-level">h6</span><span class="sg-label-classes">.slide-counter · .wine-number · .wine-body-label · .contact-label · .wine-spec</span>
-      <div class="sg-label-meta"><strong>--h6</strong> <span>clamp(0.62rem, 1.6vw, 0.78rem) · mobile 0.68rem</span> <span>dimensione condivisa · ogni elemento mantiene il suo letter-spacing</span></div>
-      <div class="sg-note">⚑ il letter-spacing varia troppo (0.05em → 0.35em) per essere unificato</div>
+      <div class="sg-label-meta"><strong>--h6</strong> <span>clamp(0.62rem, 1.6vw, 0.78rem) · mobile 0.68rem</span> <span>JetBrains Mono · wt 300 · lh 1.4 · ls 0.2em · uppercase</span></div>
+      <div class="sg-note">✓ unificati alle proprietà di .contact-label — colori e border nel sito restano invariati</div>
     </div>
-    <div class="sg-variant" style="border-top:none; padding-top:0; margin-top:0;">
-      <div class="sg-variant-label">.slide-counter — JetBrains Mono · ls 0.05em</div>
-      <div class="s-h6-counter">3 / 8</div>
-    </div>
-    <div class="sg-variant">
-      <div class="sg-variant-label">.wine-number — bookmania · ls 0.35em</div>
-      <div class="s-h6-number">01 — WHITE</div>
-    </div>
-    <div class="sg-variant">
-      <div class="sg-variant-label">.wine-body-label — bookmania · ls 0.3em · uppercase</div>
-      <div class="s-h6-body-label">Story</div>
-    </div>
-    <div class="sg-variant">
-      <div class="sg-variant-label">.contact-label — JetBrains Mono · ls 0.2em · uppercase</div>
-      <div class="s-h6-contact-label">Location</div>
-    </div>
-    <div class="sg-variant">
-      <div class="sg-variant-label">.wine-spec — bookmania · ls 0.22em · uppercase · border-left</div>
-      <div style="display:flex; gap:20px; flex-wrap:wrap;">
-        <span class="s-h6-spec">PGI Dodecanese</span>
-        <span class="s-h6-spec">Dry-farmed</span>
-        <span class="s-h6-spec">Minimal intervention</span>
-      </div>
-    </div>
+    <div class="s-h6">3 / 8 &nbsp;&nbsp;&nbsp; 01 — White &nbsp;&nbsp;&nbsp; Story &nbsp;&nbsp;&nbsp; Location &nbsp;&nbsp;&nbsp; PGI Dodecanese</div>
   </div>
 
   <!-- P -->
