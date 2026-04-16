@@ -247,11 +247,13 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 #m7 .big.red { color: var(--amber); }
 #m7 hr.slash { border-top-color: var(--amber); }
 
-/* illustration colours per slide */
-#m2 .illust-line, #m4 .illust-line, #m7 .illust-line { stroke: #EA9336; }
-#m2 .illust-accent, #m4 .illust-accent, #m7 .illust-accent { stroke: #EA9336; }
-#credo .illust-line { stroke: #2D2927; }
-#credo .illust-accent { stroke: #2D2927; }
+/* illustration colours per slide (SVGs loaded as <img>, use filter) */
+#m2 .panel-illust img, #m4 .panel-illust img, #m7 .panel-illust img {
+  filter: sepia(1) saturate(4) hue-rotate(8deg) brightness(1.05);
+}
+#credo .panel-illust img {
+  filter: brightness(0.15);
+}
 
 /* credo */
 #credo { background: var(--red); border-bottom: 1px solid rgba(41,37,35,0.1); }
