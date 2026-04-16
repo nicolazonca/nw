@@ -289,11 +289,11 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .wine-landscape { display: none; }
 .wine-card-inner { flex: 1; min-width: 0; padding: 0; display: flex; flex-direction: column; gap: 0; position: relative; z-index: 1; }
 .wine-bottle-area {
-  flex: 0 0 auto; width: clamp(100px, 18vw, 220px);
+  flex: 0 0 auto; width: clamp(120px, 21.6vw, 264px);
   display: flex; align-items: center; justify-content: center;
-  align-self: center; padding: 0 16px; position: relative; z-index: 2;
+  align-self: center; padding: 0 16px; margin-right: clamp(32px, 5vw, 80px); position: relative; z-index: 2;
 }
-.wine-bottle-area img { max-width: 100%; max-height: 55vh; object-fit: contain; filter: drop-shadow(4px 8px 20px rgba(41,37,35,0.25)); }
+.wine-bottle-area img { max-width: 100%; max-height: 66vh; object-fit: contain; }
 .wine-number { font-size: clamp(0.65rem, 1.8vw, 0.85rem); letter-spacing: 0.4em; color: var(--red); margin-bottom: 20px; }
 .wine-name { font-family: bookmania, Georgia, serif; font-weight: 400; font-size: clamp(2.5rem, 8vw, 6rem); line-height: 1.0; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 0.12em; }
 .wine-type { font-family: 'JetBrains Mono', monospace; font-weight: 300; font-size: clamp(0.9rem, 2vw, 1.2rem); color: var(--muted); margin-bottom: 24px; }
@@ -432,7 +432,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .collection-desc { font-size: clamp(0.65rem, 2vw, 0.82rem); line-height: 1.5; }
   .wine-card-inner { flex: 1; min-height: 0; overflow: hidden; }
   .wine-bottle-area { flex: 0 0 auto; width: 100%; padding: 0 0 10px; margin-bottom: 8px; border-bottom: 1px solid rgba(41,37,35,0.08); justify-content: center; align-items: center; }
-  .wine-bottle-area img { max-height: 28vh; max-width: 150px; }
+  .wine-bottle-area img { max-height: 34vh; max-width: 180px; }
   .wine-body { font-size: clamp(0.7rem, 2.4vw, 0.88rem); margin-bottom: 6px; }
   .wine-body-section { margin-bottom: 3px; }
   .wine-body-text { line-height: 1.5; }
