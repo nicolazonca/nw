@@ -224,7 +224,24 @@ function driveUrl(u){if(!u)return'';var m=u.match(/\/d\/([a-zA-Z0-9_-]+)/)||u.ma
 function joinCSVLines(t){var r=[],c='',q=false;for(var i=0;i<t.length;i++){var ch=t[i];if(ch==='"'){q=!q;c+=ch;}else if((ch==='\n'||(ch==='\r'&&t[i+1]==='\n'))&&q){c+=' ';if(ch==='\r')i++;}else if(ch==='\r'){}else if(ch==='\n'){r.push(c);c='';}else c+=ch;}if(c)r.push(c);return r;}
 function splitRow(row){var r=[],c='',q=false;for(var i=0;i<row.length;i++){var ch=row[i];if(ch==='"'){if(q&&row[i+1]==='"'){c+='"';i++;}else q=!q;}else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}r.push(c);return r;}
 function parseCSV(text){var rows=[],lines=joinCSVLines(text.trim()),hi=-1;for(var i=0;i<lines.length;i++){if(splitRow(lines[i])[0].replace(/^"|"$/g,'').trim().toLowerCase()==='id'){hi=i;break;}}if(hi===-1)return rows;var headers=splitRow(lines[hi]).map(h=>h.replace(/^"|"$/g,'').trim().split('\n')[0].replace(/\s*\(.*$/,'').trim().toLowerCase());for(var i=hi+1;i<lines.length;i++){var vals=splitRow(lines[i]);if(vals.every(v=>!v.trim()))continue;var fv=vals[0].replace(/^"|"$/g,'').trim();if(!fv||fv.charCodeAt(0)===0x25b8)continue;var obj={};headers.forEach((h,idx)=>{obj[h]=(vals[idx]||'').replace(/^"|"$/g,'').trim();});rows.push(obj);}return rows;}
-async function fetchSheet(url){if(!url)return null;try{var r=await fetch(url);if(r.ok)return r.text();}catch(e){}var r2=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(url));if(!r2.ok)throw new Error('HTTP '+r2.status);return r2.text();}
+async function fetchSheet(url){
+  if(!url)return null;
+  var proxies=[
+    url,
+    'https://corsproxy.io/?'+encodeURIComponent(url),
+    'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(url)
+  ];
+  for(var i=0;i<proxies.length;i++){
+    try{
+      var ctrl=new AbortController();
+      var tid=setTimeout(()=>ctrl.abort(),6000);
+      var r=await fetch(proxies[i],{signal:ctrl.signal,redirect:'follow'});
+      clearTimeout(tid);
+      if(r.ok)return r.text();
+    }catch(e){}
+  }
+  throw new Error('fetchSheet: all attempts failed');
+}
 
 function renderWineBody(body){var labels=['Story','Winemaking','Tasting Notes'],parts=body.split('|||').map(s=>s.trim()).filter(Boolean);if(parts.length>=3)return'<div class="wine-body">'+parts.slice(0,3).map((p,i)=>'<div class="wine-body-section"><p class="wine-body-label">'+labels[i]+'</p><p class="wine-body-text">'+p+'</p></div>').join('')+'</div>';return'<div class="wine-body"><p class="wine-body-text">'+body+'</p></div>';}
 
