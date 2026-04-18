@@ -269,18 +269,16 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 #m4 { background: var(--bg-alt); }
 #m5 { background: var(--bg); }
 #m6 { background: var(--bg-alt); }
-#m7 { background: var(--bg); }
-
-/* slides II, IV, VII → amber accent */
+/* slides II, IV, VI → amber accent */
 #m2 .big.red { color: var(--amber); }
 #m2 hr.slash { border-top-color: var(--amber); }
 #m4 .big.red { color: var(--amber); }
 #m4 hr.slash { border-top-color: var(--amber); }
-#m7 .big.red { color: var(--amber); }
-#m7 hr.slash { border-top-color: var(--amber); }
+#m6 .big.red { color: var(--amber); }
+#m6 hr.slash { border-top-color: var(--amber); }
 
 /* illustration colours per slide */
-/* slides 2,4,7: colour set directly in SVG files (#EA9332) */
+/* slides 2,4,6: colour set directly in SVG files (#EA9332) */
 #credo .panel-illust img {
   filter: brightness(0.15);
 }
