@@ -427,6 +427,7 @@ function setupDots(scrollEl, dotsEl, counterEl, controlsEl) {
       var panel = pp[idx];
       controlsEl.style.backgroundColor = getComputedStyle(panel).backgroundColor;
       controlsEl.classList.toggle('on-dark', panel.id === 'credo');
+      controlsEl.classList.toggle('on-last', idx === total - 1);
     }
   }
   syncControls(0);

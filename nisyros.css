@@ -198,6 +198,10 @@ body::before {
 .manifesto-controls.on-dark .hscroll-dots .dot { background: var(--bg); }
 .manifesto-controls.on-dark .hscroll-dots .dot.active { background: var(--ink); }
 
+/* Last slide: hide counter and arrows, keep dots */
+.manifesto-controls.on-last .slide-counter,
+.manifesto-controls.on-last .manifesto-arrows { display: none; }
+
 /* Bounce override for inline chevron layout */
 @keyframes bounce-right-inline {
   0%, 100% { transform: translateX(0);    opacity: 0.6; }
