@@ -40,8 +40,8 @@
 
     <!-- I: Edge -->
     <section class="page" id="m1">
-      <span class="slide-counter">I / VI</span>
       <div class="panel-text">
+        <span class="slide-counter">1 / 7</span>
         <div class="big line1 reveal on" data-cms="m1_line1">Wine</div>
         <div class="big line2 reveal d1 on" data-cms="m1_line2">on the</div>
         <div class="big red line3 reveal d2 on" data-cms="m1_line3">Edge</div>
@@ -55,8 +55,8 @@
 
     <!-- II: Nothing -->
     <section class="page" id="m2">
-      <span class="slide-counter">II / VI</span>
       <div class="panel-text">
+        <span class="slide-counter">2 / 7</span>
         <div class="big md line1 reveal" data-cms="m2_line1">Almost</div>
         <div class="big md red line2 reveal d1" data-cms="m2_line2">Nothing</div>
         <hr class="slash reveal d2">
@@ -69,8 +69,8 @@
 
     <!-- III: Land -->
     <section class="page" id="m3">
-      <span class="slide-counter">III / VI</span>
       <div class="panel-text">
+        <span class="slide-counter">3 / 7</span>
         <div class="big md line1 reveal" data-cms="m3_line1">With the</div>
         <div class="big md red line2 reveal d1" data-cms="m3_line2">Land</div>
         <hr class="slash reveal d2">
@@ -83,8 +83,8 @@
 
     <!-- IV: Shoulders of Giants -->
     <section class="page" id="m4">
-      <span class="slide-counter">IV / VI</span>
       <div class="panel-text">
+        <span class="slide-counter">4 / 7</span>
         <div class="big sm line1 reveal" data-cms="m4_line1">On the</div>
         <div class="big sm line2 reveal d1" data-cms="m4_line2">Shoulders</div>
         <div class="big sm red line3 reveal d2" data-cms="m4_line3">of Giants</div>
@@ -98,8 +98,8 @@
 
     <!-- V: Fail -->
     <section class="page" id="m5">
-      <span class="slide-counter">V / VI</span>
       <div class="panel-text">
+        <span class="slide-counter">5 / 7</span>
         <div class="big line1 reveal" data-cms="m5_line1">We try</div>
         <div class="big line2 reveal d1" data-cms="m5_line2">things that</div>
         <div class="big red line3 reveal d2" data-cms="m5_line3">Fail</div>
@@ -113,8 +113,8 @@
 
     <!-- VI: We Do What We Say -->
     <section class="page" id="m6">
-      <span class="slide-counter">VI / VI</span>
       <div class="panel-text">
+        <span class="slide-counter">6 / 7</span>
         <div class="big md line1 reveal" data-cms="m6_line1">We Do</div>
         <div class="big md red line2 reveal d1" data-cms="m6_line2">What we Say</div>
         <hr class="slash reveal d2">
@@ -128,6 +128,7 @@
     <!-- CREDO: A Wine that Belongs -->
     <section class="page" id="credo">
       <div class="panel-text">
+        <span class="slide-counter">7 / 7</span>
         <div class="big line1 reveal" data-cms="credo_line1">A Wine</div>
         <div class="big line2 reveal d1" data-cms="credo_line2">that</div>
         <div class="big red line3 reveal d2" style="margin-top:0.08em;" data-cms="credo_line3">Belongs</div>
@@ -164,99 +165,100 @@
 <div class="hscroll-wrapper" id="wines-wrapper">
   <div class="hscroll" id="wines-scroll">
 
-    <div class="wine-card wines-intro-card">
+    <div class="wine-card wines-intro-card" onclick="goPanel(document.getElementById('wines-scroll'), 1)" style="cursor:pointer;">
+      <div class="wines-intro-text">
+        <div class="big reveal on" style="color:var(--red);">5 Wines.</div>
+        <div class="big reveal d1 on">2 Vintages.</div>
+        <div class="big reveal d2 on">3 Collections.</div>
+        <button class="wine-discover-cta reveal d3 on" onclick="event.stopPropagation();goPanel(document.getElementById('wines-scroll'), 1)">Discover &gt;</button>
+      </div>
+    </div>
+
+    <!-- Wine cards are rendered by js/main.js loadCMS() from the Google Sheet.
+         Required CMS columns per wine: id, collection, name, type, body, specs, img_bottle.
+           body  → exactly 2 non-empty parts separated by "||"
+                   (part 1 = Story, part 2 = Winemaking & Tasting Notes)
+           specs → ≥ 1 non-empty part separated by "|", each becomes a .wine-spec-row
+           Slug (data-collection) is derived from `collection` (lowercase + accent-strip).
+         If the sheet is missing a field or the shape is wrong, loadCMS throws loudly. -->
+    <div id="wines-container" style="display:contents;"></div>
+
+    <div class="wine-card wines-collections-card reveal">
       <div class="wine-card-inner">
-        <div class="big md reveal on">Our</div>
-        <div class="big md reveal d1 on">Wines</div>
-        <hr class="slash reveal d2 on">
-        <p class="quote reveal d2 on" id="wines-subtitle" data-cms="wines_subtitle">Three collections. Six wines. Two vintages.</p>
-        <div style="margin-top:48px;padding-top:32px;border-top:1px solid rgba(41,37,35,0.08);">
-          <p class="collections-label">Collections</p>
-          <div class="collections-grid">
-            <div class="collection-item">
-              <h3 class="collection-name" id="coll-1-name" style="color:#EA9332;" data-cms="coll_1_name">Monopàtia</h3>
-              <p class="collection-desc" id="coll-1-desc" data-cms="coll_1_desc">A collection of unconventional wines inspired by Dodecanese's old stone paths celebrating creative freedom and authentic uniqueness.</p>
-            </div>
-            <div class="collection-item">
-              <h3 class="collection-name" id="coll-2-name" style="color:#C7BCA3;" data-cms="coll_2_name">Nereides</h3>
-              <p class="collection-desc" id="coll-2-desc" data-cms="coll_2_desc">A collection produced with selected grapes from rare Dodecanese vineyards and varieties.</p>
-            </div>
-            <div class="collection-item">
-              <h3 class="collection-name" id="coll-3-name" style="color:#C46E4B;" data-cms="coll_3_name">Volcanic Nature</h3>
-              <p class="collection-desc" id="coll-3-desc" data-cms="coll_3_desc">Every grape grown and harvested on Nisyros. Pure volcanic terroir, Aegean wind, nothing else.</p>
-            </div>
+        <p class="collections-eyebrow">Our Collections</p>
+        <div class="big sm reveal">Three Philosophies</div>
+        <div class="collections-grid-v2">
+          <div class="collection-item-v2">
+            <img class="collection-icon-v2" src="assets/icon-monopatia.svg" alt="Monopàtia">
+            <h3 class="collection-name-v2" style="color:#EA9332;">Monopàtia</h3>
+            <p class="collection-desc-v2">A collection of unconventional wines inspired by Dodecanese's old stone paths celebrating creative freedom and authentic uniqueness.</p>
+          </div>
+          <div class="collection-item-v2">
+            <img class="collection-icon-v2" src="assets/icon-nereides.svg" alt="Nereides">
+            <h3 class="collection-name-v2" style="color:#C7BCA3;">Nereides</h3>
+            <p class="collection-desc-v2">A collection produced with selected grapes from rare Dodecanese vineyards and varieties.</p>
+          </div>
+          <div class="collection-item-v2">
+            <img class="collection-icon-v2" src="assets/icon-volcanica.svg" alt="Volcanica">
+            <h3 class="collection-name-v2" style="color:#C46E4B;">Volcanica</h3>
+            <p class="collection-desc-v2">Single-island wines. Every grape grown and harvested on Nisyros. Pure volcanic terroir, Aegean wind, nothing else.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div id="wines-container" style="display:contents;">
-      <article class="wine-card reveal" id="w1" data-collection="nereides">
-        <div class="wine-card-inner">
-          <p class="wine-number">01 — WHITE <span class="wine-collection">Nereides</span></p>
-          <div class="wine-name">3 2 1...</div>
-          <div class="wine-vintages"><span class="wine-vintage-year">2024</span><span class="wine-vintage-sep"></span><span class="wine-vintage-year">2025</span></div>
-          <p class="wine-type">Athiri</p>
-          <hr class="wine-slash">
-          <div class="wine-body"><div class="wine-body-section"><p class="wine-body-label">Story</p><p class="wine-body-text">The moment before it begins. Dry-farmed Athiri from old Dodecanesian terraces — hand-tended, extremely low yields, harvested when the decision can no longer be delayed.</p></div><div class="wine-body-section"><p class="wine-body-label">Winemaking</p><p class="wine-body-text">Minimal intervention. Whole-cluster pressed, temperature-controlled ferment in stainless steel. Nothing added, nothing removed.</p></div><div class="wine-body-section"><p class="wine-body-label">Tasting Notes</p><p class="wine-body-text">Bone dry, precise, saline. Citrus pith, green almond, chalky minerality.</p></div></div>
-          <div class="wine-specs wine-specs-row1"><div class="wine-spec">Athiri 100%</div><div class="wine-spec">Dry-farmed · Hand-harvested</div><div class="wine-spec">Minimal intervention</div></div>
-          <div class="wine-specs wine-specs-row2"><div class="wine-spec">PGI Dodecanese</div><div class="wine-spec">Nereides collection</div></div>
+    <!-- ── BACKUP: 3 2 1... design v2 (accordion) ── -->
+    <article class="wine-card wine-card-v2 reveal" id="w1-backup" data-collection="nereides">
+      <div class="wine-card-inner">
+        <span class="wine-collection">Nereides Collection</span>
+        <div class="wine-name">3 2 1...</div>
+        <p class="wine-type">Athiri</p>
+        <div class="wine-accordion">
+          <div class="wine-acc-item open">
+            <button class="wine-acc-trigger" aria-expanded="true">
+              <span>Story</span>
+              <svg class="wine-acc-symbol" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20" class="wine-acc-vline"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+            </button>
+            <div class="wine-acc-body">
+              <p class="wine-body-text">The moment before it begins. Dry-farmed Athiri from old Dodecanesian terraces — hand-tended, extremely low yields, harvested when the decision can no longer be delayed.</p>
+            </div>
+          </div>
+          <div class="wine-acc-item">
+            <button class="wine-acc-trigger" aria-expanded="false">
+              <span>Winemaking</span>
+              <svg class="wine-acc-symbol" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20" class="wine-acc-vline"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+            </button>
+            <div class="wine-acc-body">
+              <p class="wine-body-text">Minimal intervention. Whole-cluster pressed, temperature-controlled ferment in stainless steel. Nothing added, nothing removed.</p>
+            </div>
+          </div>
+          <div class="wine-acc-item">
+            <button class="wine-acc-trigger" aria-expanded="false">
+              <span>Tasting Notes</span>
+              <svg class="wine-acc-symbol" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20" class="wine-acc-vline"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+            </button>
+            <div class="wine-acc-body">
+              <p class="wine-body-text">Bone dry, precise, saline. Citrus pith, green almond, chalky minerality.</p>
+            </div>
+          </div>
+          <div class="wine-acc-item">
+            <button class="wine-acc-trigger" aria-expanded="false">
+              <span>Details</span>
+              <svg class="wine-acc-symbol" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20" class="wine-acc-vline"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+            </button>
+            <div class="wine-acc-body wine-specs-list">
+              <div class="wine-spec-row">White</div>
+              <div class="wine-spec-row">Athiri 100%</div>
+              <div class="wine-spec-row">Dry-farmed · Hand-harvested</div>
+              <div class="wine-spec-row">Minimal intervention</div>
+              <div class="wine-spec-row">PGI Dodecanese</div>
+              <div class="wine-spec-row">2024 · 2025</div>
+            </div>
+          </div>
         </div>
-        <div class="wine-bottle-area"><img src="https://lh3.googleusercontent.com/d/1g7t5Te6RXps8tujbpruPZcxvAk5jobiU=s1600" alt="3 2 1... bottle" loading="lazy"></div>
-      </article>
-      <article class="wine-card reveal" id="w2" data-collection="nereides">
-        <div class="wine-card-inner">
-          <p class="wine-number">02 — ROSÉ <span class="wine-collection">Nereides</span></p>
-          <div class="wine-name">40 Milia Konda</div>
-          <div class="wine-vintages"><span class="wine-vintage-year">2025</span></div>
-          <p class="wine-type">Athiri · Mandilaria</p>
-          <hr class="wine-slash">
-          <div class="wine-body"><div class="wine-body-section"><p class="wine-body-label">Story</p><p class="wine-body-text">40 nautical miles — the distance from Nisyros to the nearest mainland coast. That is how far you are from anything ordinary when you drink this wine.</p></div><div class="wine-body-section"><p class="wine-body-label">Winemaking</p><p class="wine-body-text">Mavrothiriko and Assyrtiko from old dry-farmed terraces. Extended maceration, gentle extraction, aged in used oak.</p></div><div class="wine-body-section"><p class="wine-body-label">Tasting Notes</p><p class="wine-body-text">Iron, dark cherry, volcanic dust. Firm tannins and a long, mineral-driven finish.</p></div></div>
-          <div class="wine-specs wine-specs-row1"><div class="wine-spec">Mavrothiriko · Assyrtiko</div><div class="wine-spec">Dry-farmed old vines</div><div class="wine-spec">Volcanic terraces</div></div>
-          <div class="wine-specs wine-specs-row2"><div class="wine-spec">PGI Dodecanese</div><div class="wine-spec">Nereides collection</div></div>
-        </div>
-        <div class="wine-bottle-area"><img src="https://lh3.googleusercontent.com/d/1g7t5Te6RXps8tujbpruPZcxvAk5jobiU=s1600" alt="40 Milia Konda bottle" loading="lazy"></div>
-      </article>
-      <article class="wine-card reveal" id="w3" data-collection="volcanica">
-        <div class="wine-card-inner">
-          <p class="wine-number">03 — ROSÉ <span class="wine-collection">Volcanica</span></p>
-          <div class="wine-name">Roudià</div>
-          <div class="wine-vintages"><span class="wine-vintage-year">2025</span></div>
-          <p class="wine-type">Mandilaria · Athiri · Rosé</p>
-          <hr class="wine-slash">
-          <div class="wine-body"><div class="wine-body-section"><p class="wine-body-label">Story</p><p class="wine-body-text">In the Dodecanese, the pomegranate is called 'roudia.' Like its fruit, this wine reveals a deep, jewelled red.</p></div><div class="wine-body-section"><p class="wine-body-label">Winemaking</p><p class="wine-body-text">Mandilaria and Athiri, co-fermented, harvested early for pure fruit energy. Semi-carbonic, indigenous yeasts, zero compromise.</p></div><div class="wine-body-section"><p class="wine-body-label">Tasting Notes</p><p class="wine-body-text">Drink chilled. Here's to endless summer sunsets.</p></div></div>
-          <div class="wine-specs wine-specs-row1"><div class="wine-spec">Mandilaria · Athiri</div><div class="wine-spec">Co-fermented</div><div class="wine-spec">Volcanic iron soil</div></div>
-          <div class="wine-specs wine-specs-row2"><div class="wine-spec">Minimal SO₂</div><div class="wine-spec">Volcanica collection</div></div>
-        </div>
-        <div class="wine-bottle-area"><img src="https://lh3.googleusercontent.com/d/1g7t5Te6RXps8tujbpruPZcxvAk5jobiU=s1600" alt="Roudià bottle" loading="lazy"></div>
-      </article>
-      <article class="wine-card reveal" id="w4" data-collection="monopatia">
-        <div class="wine-card-inner">
-          <p class="wine-number">04 — WHITE <span class="wine-collection">Monopatia</span></p>
-          <div class="wine-name">Apiri</div>
-          <div class="wine-vintages"><span class="wine-vintage-year">2024</span><span class="wine-vintage-sep"></span><span class="wine-vintage-year">2025</span></div>
-          <p class="wine-type">Athiri · Amphora White</p>
-          <hr class="wine-slash">
-          <div class="wine-body"><div class="wine-body-section"><p class="wine-body-label">Story</p><p class="wine-body-text">The warm air that breathes through the cracks of the volcano is called Apyri. This wine takes its name from that breath.</p></div><div class="wine-body-section"><p class="wine-body-label">Winemaking</p><p class="wine-body-text">Athiri, part skin-contact, rested in amphora. Unclarified, unfiltered. Wild ferment, no additions.</p></div><div class="wine-body-section"><p class="wine-body-label">Tasting Notes</p><p class="wine-body-text">Golden amber with copper glints. Beeswax, dried herbs, white peach. Textured palate with saline finish.</p></div></div>
-          <div class="wine-specs wine-specs-row1"><div class="wine-spec">Athiri blend</div><div class="wine-spec">Partial skin contact</div><div class="wine-spec">Wild ferment · Amphora</div></div>
-          <div class="wine-specs wine-specs-row2"><div class="wine-spec">Unclarified · Unfiltered</div><div class="wine-spec">Monopatia collection</div></div>
-        </div>
-        <div class="wine-bottle-area"><img src="https://lh3.googleusercontent.com/d/1dCMUZcjrd3fV0TIjlLmV5ZBSLBtBoLh5=s1600" alt="Apiri bottle" loading="lazy"></div>
-      </article>
-      <article class="wine-card reveal" id="w5" data-collection="monopatia">
-        <div class="wine-card-inner">
-          <p class="wine-number">05 — WHITE <span class="wine-collection">Monopatia</span></p>
-          <div class="wine-name">Atmida</div>
-          <div class="wine-vintages"><span class="wine-vintage-year">2025</span></div>
-          <p class="wine-type">Athiri · Volcano's Breath</p>
-          <hr class="wine-slash">
-          <div class="wine-body"><div class="wine-body-section"><p class="wine-body-label">Story</p><p class="wine-body-text">Atmida means steam — the vapour that rises from the ground on cool mornings, the breath the volcano never fully holds back.</p></div><div class="wine-body-section"><p class="wine-body-label">Winemaking</p><p class="wine-body-text">Crushed barefoot, indigenous yeasts, rested in amphora.</p></div><div class="wine-body-section"><p class="wine-body-label">Tasting Notes</p><p class="wine-body-text">Copper glow, wild strawberry, volcanic minerality. A sip as wild as the land it comes from.</p></div></div>
-          <div class="wine-specs wine-specs-row1"><div class="wine-spec">Athiri 100%</div><div class="wine-spec">Extended skin contact</div><div class="wine-spec">Wild ferment</div></div>
-          <div class="wine-specs wine-specs-row2"><div class="wine-spec">Unclarified</div><div class="wine-spec">Monopatia collection</div></div>
-        </div>
-        <div class="wine-bottle-area"><img src="https://lh3.googleusercontent.com/d/1g7t5Te6RXps8tujbpruPZcxvAk5jobiU=s1600" alt="Atmida bottle" loading="lazy"></div>
-      </article>
-    </div>
+      </div>
+      <div class="wine-bottle-area"><img src="https://lh3.googleusercontent.com/d/1g7t5Te6RXps8tujbpruPZcxvAk5jobiU=s1600" alt="3 2 1... bottle" loading="lazy"></div>
+    </article>
 
   </div>
   <div class="hscroll-dots wines-dots" id="wines-dots"></div>
@@ -306,18 +308,19 @@
 </section>
 <!-- ══ CONTACT ══ -->
 <section id="contact">
-  <div class="section-header">
-    <div class="big md reveal">Find</div>
-    <div class="big md reveal d1">Us</div>
-    <hr class="slash reveal d2">
-    <p class="quote reveal d2" data-cms="contact_subtitle">We are a small operation on a small island. We answer every message ourselves.</p>
-  </div>
   <div class="contact-grid">
+
+    <div class="contact-header reveal">
+      <div class="big md">Find<br>Us</div>
+      <hr class="slash">
+      <p class="quote" data-cms="contact_subtitle">We are a small operation on a small island. We answer every message ourselves.</p>
+    </div>
 
     <div class="contact-block reveal" id="contact-loc">
       <p class="contact-label">Location</p>
       <div class="contact-value" data-cms="contact_loc_value">Nisyros</div>
       <p class="contact-sub" data-cms="contact_loc_sub">Mandraki village<br>Nisyros, Dodecanese<br>Greece 853 03</p>
+      <a class="contact-map-link" href="https://maps.google.com/?q=Nisyros+Wines,+Mandraki,+Nisyros,+Greece" target="_blank" rel="noopener">See on map</a>
     </div>
 
     <div class="contact-block reveal d1" id="contact-reach">
@@ -327,25 +330,25 @@
       <p class="contact-sub" style="margin-top:12px;" data-cms="contact_email_sub">We reply within 48 hours, usually faster.</p>
     </div>
 
-    <div class="contact-block reveal d2" id="contact-visits">
+    <div class="contact-block reveal d1" id="contact-visits">
       <p class="contact-label">Visits &amp; Tastings</p>
       <div class="contact-value contact-value--sm" data-cms="contact_visits_value">By appointment</div>
       <p class="contact-sub" data-cms="contact_visits_sub">We welcome visitors who are curious about what we do. Write to us first. Tell us what you are curious about. The cellar is small and we want to give you real time, not a tour.</p>
     </div>
 
-    <div class="contact-block reveal d3" id="contact-trade">
-      <p class="contact-label">Trade &amp; Distribution</p>
-      <div class="contact-value contact-value--sm" data-cms="contact_trade_value">Limited allocation</div>
-      <p class="contact-sub" data-cms="contact_trade_sub">Production is small and we work with a handful of importers who share our values.</p>
-    </div>
-
-    <div class="contact-block reveal d3" id="contact-social">
+    <div class="contact-block reveal d2" id="contact-social">
       <p class="contact-label">Follow</p>
       <a href="https://www.instagram.com/nisyroswines/" target="_blank" rel="noopener" class="contact-social-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="5.5"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>
         <span class="contact-social-name">@nisyroswines</span>
       </a>
       <p class="contact-sub" style="margin-top:12px;">The vineyard, the cellar, the island. Unfiltered.</p>
+    </div>
+
+    <div class="contact-block reveal d2" id="contact-trade">
+      <p class="contact-label">Trade &amp; Distribution</p>
+      <div class="contact-value contact-value--sm" data-cms="contact_trade_value">Limited allocation</div>
+      <p class="contact-sub" data-cms="contact_trade_sub">Production is small and we work with a handful of importers who share our values.</p>
     </div>
 
   </div>
@@ -603,52 +606,104 @@ function parseConfig(text){
   return cfg;
 }
 
+// No silent failures: loadConfig and loadCMS let exceptions propagate so
+// broken sheets / network / DOM surface immediately in the devtools console.
 async function loadConfig(){
-  try{
-    var cfg=parseConfig(await fetchSheet(SHEET_CONFIG));
-    if(!Object.keys(cfg).length)return;
-    // Apply plain text fields
-    document.querySelectorAll('[data-cms]').forEach(function(el){
-      var key=el.dataset.cms;
-      if(cfg[key]!==undefined&&cfg[key]!==''){
-        // Handle \n in contact sub fields
-        if(el.dataset.cms.endsWith('_sub')&&cfg[key].indexOf('\\n')>-1){
-          el.innerHTML=cfg[key].replace(/\\n/g,'<br>');
-        } else {
-          el.textContent=cfg[key];
-        }
+  var cfg = parseConfig(await fetchSheet(SHEET_CONFIG));
+  if(!Object.keys(cfg).length) throw new Error('[CMS] config sheet returned no rows');
+  document.querySelectorAll('[data-cms]').forEach(function(el){
+    var key = el.dataset.cms;
+    if(cfg[key] !== undefined && cfg[key] !== ''){
+      if(el.dataset.cms.endsWith('_sub') && cfg[key].indexOf('\\n') > -1){
+        el.innerHTML = cfg[key].replace(/\\n/g,'<br>');
+      } else {
+        el.textContent = cfg[key];
       }
-    });
-    // Update email link href
-    document.querySelectorAll('[data-cms-email]').forEach(function(el){
-      var key=el.dataset.cmsEmail;
-      if(cfg[key]){
-        el.href='mailto:'+cfg[key];
-      }
-    });
-  }catch(e){console.warn('[CMS] config',e);}
+    }
+  });
+  document.querySelectorAll('[data-cms-email]').forEach(function(el){
+    var key = el.dataset.cmsEmail;
+    if(cfg[key]) el.href = 'mailto:'+cfg[key];
+  });
 }
 
-function renderWineBody(body){var labels=['Story','Winemaking','Tasting Notes'],parts=body.split('|||').map(s=>s.trim()).filter(Boolean);if(parts.length>=3)return'<div class="wine-body">'+parts.slice(0,3).map((p,i)=>'<div class="wine-body-section"><p class="wine-body-label">'+labels[i]+'</p><p class="wine-body-text">'+p+'</p></div>').join('')+'</div>';return'<div class="wine-body"><p class="wine-body-text">'+body+'</p></div>';}
+// ── Wine card v3 rendering (single source of truth: the CMS sheet) ──
+// Required CMS columns per wine:
+//   id, collection, name, type, body, specs, img_bottle
+// Shape:
+//   body  → exactly 2 non-empty parts separated by "||"
+//           (part 1 renders under "Story", part 2 under "Winemaking & Tasting Notes")
+//   specs → ≥ 1 non-empty part separated by "|", each becomes a .wine-spec-row
+//   slug  → derived from `collection` (lowercased, accents stripped)
+function slugify(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').trim();
+}
+function escAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function requireField(w, field){
+  var v = (w[field] || '').trim();
+  if(!v) throw new Error('[CMS] wine "'+(w.id || '?')+'" missing required field: '+field);
+  return v;
+}
+function renderWineV3(w){
+  var id       = requireField(w, 'id');
+  var coll     = requireField(w, 'collection');
+  var name     = requireField(w, 'name');
+  var type     = requireField(w, 'type');
+  var bodyRaw  = requireField(w, 'body');
+  var specsRaw = requireField(w, 'specs');
+  var imgRaw   = requireField(w, 'img_bottle');
+
+  var slug = slugify(coll);
+
+  var body = bodyRaw.split('||').map(function(s){ return s.trim(); });
+  if(body.length !== 2 || !body[0] || !body[1]){
+    throw new Error('[CMS] wine "'+id+'" body must split into exactly 2 non-empty parts on "||" (got '+body.length+')');
+  }
+
+  var specs = specsRaw.split('|').map(function(s){ return s.trim(); }).filter(Boolean);
+  if(!specs.length){
+    throw new Error('[CMS] wine "'+id+'" specs is empty');
+  }
+
+  var imgSrc = driveUrl(imgRaw);
+  var plainName = name.replace(/<[^>]+>/g, '');
+
+  return ''
+    + '<article class="wine-card wine-card-v3 reveal" id="'+escAttr(id)+'" data-collection="'+escAttr(slug)+'">'
+      + '<div class="wine-col-main">'
+        + '<span class="wine-collection">'+coll+' Collection</span>'
+        + '<div class="wine-name">'+name+'</div>'
+        + '<p class="wine-type">'+type+'</p>'
+        + '<div class="wine-col-texts">'
+          + '<div><p class="wine-body-label">Story</p><p class="wine-body-text">'+body[0]+'</p></div>'
+          + '<div><p class="wine-body-label">Winemaking &amp; Tasting Notes</p><p class="wine-body-text">'+body[1]+'</p></div>'
+        + '</div>'
+      + '</div>'
+      + '<div class="wine-col-details">'
+        + '<p class="wine-body-label">Details</p>'
+        + specs.map(function(s){ return '<div class="wine-spec-row">'+s+'</div>'; }).join('')
+      + '</div>'
+      + '<div class="wine-col-bottle">'
+        + '<img src="'+escAttr(imgSrc)+'" alt="'+escAttr(plainName)+' bottle" loading="lazy">'
+      + '</div>'
+    + '</article>';
+}
 
 async function loadCMS(){
-  try {
-    var wines = parseCSV(await fetchSheet(SHEET_WINES));
-    var vw = wines.filter(w=>w.name&&w.name.trim());
-    if (!vw.length) return;
-    var container = document.getElementById('wines-container');
-    container.innerHTML = vw.map((w,i)=>{
-      var specs=(w.specs||'').split('|').map(s=>s.trim()).filter(Boolean);
-      var bSrc=driveUrl(w.img_bottle), bHtml=bSrc?'<div class="wine-bottle-area"><img src="'+bSrc+'" alt="'+w.name+' bottle" loading="lazy"></div>':'';
-      var cSlug=(w.collection||'').toLowerCase().trim(), cBadge=w.collection?'<span class="wine-collection">'+w.collection+'</span>':'';
-      var vRaw=w.vintages||'2024 | 2025 coming soon';
-      var vHtml=vRaw.split('|').map((v,vi)=>{v=v.trim();var s=vi<vRaw.split('|').length-1?'<span class="wine-vintage-sep"></span>':'';return v.toLowerCase().includes('coming soon')?'<span class="wine-vintage-soon">'+v+'</span>'+s:'<span class="wine-vintage-year">'+v+'</span>'+s;}).join('');
-      return'<article class="wine-card reveal" id="'+(w.id||'w'+i)+'" data-collection="'+cSlug+'"><div class="wine-card-inner"><p class="wine-number">'+(w.number||'')+' '+cBadge+'</p><div class="wine-name">'+(w.name||'')+'</div><div class="wine-vintages">'+vHtml+'</div><p class="wine-type">'+(w.type||'')+'</p><hr class="wine-slash">'+renderWineBody(w.body||'')+'<div class="wine-specs wine-specs-row1">'+specs.slice(0,3).map(s=>'<div class="wine-spec">'+s+'</div>').join('')+'</div><div class="wine-specs wine-specs-row2">'+specs.slice(3).map(s=>'<div class="wine-spec">'+s+'</div>').join('')+'</div></div>'+bHtml+'</article>';
-    }).join('');
-    container.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-    if (wScroll && wDots) setupDots(wScroll, wDots);
-  } catch(e) { console.warn('[CMS] wines', e); }
+  var container = document.getElementById('wines-container');
+  if(!container) throw new Error('[CMS] #wines-container not found in DOM');
+
+  var wines = parseCSV(await fetchSheet(SHEET_WINES));
+  var valid = wines.filter(function(w){ return w.name && w.name.trim(); });
+  if(!valid.length) throw new Error('[CMS] wines sheet returned no rows with a name');
+
+  container.innerHTML = valid.map(renderWineV3).join('');
+  container.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  if(wScroll && wDots) setupDots(wScroll, wDots);
 }
+
 loadConfig();
 loadCMS();
 </script>

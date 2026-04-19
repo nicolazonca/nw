@@ -247,51 +247,103 @@ function parseConfig(text){
   return cfg;
 }
 
+// No silent failures: loadConfig and loadCMS let exceptions propagate so
+// broken sheets / network / DOM surface immediately in the devtools console.
 async function loadConfig(){
-  try{
-    var cfg=parseConfig(await fetchSheet(SHEET_CONFIG));
-    if(!Object.keys(cfg).length)return;
-    // Apply plain text fields
-    document.querySelectorAll('[data-cms]').forEach(function(el){
-      var key=el.dataset.cms;
-      if(cfg[key]!==undefined&&cfg[key]!==''){
-        // Handle \n in contact sub fields
-        if(el.dataset.cms.endsWith('_sub')&&cfg[key].indexOf('\\n')>-1){
-          el.innerHTML=cfg[key].replace(/\\n/g,'<br>');
-        } else {
-          el.textContent=cfg[key];
-        }
+  var cfg = parseConfig(await fetchSheet(SHEET_CONFIG));
+  if(!Object.keys(cfg).length) throw new Error('[CMS] config sheet returned no rows');
+  document.querySelectorAll('[data-cms]').forEach(function(el){
+    var key = el.dataset.cms;
+    if(cfg[key] !== undefined && cfg[key] !== ''){
+      if(el.dataset.cms.endsWith('_sub') && cfg[key].indexOf('\\n') > -1){
+        el.innerHTML = cfg[key].replace(/\\n/g,'<br>');
+      } else {
+        el.textContent = cfg[key];
       }
-    });
-    // Update email link href
-    document.querySelectorAll('[data-cms-email]').forEach(function(el){
-      var key=el.dataset.cmsEmail;
-      if(cfg[key]){
-        el.href='mailto:'+cfg[key];
-      }
-    });
-  }catch(e){console.warn('[CMS] config',e);}
+    }
+  });
+  document.querySelectorAll('[data-cms-email]').forEach(function(el){
+    var key = el.dataset.cmsEmail;
+    if(cfg[key]) el.href = 'mailto:'+cfg[key];
+  });
 }
 
-function renderWineBody(body){var labels=['Story','Winemaking','Tasting Notes'],parts=body.split('|||').map(s=>s.trim()).filter(Boolean);if(parts.length>=3)return'<div class="wine-body">'+parts.slice(0,3).map((p,i)=>'<div class="wine-body-section"><p class="wine-body-label">'+labels[i]+'</p><p class="wine-body-text">'+p+'</p></div>').join('')+'</div>';return'<div class="wine-body"><p class="wine-body-text">'+body+'</p></div>';}
+// ── Wine card v3 rendering (single source of truth: the CMS sheet) ──
+// Required CMS columns per wine:
+//   id, collection, name, type, body, specs, img_bottle
+// Shape:
+//   body  → exactly 2 non-empty parts separated by "||"
+//           (part 1 renders under "Story", part 2 under "Winemaking & Tasting Notes")
+//   specs → ≥ 1 non-empty part separated by "|", each becomes a .wine-spec-row
+//   slug  → derived from `collection` (lowercased, accents stripped)
+function slugify(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').trim();
+}
+function escAttr(s){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function requireField(w, field){
+  var v = (w[field] || '').trim();
+  if(!v) throw new Error('[CMS] wine "'+(w.id || '?')+'" missing required field: '+field);
+  return v;
+}
+function renderWineV3(w){
+  var id       = requireField(w, 'id');
+  var coll     = requireField(w, 'collection');
+  var name     = requireField(w, 'name');
+  var type     = requireField(w, 'type');
+  var bodyRaw  = requireField(w, 'body');
+  var specsRaw = requireField(w, 'specs');
+  var imgRaw   = requireField(w, 'img_bottle');
+
+  var slug = slugify(coll);
+
+  var body = bodyRaw.split('||').map(function(s){ return s.trim(); });
+  if(body.length !== 2 || !body[0] || !body[1]){
+    throw new Error('[CMS] wine "'+id+'" body must split into exactly 2 non-empty parts on "||" (got '+body.length+')');
+  }
+
+  var specs = specsRaw.split('|').map(function(s){ return s.trim(); }).filter(Boolean);
+  if(!specs.length){
+    throw new Error('[CMS] wine "'+id+'" specs is empty');
+  }
+
+  var imgSrc = driveUrl(imgRaw);
+  var plainName = name.replace(/<[^>]+>/g, '');
+
+  return ''
+    + '<article class="wine-card wine-card-v3 reveal" id="'+escAttr(id)+'" data-collection="'+escAttr(slug)+'">'
+      + '<div class="wine-col-main">'
+        + '<span class="wine-collection">'+coll+' Collection</span>'
+        + '<div class="wine-name">'+name+'</div>'
+        + '<p class="wine-type">'+type+'</p>'
+        + '<div class="wine-col-texts">'
+          + '<div><p class="wine-body-label">Story</p><p class="wine-body-text">'+body[0]+'</p></div>'
+          + '<div><p class="wine-body-label">Winemaking &amp; Tasting Notes</p><p class="wine-body-text">'+body[1]+'</p></div>'
+        + '</div>'
+      + '</div>'
+      + '<div class="wine-col-details">'
+        + '<p class="wine-body-label">Details</p>'
+        + specs.map(function(s){ return '<div class="wine-spec-row">'+s+'</div>'; }).join('')
+      + '</div>'
+      + '<div class="wine-col-bottle">'
+        + '<img src="'+escAttr(imgSrc)+'" alt="'+escAttr(plainName)+' bottle" loading="lazy">'
+      + '</div>'
+    + '</article>';
+}
 
 async function loadCMS(){
-  try {
-    var wines = parseCSV(await fetchSheet(SHEET_WINES));
-    var vw = wines.filter(w=>w.name&&w.name.trim());
-    if (!vw.length) return;
-    var container = document.getElementById('wines-container');
-    container.innerHTML = vw.map((w,i)=>{
-      var specs=(w.specs||'').split('|').map(s=>s.trim()).filter(Boolean);
-      var bSrc=driveUrl(w.img_bottle), bHtml=bSrc?'<div class="wine-bottle-area"><img src="'+bSrc+'" alt="'+w.name+' bottle" loading="lazy"></div>':'';
-      var cSlug=(w.collection||'').toLowerCase().trim(), cBadge=w.collection?'<span class="wine-collection">'+w.collection+'</span>':'';
-      var vRaw=w.vintages||'2024 | 2025 coming soon';
-      var vHtml=vRaw.split('|').map((v,vi)=>{v=v.trim();var s=vi<vRaw.split('|').length-1?'<span class="wine-vintage-sep"></span>':'';return v.toLowerCase().includes('coming soon')?'<span class="wine-vintage-soon">'+v+'</span>'+s:'<span class="wine-vintage-year">'+v+'</span>'+s;}).join('');
-      return'<article class="wine-card reveal" id="'+(w.id||'w'+i)+'" data-collection="'+cSlug+'"><div class="wine-card-inner"><p class="wine-number">'+(w.number||'')+' '+cBadge+'</p><div class="wine-name">'+(w.name||'')+'</div><div class="wine-vintages">'+vHtml+'</div><p class="wine-type">'+(w.type||'')+'</p><hr class="wine-slash">'+renderWineBody(w.body||'')+'<div class="wine-specs wine-specs-row1">'+specs.slice(0,3).map(s=>'<div class="wine-spec">'+s+'</div>').join('')+'</div><div class="wine-specs wine-specs-row2">'+specs.slice(3).map(s=>'<div class="wine-spec">'+s+'</div>').join('')+'</div></div>'+bHtml+'</article>';
-    }).join('');
-    container.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-    if (wScroll && wDots) setupDots(wScroll, wDots);
-  } catch(e) { console.warn('[CMS] wines', e); }
+  var container = document.getElementById('wines-container');
+  if(!container) throw new Error('[CMS] #wines-container not found in DOM');
+
+  var wines = parseCSV(await fetchSheet(SHEET_WINES));
+  var valid = wines.filter(function(w){ return w.name && w.name.trim(); });
+  if(!valid.length) throw new Error('[CMS] wines sheet returned no rows with a name');
+
+  container.innerHTML = valid.map(renderWineV3).join('');
+  container.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  if(wScroll && wDots) setupDots(wScroll, wDots);
 }
+
 loadConfig();
 loadCMS();
