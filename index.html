@@ -41,7 +41,6 @@
     <!-- I: Edge -->
     <section class="page" id="m1">
       <div class="panel-text">
-        <span class="slide-counter">1 / 7</span>
         <div class="big line1 reveal on" data-cms="m1_line1">Wine</div>
         <div class="big line2 reveal d1 on" data-cms="m1_line2">on the</div>
         <div class="big red line3 reveal d2 on" data-cms="m1_line3">Edge</div>
@@ -56,7 +55,6 @@
     <!-- II: Nothing -->
     <section class="page" id="m2">
       <div class="panel-text">
-        <span class="slide-counter">2 / 7</span>
         <div class="big md line1 reveal" data-cms="m2_line1">Almost</div>
         <div class="big md red line2 reveal d1" data-cms="m2_line2">Nothing</div>
         <hr class="slash reveal d2">
@@ -70,7 +68,6 @@
     <!-- III: Land -->
     <section class="page" id="m3">
       <div class="panel-text">
-        <span class="slide-counter">3 / 7</span>
         <div class="big md line1 reveal" data-cms="m3_line1">With the</div>
         <div class="big md red line2 reveal d1" data-cms="m3_line2">Land</div>
         <hr class="slash reveal d2">
@@ -84,7 +81,6 @@
     <!-- IV: Shoulders of Giants -->
     <section class="page" id="m4">
       <div class="panel-text">
-        <span class="slide-counter">4 / 7</span>
         <div class="big sm line1 reveal" data-cms="m4_line1">On the</div>
         <div class="big sm line2 reveal d1" data-cms="m4_line2">Shoulders</div>
         <div class="big sm red line3 reveal d2" data-cms="m4_line3">of Giants</div>
@@ -99,7 +95,6 @@
     <!-- V: Fail -->
     <section class="page" id="m5">
       <div class="panel-text">
-        <span class="slide-counter">5 / 7</span>
         <div class="big line1 reveal" data-cms="m5_line1">We try</div>
         <div class="big line2 reveal d1" data-cms="m5_line2">things that</div>
         <div class="big red line3 reveal d2" data-cms="m5_line3">Fail</div>
@@ -114,7 +109,6 @@
     <!-- VI: We Do What We Say -->
     <section class="page" id="m6">
       <div class="panel-text">
-        <span class="slide-counter">6 / 7</span>
         <div class="big md line1 reveal" data-cms="m6_line1">We Do</div>
         <div class="big md red line2 reveal d1" data-cms="m6_line2">What we Say</div>
         <hr class="slash reveal d2">
@@ -128,7 +122,6 @@
     <!-- CREDO: A Wine that Belongs -->
     <section class="page" id="credo">
       <div class="panel-text">
-        <span class="slide-counter">7 / 7</span>
         <div class="big line1 reveal" data-cms="credo_line1">A Wine</div>
         <div class="big line2 reveal d1" data-cms="credo_line2">that</div>
         <div class="big red line3 reveal d2" style="margin-top:0.08em;" data-cms="credo_line3">Belongs</div>
@@ -142,8 +135,11 @@
     </section>
 
   </div>
-  <div class="hscroll-dots" id="manifesto-dots"></div>
-  <!-- chevrons injected by JS -->
+  <div class="manifesto-controls">
+    <span class="slide-counter" id="manifesto-counter">1 / 7</span>
+    <div class="manifesto-arrows" id="manifesto-arrows"></div>
+    <div class="hscroll-dots" id="manifesto-dots"></div>
+  </div>
 </div>
 <!-- ══ HERO ══ -->
 <section id="hero">
@@ -413,7 +409,7 @@ function goPanel(el, idx) {
   smoothTo(el, pp[idx].offsetLeft, 480);
 }
 
-function setupDots(scrollEl, dotsEl) {
+function setupDots(scrollEl, dotsEl, counterEl) {
   var pp = scrollEl.querySelectorAll('.page,.wine-card');
   if (!pp.length) return;
   dotsEl.innerHTML = '';
@@ -424,20 +420,24 @@ function setupDots(scrollEl, dotsEl) {
     dotsEl.appendChild(d);
   });
   var dots = dotsEl.querySelectorAll('.dot');
+  var total = pp.length;
+  if (counterEl) counterEl.textContent = '1 / ' + total;
   scrollEl.addEventListener('scroll', function() {
     clearTimeout(scrollEl._dt);
     scrollEl._dt = setTimeout(() => {
       var idx = getIdx(scrollEl);
       dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+      if (counterEl) counterEl.textContent = (idx+1) + ' / ' + total;
     }, 50);
   });
 }
 
-var mScroll = document.getElementById('manifesto-scroll');
-var mDots   = document.getElementById('manifesto-dots');
-var wScroll = document.getElementById('wines-scroll');
-var wDots   = document.getElementById('wines-dots');
-if (mScroll && mDots) setupDots(mScroll, mDots);
+var mScroll  = document.getElementById('manifesto-scroll');
+var mDots    = document.getElementById('manifesto-dots');
+var mCounter = document.getElementById('manifesto-counter');
+var wScroll  = document.getElementById('wines-scroll');
+var wDots    = document.getElementById('wines-dots');
+if (mScroll && mDots) setupDots(mScroll, mDots, mCounter);
 if (wScroll && wDots) setupDots(wScroll, wDots);
 
 /* Reveal inside panels */
@@ -500,8 +500,9 @@ if (wScroll && wDots) setupDots(wScroll, wDots);
     rArr.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>';
     // Only first right chevron (manifesto) gets bounce
     if (isFirst) { rArr.classList.add('first-bounce'); isFirst = false; }
-    wrapper.appendChild(lArr);
-    wrapper.appendChild(rArr);
+    var arrowsHost = id === 'manifesto-scroll' ? document.getElementById('manifesto-arrows') : wrapper;
+    arrowsHost.appendChild(lArr);
+    arrowsHost.appendChild(rArr);
     function upd() {
       var pp=scrollEl.querySelectorAll('.page,.wine-card'), idx=getIdx(scrollEl);
       lArr.style.display = idx<=0?'none':'';

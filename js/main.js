@@ -54,7 +54,7 @@ function goPanel(el, idx) {
   smoothTo(el, pp[idx].offsetLeft, 480);
 }
 
-function setupDots(scrollEl, dotsEl) {
+function setupDots(scrollEl, dotsEl, counterEl) {
   var pp = scrollEl.querySelectorAll('.page,.wine-card');
   if (!pp.length) return;
   dotsEl.innerHTML = '';
@@ -65,20 +65,24 @@ function setupDots(scrollEl, dotsEl) {
     dotsEl.appendChild(d);
   });
   var dots = dotsEl.querySelectorAll('.dot');
+  var total = pp.length;
+  if (counterEl) counterEl.textContent = '1 / ' + total;
   scrollEl.addEventListener('scroll', function() {
     clearTimeout(scrollEl._dt);
     scrollEl._dt = setTimeout(() => {
       var idx = getIdx(scrollEl);
       dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+      if (counterEl) counterEl.textContent = (idx+1) + ' / ' + total;
     }, 50);
   });
 }
 
-var mScroll = document.getElementById('manifesto-scroll');
-var mDots   = document.getElementById('manifesto-dots');
-var wScroll = document.getElementById('wines-scroll');
-var wDots   = document.getElementById('wines-dots');
-if (mScroll && mDots) setupDots(mScroll, mDots);
+var mScroll  = document.getElementById('manifesto-scroll');
+var mDots    = document.getElementById('manifesto-dots');
+var mCounter = document.getElementById('manifesto-counter');
+var wScroll  = document.getElementById('wines-scroll');
+var wDots    = document.getElementById('wines-dots');
+if (mScroll && mDots) setupDots(mScroll, mDots, mCounter);
 if (wScroll && wDots) setupDots(wScroll, wDots);
 
 /* Reveal inside panels */
@@ -141,8 +145,9 @@ if (wScroll && wDots) setupDots(wScroll, wDots);
     rArr.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>';
     // Only first right chevron (manifesto) gets bounce
     if (isFirst) { rArr.classList.add('first-bounce'); isFirst = false; }
-    wrapper.appendChild(lArr);
-    wrapper.appendChild(rArr);
+    var arrowsHost = id === 'manifesto-scroll' ? document.getElementById('manifesto-arrows') : wrapper;
+    arrowsHost.appendChild(lArr);
+    arrowsHost.appendChild(rArr);
     function upd() {
       var pp=scrollEl.querySelectorAll('.page,.wine-card'), idx=getIdx(scrollEl);
       lArr.style.display = idx<=0?'none':'';
