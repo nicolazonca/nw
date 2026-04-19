@@ -370,7 +370,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .wine-col-texts .wine-body-label { margin-bottom: 12px; }
 .wine-col-details { padding-top: clamp(56px, 7.2vw, 112px); display: flex; flex-direction: column; }
 .wine-detail-row {
-  display: flex; flex-direction: column; gap: 2px;
+  display: flex; flex-direction: column; gap: 7px;
   padding: 7px 0 9px; border-bottom: 1px solid rgba(43,39,37,0.18);
 }
 .wine-detail-label {
