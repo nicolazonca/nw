@@ -180,7 +180,7 @@ body::before {
 }
 
 /* ── ILLUSTRATIONS ── */
-.panel-illust      { flex: 0 0 auto; width: clamp(160px, 30vw, 400px); opacity: 0.85; margin-right: 52px; align-self: flex-end; padding-bottom: clamp(40px, 6vh, 64px); }
+.panel-illust      { flex: 0 0 auto; width: clamp(180px, 34vw, 460px); opacity: 0.85; margin-right: 52px; align-self: center; padding-bottom: clamp(48px, 10vh, 120px); }
 .panel-illust svg, .panel-illust img  { width: 100%; height: auto; display: block; }
 
 /* ── PAGE BLOCKS ── */
