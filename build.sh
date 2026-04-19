@@ -1,10 +1,10 @@
 #!/bin/bash
 # ══════════════════════════════════════════════
-#  build.sh — ricompone nisyros.html dai componenti
+#  build.sh — ricompone index.html dai componenti
 #  Uso: ./build.sh
 # ══════════════════════════════════════════════
 
-OUT="nisyros.html"
+OUT="index.html"
 
 cat \
   sections/head.html \

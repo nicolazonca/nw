@@ -218,13 +218,60 @@ var navObs = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 document.querySelectorAll('#m1,#hero,#wines-wrapper,#faces,#contact').forEach(el => navObs.observe(el));
 
-/* CMS — wines only (faces managed via HTML for now) */
-const SHEET_WINES = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQGec_ewoWxtdcEXP05iJm4v2LHOoyW5sZc2bSBRVMzX7vlJIX8duf1JD--qMhpihBVgHMnHJxrgwkL/pub?gid=1993474932&single=true&output=csv';
+/* CMS — config (Sheet1) + wines — served via Vercel Edge Function (no CORS) */
+const SHEET_CONFIG = '/api/cms?sheet=config';
+const SHEET_WINES  = '/api/cms?sheet=wines';
 function driveUrl(u){if(!u)return'';var m=u.match(/\/d\/([a-zA-Z0-9_-]+)/)||u.match(/[?&]id=([a-zA-Z0-9_-]+)/);return m?'https://lh3.googleusercontent.com/d/'+m[1]+'=s1600':u;}
 function joinCSVLines(t){var r=[],c='',q=false;for(var i=0;i<t.length;i++){var ch=t[i];if(ch==='"'){q=!q;c+=ch;}else if((ch==='\n'||(ch==='\r'&&t[i+1]==='\n'))&&q){c+=' ';if(ch==='\r')i++;}else if(ch==='\r'){}else if(ch==='\n'){r.push(c);c='';}else c+=ch;}if(c)r.push(c);return r;}
 function splitRow(row){var r=[],c='',q=false;for(var i=0;i<row.length;i++){var ch=row[i];if(ch==='"'){if(q&&row[i+1]==='"'){c+='"';i++;}else q=!q;}else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}r.push(c);return r;}
 function parseCSV(text){var rows=[],lines=joinCSVLines(text.trim()),hi=-1;for(var i=0;i<lines.length;i++){if(splitRow(lines[i])[0].replace(/^"|"$/g,'').trim().toLowerCase()==='id'){hi=i;break;}}if(hi===-1)return rows;var headers=splitRow(lines[hi]).map(h=>h.replace(/^"|"$/g,'').trim().split('\n')[0].replace(/\s*\(.*$/,'').trim().toLowerCase());for(var i=hi+1;i<lines.length;i++){var vals=splitRow(lines[i]);if(vals.every(v=>!v.trim()))continue;var fv=vals[0].replace(/^"|"$/g,'').trim();if(!fv||fv.charCodeAt(0)===0x25b8)continue;var obj={};headers.forEach((h,idx)=>{obj[h]=(vals[idx]||'').replace(/^"|"$/g,'').trim();});rows.push(obj);}return rows;}
-async function fetchSheet(url){if(!url)return null;try{var r=await fetch(url);if(r.ok)return r.text();}catch(e){}var r2=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(url));if(!r2.ok)throw new Error('HTTP '+r2.status);return r2.text();}
+async function fetchSheet(url){
+  if(!url)return null;
+  var ctrl=new AbortController();
+  var tid=setTimeout(()=>ctrl.abort(),10000);
+  var r=await fetch(url,{signal:ctrl.signal});
+  clearTimeout(tid);
+  if(!r.ok)throw new Error('fetchSheet: '+r.status);
+  return r.text();
+}
+
+function parseConfig(text){
+  var cfg={}, lines=joinCSVLines(text.trim());
+  lines.forEach(function(line){
+    var row=splitRow(line);
+    var key=(row[0]||'').replace(/^"|"$/g,'').trim();
+    var val=(row[1]||'').replace(/^"|"$/g,'').trim();
+    if(!key||key.charCodeAt(0)===0x25b8)return;
+    cfg[key]=val;
+  });
+  return cfg;
+}
+
+async function loadConfig(){
+  try{
+    var cfg=parseConfig(await fetchSheet(SHEET_CONFIG));
+    if(!Object.keys(cfg).length)return;
+    // Apply plain text fields
+    document.querySelectorAll('[data-cms]').forEach(function(el){
+      var key=el.dataset.cms;
+      if(cfg[key]!==undefined&&cfg[key]!==''){
+        // Handle \n in contact sub fields
+        if(el.dataset.cms.endsWith('_sub')&&cfg[key].indexOf('\\n')>-1){
+          el.innerHTML=cfg[key].replace(/\\n/g,'<br>');
+        } else {
+          el.textContent=cfg[key];
+        }
+      }
+    });
+    // Update email link href
+    document.querySelectorAll('[data-cms-email]').forEach(function(el){
+      var key=el.dataset.cmsEmail;
+      if(cfg[key]){
+        el.href='mailto:'+cfg[key];
+      }
+    });
+  }catch(e){console.warn('[CMS] config',e);}
+}
 
 function renderWineBody(body){var labels=['Story','Winemaking','Tasting Notes'],parts=body.split('|||').map(s=>s.trim()).filter(Boolean);if(parts.length>=3)return'<div class="wine-body">'+parts.slice(0,3).map((p,i)=>'<div class="wine-body-section"><p class="wine-body-label">'+labels[i]+'</p><p class="wine-body-text">'+p+'</p></div>').join('')+'</div>';return'<div class="wine-body"><p class="wine-body-text">'+body+'</p></div>';}
 
@@ -246,4 +293,5 @@ async function loadCMS(){
     if (wScroll && wDots) setupDots(wScroll, wDots);
   } catch(e) { console.warn('[CMS] wines', e); }
 }
+loadConfig();
 loadCMS();
