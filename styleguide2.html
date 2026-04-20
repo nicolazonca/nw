@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Nisyros Wines — Styleguide 2</title>
+<link rel="stylesheet" href="https://use.typekit.net/jyf6llr.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #F5F2EE;
+    --bg-alt:#EDE7DB;
+    --ink:   #2B2725;
+    --red:   #C46E4B;
+    --amber: #EA9332;
+    --stone: #C7BCA3;
+    --muted: #494441;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    padding: 48px 40px 80px;
+    min-width: 1200px;
+  }
+
+  .page-title {
+    font-family: bookmania, Georgia, serif;
+    font-weight: 400;
+    font-size: 2.6rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .page-intro {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 780px;
+    margin-bottom: 56px;
+  }
+
+  /* ── ROW: one class, three columns ── */
+  .class-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    padding: 32px 0 48px;
+    border-top: 1px solid rgba(43,39,37,0.15);
+  }
+
+  .col-header {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+
+  .class-name {
+    font-family: bookmania, Georgia, serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .clamp-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+
+  .sample {
+    padding: 24px 0;
+    border-top: 1px dashed rgba(43,39,37,0.18);
+    border-bottom: 1px dashed rgba(43,39,37,0.18);
+    margin-bottom: 20px;
+    overflow: hidden;
+    min-height: 140px;
+    display: flex;
+    align-items: center;
+  }
+
+  .details {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .details div { display: grid; grid-template-columns: 130px 1fr; }
+  .details .k { color: var(--ink); }
+
+  .usage-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .usage-list {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    line-height: 1.75;
+    color: var(--muted);
+    list-style: none;
+  }
+  .usage-list li { padding-left: 14px; position: relative; }
+  .usage-list li::before {
+    content: '·';
+    color: var(--red);
+    position: absolute;
+    left: 0;
+  }
+
+  /* ── NON-RESPONSIVE DEMOS for .big ── */
+  /* Shared .big look, only font-size varies per column */
+  .big-demo {
+    font-family: bookmania, Georgia, serif;
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+  .big-demo.desktop      { font-size: 9rem;    }   /* clamp max    */
+  .big-demo.intermediate { font-size: 6.25rem; }   /* 10vw @ 1000px */
+  .big-demo.mobile       { font-size: 3.5rem;  }   /* clamp min    */
+</style>
+</head>
+<body>
+
+  <h1 class="page-title">Styleguide v2</h1>
+  <p class="page-intro">
+    Classi tipografiche in ordine di grandezza. Ogni classe è mostrata tre volte affiancate — i tre valori del <code>clamp()</code>: massimo (desktop), preferito (intermedio) e minimo (mobile). La parola campione è resa a misura reale, non responsive, così da vedere l'effettiva dimensione ad ogni breakpoint.
+  </p>
+
+  <!-- ══════════════════════════════════════
+       .big
+       clamp(3.5rem, 10vw, 9rem)
+       ══════════════════════════════════════ -->
+  <section class="class-row">
+
+    <!-- ── Col 1 · DESKTOP (max) ── -->
+    <div>
+      <div class="col-header">Desktop · max</div>
+      <div class="class-name">.big</div>
+      <div class="clamp-value">clamp(3.5rem, 10vw, <strong>9rem</strong>) → 144px</div>
+
+      <div class="sample"><span class="big-demo desktop">Nisyros</span></div>
+
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>9rem (144px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+        <div><span class="k">word-break</span><span>keep-all</span></div>
+      </div>
+
+      <div class="usage-title">Usata in</div>
+      <ul class="usage-list">
+        <li>Manifesto — titoli dei pannelli #m1–#m6 e #credo</li>
+        <li>Hero — titolo principale (override colore: var(--bg))</li>
+        <li>Wines intro card — "5 Wines / 2 Vintages / 3 Collections"</li>
+        <li>Wines collections card — "Three Philosophies" (con modifier .sm → --h2)</li>
+        <li>Faces header overlay — titolo della sezione</li>
+        <li>Modifier disponibili: <code>.big.md</code> (--h1) · <code>.big.sm</code> (--h2) · <code>.big.red</code> · <code>.big.amber</code></li>
+      </ul>
+    </div>
+
+    <!-- ── Col 2 · INTERMEDIO (preferred) ── -->
+    <div>
+      <div class="col-header">Intermedio · preferred</div>
+      <div class="class-name">.big</div>
+      <div class="clamp-value">clamp(3.5rem, <strong>10vw</strong>, 9rem) → ≈ 100px @ 1000px</div>
+
+      <div class="sample"><span class="big-demo intermediate">Nisyros</span></div>
+
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>6.25rem (100px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+        <div><span class="k">word-break</span><span>keep-all</span></div>
+      </div>
+    </div>
+
+    <!-- ── Col 3 · MOBILE (min) ── -->
+    <div>
+      <div class="col-header">Mobile · min</div>
+      <div class="class-name">.big</div>
+      <div class="clamp-value">clamp(<strong>3.5rem</strong>, 10vw, 9rem) → 56px</div>
+
+      <div class="sample"><span class="big-demo mobile">Nisyros</span></div>
+
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>3.5rem (56px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+        <div><span class="k">word-break</span><span>keep-all</span></div>
+      </div>
+    </div>
+
+  </section>
+
+</body>
+</html>
