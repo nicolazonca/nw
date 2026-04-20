@@ -152,7 +152,7 @@
 
   <h1 class="page-title">Styleguide v2</h1>
   <p class="page-intro">
-    Classi tipografiche in ordine di grandezza. Ogni classe è mostrata tre volte affiancate — i tre valori del <code>clamp()</code>: massimo (desktop), preferito (intermedio) e minimo (mobile). La parola campione è resa a misura reale, non responsive, così da vedere l'effettiva dimensione ad ogni breakpoint.
+    Classi tipografiche in ordine di grandezza. Ogni classe è mostrata tre volte affiancate — i tre valori del <code>clamp()</code>: massimo (desktop), midpoint (intermedio, media fra min e max) e minimo (mobile). La parola campione è resa a misura reale, non responsive, così da vedere l'effettiva dimensione ad ogni breakpoint.
   </p>
 
   <!-- ══════════════════════════════════════
@@ -193,9 +193,9 @@
 
     <!-- ── Col 2 · INTERMEDIO (preferred) ── -->
     <div>
-      <div class="col-header">Intermedio · preferred</div>
+      <div class="col-header">Intermedio · midpoint</div>
       <div class="class-name">.big</div>
-      <div class="clamp-value">10vw · ≈ 100px @ 1000px viewport</div>
+      <div class="clamp-value">6.25rem · 100px</div>
 
       <div class="sample"><span class="big-demo intermediate">Nisyros</span></div>
 
@@ -229,6 +229,281 @@
       </div>
     </div>
 
+  </section>
+
+  <!-- ══════════════════════════════════════
+       .big.md  (modifier --h1)
+       clamp(3rem, 8.5vw, 7.5rem)
+       ══════════════════════════════════════ -->
+  <section class="class-row">
+    <div>
+      <div class="col-header">Desktop · max</div>
+      <div class="class-name">.big.md</div>
+      <div class="clamp-formula">clamp(3rem, 8.5vw, 7.5rem)</div>
+      <div class="clamp-value">7.5rem · 120px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:7.5rem;line-height:0.92;letter-spacing:-0.02em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>7.5rem (120px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+      <div class="usage-title">Usata in</div>
+      <ul class="usage-list">
+        <li>Modifier di <code>.big</code> — titolo "medio" con stessa scala tipografica ma font-size --h1</li>
+        <li>Attualmente non istanziata nei template (disponibile come utility)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-header">Intermedio · midpoint</div>
+      <div class="class-name">.big.md</div>
+      <div class="clamp-value">5.25rem · 84px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:5.25rem;line-height:0.92;letter-spacing:-0.02em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>5.25rem (84px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">Mobile · min</div>
+      <div class="class-name">.big.md</div>
+      <div class="clamp-value">3rem · 48px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:3rem;line-height:0.92;letter-spacing:-0.02em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>3rem (48px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       .big.sm  (modifier --h2)
+       clamp(2.5rem, 7vw, 6rem)
+       ══════════════════════════════════════ -->
+  <section class="class-row">
+    <div>
+      <div class="col-header">Desktop · max</div>
+      <div class="class-name">.big.sm</div>
+      <div class="clamp-formula">clamp(2.5rem, 7vw, 6rem)</div>
+      <div class="clamp-value">6rem · 96px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:6rem;line-height:0.92;letter-spacing:-0.02em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>6rem (96px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+      <div class="usage-title">Usata in</div>
+      <ul class="usage-list">
+        <li>Wines collections card — "Three Philosophies" sopra la griglia 3 colonne</li>
+        <li>Modifier di <code>.big</code> → font-size --h2 (ereditando line-height/letter-spacing di <code>.big</code>)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-header">Intermedio · midpoint</div>
+      <div class="class-name">.big.sm</div>
+      <div class="clamp-value">4.25rem · 68px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:4.25rem;line-height:0.92;letter-spacing:-0.02em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>4.25rem (68px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">Mobile · min</div>
+      <div class="class-name">.big.sm</div>
+      <div class="clamp-value">2.5rem · 40px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:2.5rem;line-height:0.92;letter-spacing:-0.02em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>2.5rem (40px)</span></div>
+        <div><span class="k">line-height</span><span>0.92</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.02em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       .wine-name  (--h2 ma lh/ls diverse da .big)
+       clamp(2.5rem, 7vw, 6rem)
+       ══════════════════════════════════════ -->
+  <section class="class-row">
+    <div>
+      <div class="col-header">Desktop · max</div>
+      <div class="class-name">.wine-name</div>
+      <div class="clamp-formula">clamp(2.5rem, 7vw, 6rem)</div>
+      <div class="clamp-value">6rem · 96px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:6rem;line-height:1;letter-spacing:-0.01em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>6rem (96px)</span></div>
+        <div><span class="k">line-height</span><span>1.0</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.01em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+        <div><span class="k">margin-bottom</span><span>0.12em</span></div>
+      </div>
+      <div class="usage-title">Usata in</div>
+      <ul class="usage-list">
+        <li>Wine cards — nome di ogni vino (3,2,1 · 40 Milia Konda · Roudià · Apiri · Atmida)</li>
+        <li>Stesso clamp di <code>.big.sm</code> ma line-height 1.0 e letter-spacing -0.01em (più aperta)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-header">Intermedio · midpoint</div>
+      <div class="class-name">.wine-name</div>
+      <div class="clamp-value">4.25rem · 68px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:4.25rem;line-height:1;letter-spacing:-0.01em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>4.25rem (68px)</span></div>
+        <div><span class="k">line-height</span><span>1.0</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.01em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">Mobile · min</div>
+      <div class="class-name">.wine-name</div>
+      <div class="clamp-value">2.5rem · 40px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:2.5rem;line-height:1;letter-spacing:-0.01em;color:#2B2725;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>2.5rem (40px)</span></div>
+        <div><span class="k">line-height</span><span>1.0</span></div>
+        <div><span class="k">letter-spacing</span><span>-0.01em</span></div>
+        <div><span class="k">color</span><span>#2B2725 (ink)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       .nav-links li a  (menu overlay)
+       clamp(2.4rem, 7vw, 5rem)
+       ══════════════════════════════════════ -->
+  <section class="class-row">
+    <div>
+      <div class="col-header">Desktop · max</div>
+      <div class="class-name">.nav-links li a</div>
+      <div class="clamp-formula">clamp(2.4rem, 7vw, 5rem)</div>
+      <div class="clamp-value">5rem · 80px</div>
+      <div class="sample" style="background:#2B2725;padding:24px;"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:5rem;line-height:1;letter-spacing:0;color:rgba(255,255,255,0.8);">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>5rem (80px)</span></div>
+        <div><span class="k">line-height</span><span>1</span></div>
+        <div><span class="k">letter-spacing</span><span>0</span></div>
+        <div><span class="k">color</span><span>rgba(255,255,255,0.8)</span></div>
+        <div><span class="k">hover/active</span><span>var(--red)</span></div>
+      </div>
+      <div class="usage-title">Usata in</div>
+      <ul class="usage-list">
+        <li>Nav overlay full-screen — voci del menu (Manifesto · Wines · Faces · Contact)</li>
+        <li>Su mobile (≤639px) il clamp diventa <code>clamp(3rem, 12vw, 5rem)</code> con line-height 1.25</li>
+        <li>Contesto: sempre su fondo scuro (<code>var(--ink)</code>)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-header">Intermedio · midpoint</div>
+      <div class="class-name">.nav-links li a</div>
+      <div class="clamp-value">3.7rem · 59.2px</div>
+      <div class="sample" style="background:#2B2725;padding:24px;"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:3.7rem;line-height:1;letter-spacing:0;color:rgba(255,255,255,0.8);">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>3.7rem (59.2px)</span></div>
+        <div><span class="k">line-height</span><span>1</span></div>
+        <div><span class="k">letter-spacing</span><span>0</span></div>
+        <div><span class="k">color</span><span>rgba(255,255,255,0.8)</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">Mobile · min</div>
+      <div class="class-name">.nav-links li a</div>
+      <div class="clamp-value">2.4rem · 38.4px</div>
+      <div class="sample" style="background:#2B2725;padding:24px;"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:2.4rem;line-height:1;letter-spacing:0;color:rgba(255,255,255,0.8);">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>2.4rem (38.4px)</span></div>
+        <div><span class="k">line-height</span><span>1</span></div>
+        <div><span class="k">letter-spacing</span><span>0</span></div>
+        <div><span class="k">color</span><span>rgba(255,255,255,0.8)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       .collection-name-v2  (--h3)
+       clamp(1.6rem, 5vw, 3.5rem)
+       ══════════════════════════════════════ -->
+  <section class="class-row">
+    <div>
+      <div class="col-header">Desktop · max</div>
+      <div class="class-name">.collection-name-v2</div>
+      <div class="clamp-formula">clamp(1.6rem, 5vw, 3.5rem)</div>
+      <div class="clamp-value">3.5rem · 56px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:3.5rem;line-height:1;color:#C46E4B;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>3.5rem (56px)</span></div>
+        <div><span class="k">line-height</span><span>1.0</span></div>
+        <div><span class="k">color</span><span>inline (per collezione)</span></div>
+        <div><span class="k">margin-bottom</span><span>12px</span></div>
+      </div>
+      <div class="usage-title">Usata in</div>
+      <ul class="usage-list">
+        <li>Wines collections card — titoli delle 3 collezioni</li>
+        <li>Colori inline per collezione: Monopàtia <code>#EA9332</code> · Nereides <code>#C7BCA3</code> · Volcanica <code>#C46E4B</code></li>
+        <li>Su mobile font-size scende a <code>var(--h4)</code> con media query</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-header">Intermedio · midpoint</div>
+      <div class="class-name">.collection-name-v2</div>
+      <div class="clamp-value">2.55rem · 40.8px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:2.55rem;line-height:1;color:#C46E4B;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>2.55rem (40.8px)</span></div>
+        <div><span class="k">line-height</span><span>1.0</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">Mobile · min</div>
+      <div class="class-name">.collection-name-v2</div>
+      <div class="clamp-value">1.6rem · 25.6px</div>
+      <div class="sample"><span style="font-family:bookmania,Georgia,serif;font-weight:400;font-size:1.6rem;line-height:1;color:#C46E4B;">Nisyros</span></div>
+      <div class="details">
+        <div><span class="k">font-family</span><span>bookmania, Georgia, serif</span></div>
+        <div><span class="k">font-weight</span><span>400</span></div>
+        <div><span class="k">font-size</span><span>1.6rem (25.6px)</span></div>
+        <div><span class="k">line-height</span><span>1.0</span></div>
+      </div>
+    </div>
   </section>
 
 </body>
