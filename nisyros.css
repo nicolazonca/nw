@@ -174,7 +174,7 @@ body::before {
   margin: 0;
   font-family: var(--h6-family);
   font-size: var(--h6);
-  color: rgba(0,0,0,0.5); letter-spacing: 0.05em;
+  color: rgba(0,0,0,0.3); letter-spacing: 0.05em;
 }
 @media (min-width: 640px) {
   .manifesto-controls .slide-counter { left: 100px; }
@@ -189,7 +189,7 @@ body::before {
   position: static; transform: none;
   width: 44px; height: 44px;
 }
-.manifesto-arrows .scroll-chevron svg { width: 26px; height: 26px; stroke: rgba(0,0,0,0.5); }
+.manifesto-arrows .scroll-chevron svg { width: 26px; height: 26px; stroke: rgba(0,0,0,0.3); }
 .manifesto-controls .hscroll-dots { padding: 0; position: static; flex: 0 0 auto; }
 
 /* Dark slide (credo): invert counter/arrows/dots */
