@@ -167,10 +167,12 @@ body::before {
   pointer-events: none;
 }
 .manifesto-controls > * { pointer-events: auto; }
-/* Per-slide counter: sits inside each .page so it scrolls with the slide */
+/* Per-slide counter: sits inside each .page so it scrolls with the slide.
+   bottom offset tuned to line up its text baseline with the dots row in
+   .manifesto-controls (controls: bottom 18px, row height ~44px → centre 40px). */
 .page-counter {
   position: absolute;
-  left: 40px; bottom: 18px;
+  left: 40px; bottom: 32px;
   font-family: var(--h6-family);
   font-size: var(--h6);
   color: rgba(0,0,0,0.3);
