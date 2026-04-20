@@ -167,21 +167,24 @@ body::before {
   pointer-events: none;
 }
 .manifesto-controls > * { pointer-events: auto; }
-.manifesto-controls .slide-counter {
+/* Per-slide counter: sits inside each .page so it scrolls with the slide */
+.page-counter {
   position: absolute;
-  left: 40px;
-  top: 50%; transform: translateY(-50%);
-  margin: 0;
+  left: 40px; bottom: 18px;
   font-family: var(--h6-family);
   font-size: var(--h6);
-  color: rgba(0,0,0,0.3); letter-spacing: 0.05em;
+  color: rgba(0,0,0,0.3);
+  letter-spacing: 0.05em;
+  z-index: 5;
+  pointer-events: none;
 }
 @media (min-width: 640px) {
-  .manifesto-controls .slide-counter { left: 100px; }
+  .page-counter { left: 100px; }
 }
 @media (max-width: 440px) {
-  .manifesto-controls .slide-counter { display: none; }
+  .page-counter { display: none; }
 }
+#credo .page-counter { color: rgba(245,242,238,0.75); }
 .manifesto-arrows {
   display: flex; align-items: center; gap: 14px;
 }

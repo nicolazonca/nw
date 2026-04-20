@@ -62,7 +62,7 @@ function goPanel(el, idx) {
   smoothTo(el, pp[idx].offsetLeft, 480);
 }
 
-function setupDots(scrollEl, dotsEl, counterEl, controlsEl) {
+function setupDots(scrollEl, dotsEl, controlsEl) {
   var pp = scrollEl.querySelectorAll('.page,.wine-card');
   if (!pp.length) return;
   dotsEl.innerHTML = '';
@@ -75,7 +75,6 @@ function setupDots(scrollEl, dotsEl, counterEl, controlsEl) {
   var dots = dotsEl.querySelectorAll('.dot');
   var total = pp.length;
   function syncControls(idx) {
-    if (counterEl) counterEl.textContent = (idx+1) + ' / ' + total;
     if (controlsEl) {
       var panel = pp[idx];
       controlsEl.classList.toggle('on-dark', panel.id === 'credo');
@@ -98,11 +97,10 @@ function setupDots(scrollEl, dotsEl, counterEl, controlsEl) {
 
 var mScroll   = document.getElementById('manifesto-scroll');
 var mDots     = document.getElementById('manifesto-dots');
-var mCounter  = document.getElementById('manifesto-counter');
 var mControls = document.querySelector('.manifesto-controls');
 var wScroll   = document.getElementById('wines-scroll');
 var wDots     = document.getElementById('wines-dots');
-if (mScroll && mDots) setupDots(mScroll, mDots, mCounter, mControls);
+if (mScroll && mDots) setupDots(mScroll, mDots, mControls);
 if (wScroll && wDots) setupDots(wScroll, wDots);
 
 /* Reveal inside panels */
