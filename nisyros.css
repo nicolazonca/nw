@@ -500,7 +500,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   position: absolute; inset: 0;
   display: flex; align-items: flex-end;
   gap: clamp(56px, 7vw, 128px);
-  padding: 0 48px 48px max(100px, env(safe-area-inset-left, 0px));
+  padding: 0 48px 100px max(100px, env(safe-area-inset-left, 0px));
   overflow-x: auto; overflow-y: hidden;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
@@ -512,13 +512,14 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .faces-wall.dragging .faces-item { pointer-events: none; }
 
 .faces-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-start; margin: 0; }
-/* Hand-hung look: each photo drifts up/down off the baseline */
-.faces-item:nth-of-type(6n+1) { transform: translateY(-40px); }
-.faces-item:nth-of-type(6n+2) { transform: translateY( 34px); }
-.faces-item:nth-of-type(6n+3) { transform: translateY(-36px); }
-.faces-item:nth-of-type(6n+4) { transform: translateY( 12px); }
-.faces-item:nth-of-type(6n+5) { transform: translateY(-24px); }
-.faces-item:nth-of-type(6n+6) { transform: translateY( 44px); }
+/* Hand-hung look: each photo drifts up off the baseline (kept biased upward so
+   nothing pokes into the controls row at the section bottom) */
+.faces-item:nth-of-type(6n+1) { transform: translateY(-50px); }
+.faces-item:nth-of-type(6n+2) { transform: translateY(  8px); }
+.faces-item:nth-of-type(6n+3) { transform: translateY(-44px); }
+.faces-item:nth-of-type(6n+4) { transform: translateY(-12px); }
+.faces-item:nth-of-type(6n+5) { transform: translateY(-32px); }
+.faces-item:nth-of-type(6n+6) { transform: translateY( 10px); }
 .faces-polaroid {
   background: #fff; padding: 14px; line-height: 0;
   box-shadow: 0 1px 2px rgba(43,39,37,0.12), 0 22px 40px -18px rgba(43,39,37,0.35);
@@ -677,7 +678,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .wine-col-bottle img { max-height: 50vh; }
   #faces { --faces-max: min(88vw, 64vh); }
   .faces-wall-header { padding-top: calc(var(--nav-h) + 20px); width: clamp(260px, 82vw, 440px); }
-  .faces-wall { gap: 40px; padding: 0 24px 28px; }
+  .faces-wall { gap: 40px; padding: 0 24px 80px; }
   .faces-polaroid { padding: 10px; }
   .faces-caption { margin-top: 14px; }
   .scroll-chevron { width: 52px; height: 52px; }
