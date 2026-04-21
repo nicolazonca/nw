@@ -484,7 +484,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   scroll-snap-align: start;
   scroll-margin-top: 0;
   position: relative; width: 100%; height: 100svh;
-  background: var(--ink);
+  background: var(--bg);
   overflow: hidden;
   isolation: isolate;
   --faces-max: clamp(390px, 72vh, 810px);
@@ -494,12 +494,11 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   left: max(100px, env(safe-area-inset-left, 0px));
   z-index: 10; pointer-events: none;
 }
-.faces-wall-header .big { color: #fff; }
 .faces-wall {
   position: absolute; inset: 0;
-  display: flex; align-items: center;
+  display: flex; align-items: flex-end;
   gap: clamp(56px, 7vw, 128px);
-  padding: 0 48px 0 calc(var(--faces-max) * 0.75);
+  padding: 0 48px 48px calc(var(--faces-max) * 0.75);
   overflow-x: auto; overflow-y: hidden;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
@@ -510,7 +509,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .faces-wall.dragging { cursor: grabbing; }
 .faces-wall.dragging .faces-item { pointer-events: none; }
 
-.faces-item { flex: 0 0 auto; position: relative; margin: 0; z-index: 20; }
+.faces-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-start; margin: 0; z-index: 20; }
 /* First photo sits behind the title; all others pass in front of it */
 .faces-item:first-child { z-index: 1; }
 /* Hand-hung look: each photo drifts up/down off the centerline */
@@ -531,19 +530,16 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   width: auto; height: auto;
   user-select: none; -webkit-user-drag: none;
 }
-.faces-caption {
-  position: absolute; top: calc(100% + 18px); left: 4px;
-  max-width: var(--faces-max);
-}
+.faces-caption { margin: 18px 4px 0; max-width: var(--faces-max); }
 .faces-label {
   font-family: var(--h6-family); font-weight: 300;
   font-size: var(--h6); letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--bg); margin-bottom: 6px;
+  color: var(--ink); margin-bottom: 6px;
 }
 .faces-text {
   font-family: bookmania, Georgia, serif; font-weight: 400;
   font-size: var(--h5); line-height: 1.15; letter-spacing: -0.01em;
-  color: var(--bg);
+  color: var(--ink);
 }
 
 /* ── CONTACT ── */

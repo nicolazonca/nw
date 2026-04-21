@@ -592,7 +592,7 @@ function navScrollTo(target) {
 (function() {
   var nav = document.getElementById('nav');
   if (!nav) return;
-  var darkZones = document.querySelectorAll('#hero, #faces');
+  var darkZones = document.querySelectorAll('#hero');
   if (!darkZones.length) return;
   function update() {
     var navH = nav.getBoundingClientRect().height;
