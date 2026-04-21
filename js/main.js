@@ -109,20 +109,15 @@ document.querySelectorAll('#m1 .reveal').forEach((el, i) => {
   // ── Lightbox ──
   var lb       = document.getElementById('faces-lightbox');
   var lbImg    = document.getElementById('faces-lightbox-img');
-  var lbCap    = document.getElementById('faces-lightbox-caption');
   var lbClose  = document.getElementById('faces-lightbox-close');
   var lbPrev   = document.getElementById('faces-lightbox-prev');
   var lbNext   = document.getElementById('faces-lightbox-next');
   if (lb && lbImg && items.length) {
     var photos = Array.prototype.map.call(items, function(it) {
       var img = it.querySelector('img');
-      var label = it.querySelector('.faces-label');
-      var text  = it.querySelector('.faces-text');
       return {
         src: img ? img.getAttribute('src') : '',
-        alt: img ? img.getAttribute('alt') : '',
-        label: label ? label.textContent : '',
-        text:  text  ? text.textContent  : ''
+        alt: img ? img.getAttribute('alt') : ''
       };
     });
     var lbIdx = 0;
@@ -131,7 +126,6 @@ document.querySelectorAll('#m1 .reveal').forEach((el, i) => {
       var p = photos[lbIdx];
       lbImg.src = p.src;
       lbImg.alt = p.alt || '';
-      lbCap.textContent = p.label + (p.label && p.text ? ' — ' : '') + p.text;
     }
     function openLb(i) {
       showPhoto(i);
