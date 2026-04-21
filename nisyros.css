@@ -277,16 +277,16 @@ body::before {
   #m1 .panel-illust img    { left: 50%; bottom: 24px; transform: translateX(-50%); }
   /* 2: centro / centro */
   #m2 .panel-illust img    { left: 50%; top: 50%;    transform: translate(-50%, -50%); }
-  /* 3: alto / centro */
-  #m3 .panel-illust img    { left: 50%; top: 24px;   transform: translateX(-50%); }
-  /* 4: basso / destra */
-  #m4 .panel-illust img    { right: 24px; bottom: 24px; }
+  /* 3: basso / centro */
+  #m3 .panel-illust img    { left: 50%; bottom: 24px; transform: translateX(-50%); }
+  /* 4: centro / centro */
+  #m4 .panel-illust img    { left: 50%; top: 50%; transform: translate(-50%, -50%); }
   /* 5: alto / destra */
   #m5 .panel-illust img    { right: 24px; top: 24px; }
   /* 6: centro / destra */
   #m6 .panel-illust img    { right: 24px; top: 50%; transform: translateY(-50%); }
-  /* 7 (credo): basso / centro */
-  #credo .panel-illust img { left: 50%; bottom: 24px; transform: translateX(-50%); }
+  /* 7 (credo): centro / centro */
+  #credo .panel-illust img { left: 50%; top: 50%; transform: translate(-50%, -50%); }
 }
 
 /* ── PAGE BLOCKS ── */
