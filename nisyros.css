@@ -489,15 +489,16 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   --faces-max: clamp(390px, 72vh, 810px);
 }
 .faces-wall-header {
-  position: absolute; top: calc(var(--nav-h) + 32px); left: 48px;
+  position: absolute; top: calc(var(--nav-h) + 32px);
+  left: max(100px, env(safe-area-inset-left, 0px));
   z-index: 0; pointer-events: none;
 }
 .faces-wall-header .big { color: #fff; }
 .faces-wall {
   position: absolute; inset: 0; z-index: 1;
-  display: flex; align-items: flex-end;
+  display: flex; align-items: center;
   gap: clamp(56px, 7vw, 128px);
-  padding: 0 48px 48px clamp(96px, 10vw, 180px);
+  padding: 0 48px 0 calc(var(--faces-max) * 0.75);
   overflow-x: auto; overflow-y: hidden;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
@@ -508,7 +509,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .faces-wall.dragging { cursor: grabbing; }
 .faces-wall.dragging .faces-item { pointer-events: none; }
 
-.faces-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-start; margin: 0; }
+.faces-item { flex: 0 0 auto; position: relative; margin: 0; }
 .faces-polaroid {
   background: #fff; padding: 14px; line-height: 0;
   box-shadow: 0 1px 2px rgba(43,39,37,0.12), 0 22px 40px -18px rgba(43,39,37,0.35);
@@ -520,7 +521,10 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   width: auto; height: auto;
   user-select: none; -webkit-user-drag: none;
 }
-.faces-caption { margin: 18px 4px 0; max-width: var(--faces-max); }
+.faces-caption {
+  position: absolute; top: calc(100% + 18px); left: 4px;
+  max-width: var(--faces-max);
+}
 .faces-label {
   font-family: var(--h6-family); font-weight: 300;
   font-size: var(--h6); letter-spacing: 0.35em; text-transform: uppercase;
@@ -614,7 +618,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .wine-col-bottle img { max-height: 50vh; }
   #faces { --faces-max: min(88vw, 64vh); }
   .faces-wall-header { top: calc(var(--nav-h) + 20px); left: 24px; }
-  .faces-wall { gap: 40px; padding: 0 24px 28px; }
+  .faces-wall { gap: 40px; padding: 0 24px; }
   .faces-polaroid { padding: 10px; }
   .faces-caption { margin-top: 14px; }
   .scroll-chevron { width: 52px; height: 52px; }
