@@ -1,42 +1,32 @@
-<!-- ══ FACES — fullscreen slideshow ══ -->
+<!-- ══ FACES — gallery wall ══ -->
 <section id="faces">
-  <div class="faces-slideshow" id="faces-slideshow">
+  <div class="faces-wall-header">
+    <div class="big md">Faces</div>
+    <div class="big md">&amp; Places</div>
+    <hr class="slash" style="margin-top:8px;">
+  </div>
 
-    <div class="faces-slide active" id="fslide-0">
-      <img src="assets/NW-01-caldera.jpg" alt="Village and caldera, Nisyros" loading="eager">
-      <div class="faces-slide-overlay"></div>
-      <div class="faces-slide-caption">
-        <p class="faces-slide-label">Territory</p>
-        <p class="faces-slide-text">The village, the caldera,<br>the sea.</p>
+  <div class="faces-wall" id="faces-wall">
+
+    <figure class="faces-item">
+      <div class="faces-polaroid">
+        <img src="assets/NW-01-caldera.jpg" alt="Village and caldera, Nisyros" loading="lazy" draggable="false">
       </div>
-    </div>
+      <figcaption class="faces-caption">
+        <p class="faces-label">Territory</p>
+        <p class="faces-text">The village, the caldera,<br>the sea.</p>
+      </figcaption>
+    </figure>
 
-    <div class="faces-slide" id="fslide-1">
-      <img src="assets/NW-02-crater.jpg" alt="Stefanos crater, Nisyros" loading="lazy">
-      <div class="faces-slide-overlay"></div>
-      <div class="faces-slide-caption">
-        <p class="faces-slide-label">Volcano</p>
-        <p class="faces-slide-text">Inside the crater.<br>Still breathing.</p>
+    <figure class="faces-item">
+      <div class="faces-polaroid">
+        <img src="assets/NW-02-crater.jpg" alt="Stefanos crater, Nisyros" loading="lazy" draggable="false">
       </div>
-    </div>
-
-    <div class="faces-header-overlay">
-      <div class="big md">Faces</div>
-      <div class="big md">&amp; Places</div>
-      <hr class="slash" style="margin-top:8px;">
-    </div>
-
-    <div class="faces-prev" id="faces-prev">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </div>
-    <div class="faces-next" id="faces-next">
-      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
-    </div>
-
-    <div class="faces-dots" id="faces-dots">
-      <div class="faces-dot active" data-idx="0"></div>
-      <div class="faces-dot" data-idx="1"></div>
-    </div>
+      <figcaption class="faces-caption">
+        <p class="faces-label">Volcano</p>
+        <p class="faces-text">Inside the crater.<br>Still breathing.</p>
+      </figcaption>
+    </figure>
 
   </div>
 </section>

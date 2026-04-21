@@ -7,40 +7,42 @@ document.querySelectorAll('#m1 .reveal').forEach((el, i) => {
   setTimeout(() => el.classList.add('on'), 150 + i * 120);
 });
 
-/* ── FACES SLIDESHOW ── */
+/* ── FACES GALLERY WALL (free horizontal scroll) ── */
 (function() {
-  var slides = document.querySelectorAll('.faces-slide');
-  var dots   = document.querySelectorAll('.faces-dot');
-  var facesEl = document.getElementById('faces');
-  var cur = 0, autoT = null;
-  function startAuto() { if (autoT) return; autoT = setInterval(autoAdvance, 5000); }
-  function stopAuto()  { if (autoT) { clearInterval(autoT); autoT = null; } }
-  function autoAdvance() { goTo((cur + 1) % slides.length); }
-  function goTo(idx) {
-    if (idx >= slides.length) {
-      stopAuto();
-      var next = facesEl ? facesEl.nextElementSibling : null;
-      if (next) navScrollTo(next);
-      return;
+  var wall = document.getElementById('faces-wall');
+  if (!wall) return;
+
+  // Mouse drag-to-scroll
+  var dragging = false, startX = 0, startScroll = 0;
+  wall.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    dragging = true;
+    startX = e.pageX;
+    startScroll = wall.scrollLeft;
+    wall.classList.add('dragging');
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    wall.scrollLeft = startScroll - (e.pageX - startX);
+  });
+  window.addEventListener('mouseup', function() {
+    if (!dragging) return;
+    dragging = false;
+    wall.classList.remove('dragging');
+  });
+
+  // Vertical wheel → horizontal scroll (only when the wall actually overflows)
+  wall.addEventListener('wheel', function(e) {
+    if (wall.scrollWidth <= wall.clientWidth + 2) return;
+    var absX = Math.abs(e.deltaX), absY = Math.abs(e.deltaY);
+    if (absY <= absX) return;
+    var canRight = wall.scrollLeft < wall.scrollWidth - wall.clientWidth - 1;
+    var canLeft  = wall.scrollLeft > 0;
+    if ((e.deltaY > 0 && canRight) || (e.deltaY < 0 && canLeft)) {
+      e.preventDefault();
+      wall.scrollLeft += e.deltaY;
     }
-    slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
-    cur = (idx + slides.length) % slides.length;
-    slides[cur].classList.add('active'); dots[cur].classList.add('active');
-    stopAuto(); startAuto();
-  }
-  document.getElementById('faces-prev').addEventListener('click', () => goTo(cur - 1));
-  document.getElementById('faces-next').addEventListener('click', () => goTo(cur + 1));
-  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
-  var ss = document.getElementById('faces-slideshow'), sx = 0;
-  ss.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
-  ss.addEventListener('touchend',   e => { var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) goTo(dx < 0 ? cur+1 : cur-1); }, { passive: true });
-  if (facesEl && 'IntersectionObserver' in window) {
-    new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) startAuto(); else stopAuto(); });
-    }, { threshold: 0.3 }).observe(facesEl);
-  } else {
-    startAuto();
-  }
+  }, { passive: false });
 })();
 
 /* ── HORIZONTAL SCROLL ENGINE ── */
@@ -227,7 +229,7 @@ function navScrollTo(target) {
 (function() {
   var nav = document.getElementById('nav');
   if (!nav) return;
-  var darkZones = document.querySelectorAll('#hero, #faces');
+  var darkZones = document.querySelectorAll('#hero');
   if (!darkZones.length) return;
   function update() {
     var navH = nav.getBoundingClientRect().height;
