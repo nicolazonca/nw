@@ -52,6 +52,12 @@ body::before {
   padding-right: max(24px, env(safe-area-inset-right, 0px));
   z-index: 400;
 }
+@media (min-width: 640px) {
+  #nav {
+    padding-left: max(100px, env(safe-area-inset-left, 0px));
+    padding-right: max(100px, env(safe-area-inset-right, 0px));
+  }
+}
 #nav .nav-logo {
   font-family: tasman, sans-serif;
   font-weight: 700;
