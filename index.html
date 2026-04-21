@@ -530,11 +530,15 @@ document.querySelectorAll('#m1 .reveal').forEach((el, i) => {
       lb.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
-    items.forEach(function(it, i) {
-      it.addEventListener('click', function() {
-        if (dragged) return;
-        openLb(i);
-      });
+    // Event delegation: the click might land on the wall instead of the item
+    // if a CSS rule toggles pointer-events during the drag cycle. Listening on
+    // the wall catches both cases and then maps back to the matching item.
+    wall.addEventListener('click', function(e) {
+      if (dragged) return;
+      var it = e.target && e.target.closest ? e.target.closest('.faces-item') : null;
+      if (!it) return;
+      var i = Array.prototype.indexOf.call(items, it);
+      if (i >= 0) openLb(i);
     });
     lbClose.addEventListener('click', closeLb);
     lbPrev.addEventListener('click', function() { showPhoto(lbIdx - 1); });

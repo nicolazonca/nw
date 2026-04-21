@@ -509,7 +509,6 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 }
 .faces-wall::-webkit-scrollbar { display: none; }
 .faces-wall.dragging { cursor: grabbing; }
-.faces-wall.dragging .faces-item { pointer-events: none; }
 
 .faces-item { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-start; margin: 0; }
 /* Hand-hung look: each photo drifts up off the baseline (kept biased upward so
