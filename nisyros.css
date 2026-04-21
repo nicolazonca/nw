@@ -669,8 +669,15 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .wine-card-v3 .wine-col-bottle { order: -1; margin-top: 0; margin-bottom: 24px; }
   .wine-col-bottle img { max-height: 50vh; }
   #faces { --faces-max: min(88vw, 64vh); }
-  .faces-wall-header { padding-top: calc(var(--nav-h) + 20px); width: clamp(260px, 82vw, 440px); }
-  .faces-wall { gap: 40px; padding: 0 24px 80px; }
+  .faces-wall-header {
+    padding-top: calc(var(--nav-h) + 20px);
+    width: min(65vw, 260px);
+  }
+  .faces-wall {
+    gap: 28px;
+    padding: 0 16px;
+    align-items: center;
+  }
   .faces-polaroid { padding: 10px; }
   .faces-caption { margin-top: 14px; }
   .scroll-chevron { width: 52px; height: 52px; }
