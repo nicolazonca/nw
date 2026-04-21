@@ -426,6 +426,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   grid-template-columns: clamp(280px, 38vw, 520px) 1fr clamp(140px, 18vw, 240px);
   align-items: start;
   column-gap: clamp(32px, 4vw, 72px);
+  padding-bottom: clamp(56px, 7vh, 96px);
 }
 .wine-col-main { display: flex; flex-direction: column; }
 .wine-col-texts { margin-top: 24px; display: flex; flex-direction: column; gap: 24px; max-width: 480px; }
