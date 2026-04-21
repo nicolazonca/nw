@@ -515,7 +515,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .contact-value--sm { font-size: var(--h3); }
 
 /* wines wrapper */
-#wines-wrapper { margin-top: -4px; padding-top: 4px; scroll-margin-top: 0; }
+#wines-wrapper { scroll-margin-top: 0; }
 
 /* ── FOOTER ── */
 footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); font-family: var(--h6-family); font-size: var(--h6); letter-spacing: 0.25em; text-transform: uppercase; text-align: center; padding: 28px 24px calc(28px + env(safe-area-inset-bottom, 0px)); }
