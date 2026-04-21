@@ -529,7 +529,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
 /* ── MOBILE ── */
 @media (max-width: 639px) {
   :root {
-    --h0: 3.8rem;
+    --h0: 3.5rem;
     --h2: 2.4rem;
     --h3: 1.6rem;
     --h4: 1.2rem;
