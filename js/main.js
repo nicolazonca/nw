@@ -388,7 +388,6 @@ function renderWineV3(w){
   return ''
     + '<article class="wine-card wine-card-v3 reveal" id="'+escAttr(id)+'" data-collection="'+escAttr(slug)+'">'
       + '<div class="wine-col-main">'
-        + '<span class="wine-collection">'+coll+' Collection</span>'
         + '<div class="big sm">'+name+'</div>'
         + '<p class="wine-type">'+type+'</p>'
         + '<div class="wine-col-texts">'
@@ -398,6 +397,7 @@ function renderWineV3(w){
         + '</div>'
       + '</div>'
       + '<div class="wine-col-details">'
+        + '<span class="wine-collection">'+coll+' Collection</span>'
         + detailsHtml
         + '<div class="wine-detail-footer">'+volume+'&nbsp;&nbsp;alc.'+alcohol+'% by vol.</div>'
       + '</div>'
