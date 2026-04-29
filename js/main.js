@@ -244,6 +244,7 @@ if (wScroll && wDots) setupDots(wScroll, wDots);
   if (!el) return;
   var accum=0, locked=false, rt;
   el.addEventListener('wheel', function(e) {
+    if (Date.now() < navLockUntil) return;
     var absX=Math.abs(e.deltaX), absY=Math.abs(e.deltaY);
     var isH = absX>absY*8 && absX>10, isD = e.deltaMode===1||(absX===0&&absY>=40);
     if (!isH&&!isD) return;
@@ -333,10 +334,15 @@ if (wScroll && wDots) setupDots(wScroll, wDots);
 
 /* Nav scroll */
 var snapTimer = null;
+var navLockUntil = 0;
 function navScrollTo(target) {
   if (snapTimer) clearTimeout(snapTimer);
   document.documentElement.style.scrollSnapType = 'none';
   target.scrollIntoView({ behavior: 'smooth' });
+  // While the section transition is in flight, suppress carousel wheel-hijacking
+  // so wheel events that arrive during the smooth scroll don't advance the
+  // receiving carousel by one slide.
+  navLockUntil = Date.now() + 1200;
   snapTimer = setTimeout(() => { document.documentElement.style.scrollSnapType = ''; snapTimer=null; }, 1200);
 }
 
@@ -471,7 +477,7 @@ function slugify(s){
 function escAttr(s){
   return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-// Read collection blurbs from the "Three Philosophies" slide so wine cards
+// Read collection blurbs from the "Three Directions" slide so wine cards
 // and that slide share a single source of truth. Populated in loadCMS().
 var COLLECTION_DESCRIPTIONS = {};
 function readCollectionDescriptions(){
