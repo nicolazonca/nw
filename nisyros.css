@@ -717,7 +717,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
      stay where they are. */
   #m4 .panel-illust,
   #m5 .panel-illust,
-  #m6 .panel-illust { position: relative; top: -60px; }
+  #credo .panel-illust { position: relative; top: -60px; }
   .scroll-chevron { width: 52px; height: 52px; }
   .scroll-chevron svg { width: 28px; height: 28px; }
   .contact-header { padding: calc(var(--nav-h) + 40px) 24px 32px; }
