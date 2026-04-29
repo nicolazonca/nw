@@ -697,9 +697,9 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
      Hoist .wine-col-main's children to the grid level so we can order
      name/subtitle separately from the body texts. */
   .wine-card-v3 .wine-col-main    { display: contents; }
-  .wine-card-v3 .big.sm           { order: 1; }
-  .wine-card-v3 .wine-subtitle    { order: 2; }
-  .wine-card-v3 .wine-col-bottle  { order: 3; margin-top: 16px; margin-bottom: 40px; }
+  .wine-card-v3 .big.sm           { order: 1; text-align: center; font-size: 3rem; }
+  .wine-card-v3 .wine-subtitle    { order: 2; text-align: center; font-size: 0.85rem; }
+  .wine-card-v3 .wine-col-bottle  { order: 3; margin-top: 46px; margin-bottom: 10px; }
   .wine-card-v3 .wine-col-texts   { order: 4; }
   .wine-card-v3 .wine-col-details { order: 5; }
   /* Bottle ~10% smaller on mobile (was 50vh). */
