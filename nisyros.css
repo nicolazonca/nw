@@ -715,9 +715,9 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   /* Lift illustrations on the long-text slides so they don't overlap the
      dots row at the bottom of the manifesto on mobile. Title and body
      stay where they are. */
-  #m4 .panel-illust,
+  #m4 .panel-illust { position: relative; top: -60px; }
   #m5 .panel-illust,
-  #credo .panel-illust { position: relative; top: -60px; }
+  #credo .panel-illust { position: relative; top: -40px; }
   .scroll-chevron { width: 52px; height: 52px; }
   .scroll-chevron svg { width: 28px; height: 28px; }
   .contact-header { padding: calc(var(--nav-h) + 40px) 24px 32px; }
