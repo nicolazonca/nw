@@ -614,6 +614,59 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   fill: none; stroke-linecap: round; stroke-linejoin: round;
 }
 
+/* ── NOTEBOOK (text-led editorial) ── */
+#notebook {
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+  background: var(--bg);
+  min-height: 100svh;
+  padding: calc(var(--nav-h) + 64px) 24px 96px;
+  display: flex; justify-content: center;
+}
+.notebook-inner { width: 100%; max-width: 720px; }
+.notebook-header { margin-bottom: 72px; }
+.notebook-header .quote { margin-top: 20px; max-width: 540px; }
+.notebook-list { display: flex; flex-direction: column; }
+.notebook-entry { padding: 40px 0 44px; }
+.notebook-entry + .notebook-entry { border-top: 1px solid rgba(43,39,37,0.12); }
+.notebook-date {
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: var(--h6); letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 18px;
+}
+.notebook-title {
+  font-family: bookmania, Georgia, serif; font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05;
+  letter-spacing: -0.01em; color: var(--ink);
+  margin: 0 0 18px;
+}
+.notebook-standfirst {
+  font-family: bookmania, Georgia, serif; font-weight: 400;
+  font-size: clamp(1.1rem, 2.1vw, 1.35rem); line-height: 1.4;
+  color: var(--ink); margin: 0;
+}
+.notebook-body {
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: var(--p); line-height: 1.85;
+  color: var(--muted); margin-top: 22px;
+}
+.notebook-body p + p { margin-top: 14px; }
+.notebook-readmore {
+  display: inline-block; margin-top: 22px;
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: var(--h6); letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  padding-bottom: 3px; border-bottom: 1px solid rgba(43,39,37,0.4);
+  transition: color 0.2s, border-color 0.2s;
+}
+.notebook-readmore:hover { color: var(--red); border-color: var(--red); }
+@media (max-width: 639px) {
+  #notebook { padding: calc(var(--nav-h) + 32px) 24px 64px; min-height: 100dvh; }
+  .notebook-header { margin-bottom: 48px; }
+  .notebook-entry { padding: 28px 0 32px; }
+  .notebook-body { line-height: 1.7; }
+}
+
 /* ── CONTACT ── */
 #contact { background: var(--bg); min-height: auto; padding-top: 0; padding-bottom: 80px; }
 .contact-grid { display: grid; grid-template-columns: 1fr; column-gap: 0; }
