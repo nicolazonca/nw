@@ -615,21 +615,21 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 }
 
 /* ── NOTEBOOK (text-led editorial) ── */
-#notebook {
+#logbook {
   scroll-snap-align: start;
   scroll-margin-top: 0;
   background: var(--bg);
   min-height: 100svh;
   padding: calc(var(--nav-h) + 64px) clamp(48px, 6vw, 100px) 96px;
 }
-.notebook-inner { width: 100%; max-width: clamp(640px, 78vw, 1100px); }
-.notebook-header {
+.logbook-inner { width: 100%; max-width: clamp(640px, 78vw, 1100px); }
+.logbook-header {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: 48px; margin-bottom: 72px;
 }
-.notebook-header-text { max-width: 540px; }
-.notebook-header .quote { margin-top: 20px; }
-.notebook-nudge {
+.logbook-header-text { max-width: 540px; }
+.logbook-header .quote { margin-top: 20px; }
+.logbook-nudge {
   flex: 0 0 auto; margin-top: 14px;
   font-family: 'JetBrains Mono', monospace; font-weight: 300;
   font-size: var(--h6); letter-spacing: 0.22em; text-transform: uppercase;
@@ -638,13 +638,13 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   transition: color 0.2s, border-color 0.2s;
   white-space: nowrap;
 }
-.notebook-nudge:hover { color: var(--red); border-color: var(--red); }
-.notebook-nudge span { display: inline-block; margin-left: 6px; }
-.notebook-list {
+.logbook-nudge:hover { color: var(--red); border-color: var(--red); }
+.logbook-nudge span { display: inline-block; margin-left: 6px; }
+.logbook-list {
   display: flex; flex-direction: column;
   border-top: 1px solid rgba(43,39,37,0.18);
 }
-.notebook-entry {
+.logbook-entry {
   display: grid;
   grid-template-columns: clamp(110px, 13vw, 150px) 1fr;
   align-items: baseline;
@@ -654,29 +654,29 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   cursor: pointer;
   transition: background 0.2s, padding-left 0.2s;
 }
-.notebook-entry:hover {
+.logbook-entry:hover {
   background: rgba(43,39,37,0.035);
   padding-left: 10px;
 }
-.notebook-entry-when-col { display: flex; flex-direction: column; gap: 6px; }
-.notebook-entry-when {
+.logbook-entry-when-col { display: flex; flex-direction: column; gap: 6px; }
+.logbook-entry-when {
   font-family: 'JetBrains Mono', monospace; font-weight: 300;
   font-size: var(--h6); letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--muted); margin: 0;
 }
-.notebook-entry-cat {
+.logbook-entry-cat {
   font-family: 'JetBrains Mono', monospace; font-weight: 400;
   font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--red); margin: 0;
 }
-.notebook-entry-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.notebook-entry-title {
+.logbook-entry-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.logbook-entry-title {
   font-family: bookmania, Georgia, serif; font-weight: 400;
   font-size: 1.05rem; line-height: 1.25; letter-spacing: -0.005em;
   color: var(--ink); margin: 0;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.notebook-entry-dek {
+.logbook-entry-dek {
   font-family: 'JetBrains Mono', monospace; font-weight: 300;
   font-size: 0.78rem; line-height: 1.5;
   color: var(--muted); margin: 0;
@@ -740,18 +740,18 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .stay-submit:hover { background: var(--red); }
 
 @media (max-width: 639px) {
-  #notebook { padding: calc(var(--nav-h) + 32px) 24px 64px; min-height: 100dvh; }
-  .notebook-header { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 40px; }
-  .notebook-nudge { margin-top: 0; }
-  .notebook-entry {
+  #logbook { padding: calc(var(--nav-h) + 32px) 24px 64px; min-height: 100dvh; }
+  .logbook-header { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 40px; }
+  .logbook-nudge { margin-top: 0; }
+  .logbook-entry {
     grid-template-columns: 1fr;
     gap: 6px;
     padding: 14px 4px;
   }
-  .notebook-entry:hover { padding-left: 4px; }
-  .notebook-entry-when { font-size: 0.62rem; }
-  .notebook-entry-title { font-size: 1rem; white-space: normal; }
-  .notebook-entry-dek { white-space: normal; }
+  .logbook-entry:hover { padding-left: 4px; }
+  .logbook-entry-when { font-size: 0.62rem; }
+  .logbook-entry-title { font-size: 1rem; white-space: normal; }
+  .logbook-entry-dek { white-space: normal; }
 }
 
 /* ── CONTACT ── */
