@@ -614,6 +614,146 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   fill: none; stroke-linecap: round; stroke-linejoin: round;
 }
 
+/* ── NOTEBOOK (text-led editorial) ── */
+#logbook {
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+  background: var(--bg);
+  min-height: 100svh;
+  padding: calc(var(--nav-h) + 64px) clamp(48px, 6vw, 100px) 96px;
+}
+.logbook-inner { width: 100%; max-width: clamp(640px, 78vw, 1100px); }
+.logbook-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 48px; margin-bottom: 72px;
+}
+.logbook-header-text { max-width: 540px; }
+.logbook-header .quote { margin-top: 20px; }
+.logbook-nudge {
+  flex: 0 0 auto; margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: var(--h6); letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  padding-bottom: 3px; border-bottom: 1px solid rgba(43,39,37,0.4);
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.logbook-nudge:hover { color: var(--red); border-color: var(--red); }
+.logbook-nudge span { display: inline-block; margin-left: 6px; }
+.logbook-list {
+  display: flex; flex-direction: column;
+  border-top: 1px solid rgba(43,39,37,0.18);
+}
+.logbook-entry {
+  display: grid;
+  grid-template-columns: clamp(110px, 13vw, 150px) 1fr;
+  align-items: baseline;
+  gap: 0 28px;
+  padding: 18px 4px;
+  border-bottom: 1px solid rgba(43,39,37,0.10);
+  cursor: pointer;
+  transition: background 0.2s, padding-left 0.2s;
+}
+.logbook-entry:hover {
+  background: rgba(43,39,37,0.035);
+  padding-left: 10px;
+}
+.logbook-entry-when-col { display: flex; flex-direction: column; gap: 6px; }
+.logbook-entry-when {
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: var(--h6); letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); margin: 0;
+}
+.logbook-entry-cat {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red); margin: 0;
+}
+.logbook-entry-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.logbook-entry-title {
+  font-family: bookmania, Georgia, serif; font-weight: 400;
+  font-size: 1.05rem; line-height: 1.25; letter-spacing: -0.005em;
+  color: var(--ink); margin: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.logbook-entry-dek {
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: 0.78rem; line-height: 1.5;
+  color: var(--muted); margin: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* ── Stay-close form (used inside #contact-stay) ── */
+.stay-form {
+  display: flex; flex-direction: column; gap: 22px;
+  max-width: 440px; margin-top: 28px;
+}
+.stay-field { display: flex; flex-direction: column; gap: 8px; }
+.stay-fieldlabel {
+  font-family: var(--h6-family); font-weight: 300;
+  font-size: var(--h6); letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted);
+}
+.stay-input {
+  font-family: bookmania, Georgia, serif; font-size: 1.1rem;
+  background: transparent; color: var(--ink);
+  border: none; border-bottom: 1px solid rgba(43,39,37,0.35);
+  padding: 8px 0; outline: none;
+  transition: border-color 0.2s;
+}
+.stay-input::placeholder { color: rgba(43,39,37,0.35); }
+.stay-input:focus { border-bottom-color: var(--red); }
+.stay-options {
+  border: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.stay-options .stay-fieldlabel { margin-bottom: 6px; }
+.stay-check {
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: 0.85rem; color: var(--ink);
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer; user-select: none;
+}
+.stay-check input {
+  appearance: none; -webkit-appearance: none;
+  width: 14px; height: 14px; flex: 0 0 auto;
+  border: 1px solid rgba(43,39,37,0.5);
+  background: transparent; cursor: pointer;
+  position: relative;
+  transition: background 0.2s, border-color 0.2s;
+}
+.stay-check input:checked { background: var(--red); border-color: var(--red); }
+.stay-check input:checked::after {
+  content: ''; position: absolute;
+  left: 3px; top: 0px; width: 5px; height: 9px;
+  border: solid #fff; border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.stay-submit {
+  align-self: flex-start; margin-top: 6px;
+  font-family: var(--h6-family); font-weight: 300;
+  font-size: var(--h6); letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--bg); background: var(--ink);
+  border: none; padding: 14px 26px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.stay-submit:hover { background: var(--red); }
+
+@media (max-width: 639px) {
+  #logbook { padding: calc(var(--nav-h) + 32px) 24px 64px; min-height: 100dvh; }
+  .logbook-header { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 40px; }
+  .logbook-nudge { margin-top: 0; }
+  .logbook-entry {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 14px 4px;
+  }
+  .logbook-entry:hover { padding-left: 4px; }
+  .logbook-entry-when { font-size: 0.62rem; }
+  .logbook-entry-title { font-size: 1rem; white-space: normal; }
+  .logbook-entry-dek { white-space: normal; }
+}
+
 /* ── CONTACT ── */
 #contact { background: var(--bg); min-height: auto; padding-top: 0; padding-bottom: 80px; }
 .contact-grid { display: grid; grid-template-columns: 1fr; column-gap: 0; }
@@ -746,4 +886,9 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .contact-grid > :nth-child(odd) { border-right: 1px solid rgba(41,37,35,0.12); }
   .contact-grid > :last-child { border-bottom: 1px solid rgba(41,37,35,0.12); }
   .contact-grid > :nth-last-child(-n+2) { border-bottom: none; }
+  /* Stay-close spans full width on its own row, last block of the section. */
+  .contact-block--wide { grid-column: 1 / -1; border-right: none; border-bottom: none !important; }
+  .contact-grid > :nth-last-child(2):not(.contact-block--wide) {
+    border-bottom: 1px solid rgba(41,37,35,0.12);
+  }
 }
