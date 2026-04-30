@@ -643,10 +643,16 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   background: rgba(43,39,37,0.035);
   padding-left: 10px;
 }
+.notebook-entry-when-col { display: flex; flex-direction: column; gap: 6px; }
 .notebook-entry-when {
   font-family: 'JetBrains Mono', monospace; font-weight: 300;
   font-size: var(--h6); letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--muted); margin: 0;
+}
+.notebook-entry-cat {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red); margin: 0;
 }
 .notebook-entry-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .notebook-entry-title {
