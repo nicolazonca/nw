@@ -622,7 +622,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
   min-height: 100svh;
   padding: calc(var(--nav-h) + 64px) clamp(48px, 6vw, 100px) 96px;
 }
-.notebook-inner { width: 100%; max-width: 720px; }
+.notebook-inner { width: 100%; max-width: clamp(640px, 78vw, 1100px); }
 .notebook-header { margin-bottom: 72px; }
 .notebook-header .quote { margin-top: 20px; max-width: 540px; }
 .notebook-list {
