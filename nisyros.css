@@ -626,22 +626,33 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 .notebook-header { margin-bottom: 72px; }
 .notebook-header .quote { margin-top: 20px; max-width: 540px; }
 .notebook-list { display: flex; flex-direction: column; }
-.notebook-entry { padding: 40px 0 44px; }
-.notebook-entry + .notebook-entry { border-top: 1px solid rgba(43,39,37,0.12); }
-.notebook-date {
-  font-family: 'JetBrains Mono', monospace; font-weight: 300;
-  font-size: var(--h6); letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--muted); margin: 0 0 18px;
+.notebook-entry {
+  padding: 32px 0 40px;
+  border-top: 1px solid rgba(43,39,37,0.18);
 }
+.notebook-eyebrow {
+  display: flex; align-items: baseline; gap: 10px;
+  font-family: 'JetBrains Mono', monospace; font-weight: 300;
+  font-size: var(--h6); letter-spacing: 0.22em;
+  color: var(--muted); margin: 0 0 14px;
+}
+.notebook-eyebrow .notebook-cat {
+  text-transform: uppercase;
+  color: var(--red);
+  letter-spacing: 0.28em;
+}
+.notebook-eyebrow .notebook-sep { opacity: 0.45; }
+.notebook-eyebrow .notebook-when { text-transform: uppercase; }
 .notebook-title {
   font-family: bookmania, Georgia, serif; font-weight: 400;
-  font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05;
-  letter-spacing: -0.01em; color: var(--ink);
-  margin: 0 0 18px;
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem); line-height: 1.18;
+  letter-spacing: -0.005em; color: var(--ink);
+  margin: 0 0 12px;
 }
 .notebook-standfirst {
   font-family: bookmania, Georgia, serif; font-weight: 400;
-  font-size: clamp(1.1rem, 2.1vw, 1.35rem); line-height: 1.4;
+  font-style: italic;
+  font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.45;
   color: var(--ink); margin: 0;
 }
 .notebook-body {
@@ -662,7 +673,7 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 @media (max-width: 639px) {
   #notebook { padding: calc(var(--nav-h) + 32px) 24px 64px; min-height: 100dvh; }
   .notebook-header { margin-bottom: 48px; }
-  .notebook-entry { padding: 28px 0 32px; }
+  .notebook-entry { padding: 24px 0 32px; }
   .notebook-body { line-height: 1.7; }
 }
 
