@@ -692,8 +692,18 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .wines-collections-card { height: 100dvh !important; overflow-y: auto !important; overflow-x: hidden; -webkit-overflow-scrolling: touch; padding: calc(var(--nav-h) + 16px) 56px 80px !important; }
   .wines-collections-card .big { margin-bottom: 40px !important; }
   .wine-col-details { margin-top: 24px; }
-  .wine-card-v3 .wine-col-bottle { order: -1; margin-top: 0; margin-bottom: 24px; }
-  .wine-col-bottle img { max-height: 50vh; }
+  /* Mobile order inside a wine card:
+       1 name → 2 subtitle → 3 bottle → 4 body texts → 5 details
+     Hoist .wine-col-main's children to the grid level so we can order
+     name/subtitle separately from the body texts. */
+  .wine-card-v3 .wine-col-main    { display: contents; }
+  .wine-card-v3 .big.sm           { order: 1; text-align: center; font-size: 3rem; margin-top: 25px; }
+  .wine-card-v3 .wine-subtitle    { order: 2; text-align: center; font-size: 0.85rem; }
+  .wine-card-v3 .wine-col-bottle  { order: 3; margin-top: 46px; margin-bottom: 10px; }
+  .wine-card-v3 .wine-col-texts   { order: 4; }
+  .wine-card-v3 .wine-col-details { order: 5; }
+  /* Bottle ~10% smaller on mobile (was 50vh). */
+  .wine-col-bottle img { max-height: 45vh; }
   #faces { --faces-max: min(88vw, 50vh); }
   .faces-wall-header {
     position: absolute; top: 0; left: 0; right: 0;
