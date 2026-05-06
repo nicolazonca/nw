@@ -738,8 +738,8 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
 @media (min-width: 640px) {
   .page { padding: calc(var(--nav-h) + 24px) 100px 32px; gap: 48px; }
   hr.slash { width: 80px; }
-  .contact-header { padding: calc(var(--nav-h) + 64px) 48px 56px; }
-  .contact-block { padding: 48px 48px; }
+  .contact-header { padding: calc(var(--nav-h) + 64px) 100px 56px; }
+  .contact-block { padding: 48px 100px; }
 }
 @media (min-width: 1024px) {
   .contact-grid { grid-template-columns: 1fr 1fr; }
