@@ -297,12 +297,26 @@ body::before {
 }
 @media (max-width: 640px) {
   .scroll-hint-right {
-    padding: 18px 16px 18px 24px;
-    font-size: 11px;
-    letter-spacing: 0.15em;
+    /* Move from the right edge (where the manifesto text sits on mobile) to a
+       small centered pill just above the bottom controls. */
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: 70px;
+    transform: translateX(-50%);
+    padding: 8px 14px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
     gap: 8px;
+    background: rgba(245, 242, 238, 0.92);
+    border: 1px solid rgba(196, 110, 75, 0.4);
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   }
-  .scroll-hint-right-arrow { width: 22px; height: 22px; }
+  .scroll-hint-right-arrow { width: 18px; height: 18px; }
+  .hscroll.user-interacted .scroll-hint-right {
+    transform: translateX(-50%) translateY(8px);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .scroll-chevron-right.first-bounce,
