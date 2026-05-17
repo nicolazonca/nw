@@ -201,6 +201,7 @@ function setupDots(scrollEl, dotsEl, controlsEl) {
       var panel = pp[idx];
       controlsEl.classList.toggle('on-dark', panel.id === 'credo');
       controlsEl.classList.toggle('on-last', idx === total - 1);
+      controlsEl.classList.toggle('on-first', idx === 0);
     }
   }
   syncControls(0);
@@ -222,8 +223,13 @@ var mDots     = document.getElementById('manifesto-dots');
 var mControls = document.querySelector('.manifesto-controls');
 var wScroll   = document.getElementById('wines-scroll');
 var wDots     = document.getElementById('wines-dots');
+// The wines bottom-bar reuses the .manifesto-controls class, so it picks up
+// the same .on-first / .on-last / .on-dark styling hooks.
+var wControls = wScroll && wScroll.closest('.hscroll-wrapper')
+  ? wScroll.closest('.hscroll-wrapper').querySelector('.manifesto-controls')
+  : null;
 if (mScroll && mDots) setupDots(mScroll, mDots, mControls);
-if (wScroll && wDots) setupDots(wScroll, wDots);
+if (wScroll && wDots) setupDots(wScroll, wDots, wControls);
 
 /* Reveal inside panels */
 [mScroll, wScroll].forEach(sc => {
@@ -286,22 +292,46 @@ if (wScroll && wDots) setupDots(wScroll, wDots);
   el.addEventListener('touchend',   e=>{if(!tr)return;tr=false;var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){var idx=getIdx(el),pp=el.querySelectorAll('.page,.wine-card');if(dx<0&&idx>=pp.length-1){var wr=el.closest('.hscroll-wrapper'),nx=wr?wr.nextElementSibling:null;if(nx)navScrollTo(nx);}else{goPanel(el,idx+(dx<0?1:-1));}}},{passive:true});
 });
 
-/* Chevron arrows — first right chevron on manifesto gets bounce class */
+/* Chevron arrows — the right chevron on both manifesto and wines bounces
+   indefinitely until the user first scrolls that carousel. JS adds
+   .user-interacted to the corresponding .hscroll, which CSS uses to kill
+   the bounce, fade the lateral hint, and hide the directional counter-arrow. */
 (function() {
-  var isFirst = true;
-  ['manifesto-scroll','wines-scroll'].forEach(id => {
-    var scrollEl = document.getElementById(id);
+  [
+    { id: 'manifesto-scroll', hintId: 'm1-scroll-hint' },
+    { id: 'wines-scroll',     hintId: 'wines-scroll-hint' },
+  ].forEach(cfg => {
+    var scrollEl = document.getElementById(cfg.id);
     if (!scrollEl) return;
     var wrapper = scrollEl.closest('.hscroll-wrapper');
     if (!wrapper) return;
+    var onFirstScroll, markInteracted;
+    markInteracted = function() {
+      scrollEl.classList.add('user-interacted');
+      scrollEl.removeEventListener('scroll', onFirstScroll);
+      scrollEl.removeEventListener('touchstart', markInteracted);
+    };
+    onFirstScroll = function() {
+      if (scrollEl.scrollLeft > 8) markInteracted();
+    };
+    scrollEl.addEventListener('scroll', onFirstScroll, { passive: true });
+    scrollEl.addEventListener('touchstart', markInteracted, { passive: true });
+    var hint = document.getElementById(cfg.hintId);
+    if (hint) {
+      hint.addEventListener('click', function(e) {
+        e.stopPropagation();
+        goPanel(scrollEl, 1);
+        markInteracted();
+      });
+    }
     var lArr = document.createElement('div');
     lArr.className = 'scroll-chevron scroll-chevron-left';
     lArr.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';
     var rArr = document.createElement('div');
     rArr.className = 'scroll-chevron scroll-chevron-right';
     rArr.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>';
-    // Only first right chevron (manifesto) gets bounce
-    if (isFirst) { rArr.classList.add('first-bounce'); isFirst = false; }
+    rArr.classList.add('first-bounce');
+    var id = cfg.id;
     var arrowsHost = document.getElementById(id === 'manifesto-scroll' ? 'manifesto-arrows' : 'wines-arrows');
     // Left arrow before the dots, right arrow after — so row is [L | dots | R]
     arrowsHost.insertBefore(lArr, arrowsHost.firstChild);

@@ -9,6 +9,10 @@
         <div class="big reveal d2 on">3 Collections.</div>
         <button class="wine-discover-cta reveal d3 on" onclick="event.stopPropagation();goPanel(document.getElementById('wines-scroll'), 1)">Discover &gt;</button>
       </div>
+      <button type="button" class="scroll-hint-right" id="wines-scroll-hint" aria-label="Continue to the wines">
+        <span class="scroll-hint-right-label">Continue</span>
+        <svg class="scroll-hint-right-arrow" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
     </div>
 
     <!-- Wine cards are rendered by js/main.js loadCMS() from the Google Sheet.
