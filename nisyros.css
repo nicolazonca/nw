@@ -296,27 +296,20 @@ body::before {
   pointer-events: none;
 }
 @media (max-width: 640px) {
-  .scroll-hint-right {
-    /* Move from the right edge (where the manifesto text sits on mobile) to a
-       small centered pill just above the bottom controls. */
-    top: auto;
-    right: auto;
-    left: 50%;
-    bottom: 70px;
-    transform: translateX(-50%);
-    padding: 8px 14px;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    gap: 8px;
-    background: rgba(245, 242, 238, 0.92);
-    border: 1px solid rgba(196, 110, 75, 0.4);
-    border-radius: 999px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  /* The lateral hint overlaps the illustration on mobile. Hide it and lean
+     instead on a louder version of the existing bottom chevron, only on
+     slide I (controls get .on-first from JS). */
+  .scroll-hint-right { display: none; }
+
+  .manifesto-controls.on-first .scroll-chevron-right {
+    width: 56px; height: 56px;
   }
-  .scroll-hint-right-arrow { width: 18px; height: 18px; }
-  .hscroll.user-interacted .scroll-hint-right {
-    transform: translateX(-50%) translateY(8px);
+  .manifesto-controls.on-first .scroll-chevron-right svg {
+    width: 34px; height: 34px;
+    stroke: var(--red); stroke-width: 2.4;
   }
+  /* Once the user has scrolled, the controls leave slide I and the chevron
+     returns to its default size/color automatically. */
 }
 @media (prefers-reduced-motion: reduce) {
   .scroll-chevron-right.first-bounce,

@@ -648,6 +648,7 @@ function setupDots(scrollEl, dotsEl, controlsEl) {
       var panel = pp[idx];
       controlsEl.classList.toggle('on-dark', panel.id === 'credo');
       controlsEl.classList.toggle('on-last', idx === total - 1);
+      controlsEl.classList.toggle('on-first', idx === 0);
     }
   }
   syncControls(0);
