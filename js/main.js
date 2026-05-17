@@ -286,7 +286,10 @@ if (wScroll && wDots) setupDots(wScroll, wDots);
   el.addEventListener('touchend',   e=>{if(!tr)return;tr=false;var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){var idx=getIdx(el),pp=el.querySelectorAll('.page,.wine-card');if(dx<0&&idx>=pp.length-1){var wr=el.closest('.hscroll-wrapper'),nx=wr?wr.nextElementSibling:null;if(nx)navScrollTo(nx);}else{goPanel(el,idx+(dx<0?1:-1));}}},{passive:true});
 });
 
-/* Chevron arrows — first right chevron on manifesto gets bounce class */
+/* Chevron arrows — first right chevron on manifesto gets bounce class.
+   The bounce loops indefinitely on the manifesto until the user first scrolls;
+   .user-interacted on the .hscroll element kills the bounce (CSS) and fades
+   the lateral hint on slide #m1 + the directional arrow in the counter. */
 (function() {
   var isFirst = true;
   ['manifesto-scroll','wines-scroll'].forEach(id => {
@@ -294,6 +297,25 @@ if (wScroll && wDots) setupDots(wScroll, wDots);
     if (!scrollEl) return;
     var wrapper = scrollEl.closest('.hscroll-wrapper');
     if (!wrapper) return;
+    if (id === 'manifesto-scroll') {
+      var markInteracted = function() {
+        scrollEl.classList.add('user-interacted');
+        scrollEl.removeEventListener('scroll', onFirstScroll);
+        scrollEl.removeEventListener('touchstart', markInteracted);
+      };
+      var onFirstScroll = function() {
+        if (scrollEl.scrollLeft > 8) markInteracted();
+      };
+      scrollEl.addEventListener('scroll', onFirstScroll, { passive: true });
+      scrollEl.addEventListener('touchstart', markInteracted, { passive: true });
+      var hint = document.getElementById('m1-scroll-hint');
+      if (hint) {
+        hint.addEventListener('click', function() {
+          goPanel(scrollEl, 1);
+          markInteracted();
+        });
+      }
+    }
     var lArr = document.createElement('div');
     lArr.className = 'scroll-chevron scroll-chevron-left';
     lArr.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>';

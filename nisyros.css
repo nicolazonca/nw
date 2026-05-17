@@ -156,7 +156,13 @@ body::before {
   60%       { transform: translateY(-50%) translateX(8px);  opacity: 0.9; }
 }
 .scroll-chevron-right.first-bounce {
-  animation: bounce-right 1.4s ease-in-out 0.6s 6;
+  animation: bounce-right 1.4s ease-in-out 0.6s infinite;
+}
+/* Once the user has scrolled, JS adds .user-interacted to .hscroll and the
+   bounce stops. */
+.hscroll.user-interacted .scroll-chevron-right.first-bounce {
+  animation: none;
+  opacity: 0.6;
 }
 
 /* ── MANIFESTO BOTTOM CONTROLS (counter left, [< · dots · >] centered, floating) ── */
@@ -178,6 +184,7 @@ body::before {
   font-family: var(--h6-family);
   font-size: var(--h6);
   color: rgba(0,0,0,0.3);
+  display: inline-flex; align-items: center; gap: 8px;
   letter-spacing: 0.05em;
   z-index: 5;
   pointer-events: none;
@@ -215,7 +222,95 @@ body::before {
   60%      { transform: translateX(4px);  opacity: 0.9; }
 }
 .manifesto-arrows .scroll-chevron-right.first-bounce {
-  animation: bounce-right-inline 1.4s ease-in-out 0.6s 6;
+  animation: bounce-right-inline 1.4s ease-in-out 0.6s infinite;
+}
+
+/* Directional arrow shown only inside .page-counter on slide #m1, fades out
+   once the user has scrolled (parent .hscroll gets .user-interacted). */
+.page-counter-arrow {
+  display: inline-block;
+  color: var(--red);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+#m1 .page-counter-arrow {
+  opacity: 0.9;
+  animation: counter-arrow-nudge 1.6s ease-in-out infinite;
+}
+.hscroll.user-interacted #m1 .page-counter-arrow {
+  animation: none;
+  opacity: 0;
+}
+@keyframes counter-arrow-nudge {
+  0%, 100% { transform: translateX(0);   opacity: 0.7; }
+  50%      { transform: translateX(6px); opacity: 1; }
+}
+
+/* ── First-slide lateral hint: large, vertical-centered, fades out on scroll ── */
+/* Slide-I lateral hint. The gradient backdrop hints "more content this way"
+   even before the user reads the label. */
+.scroll-hint-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+  padding: 24px 28px 24px 36px;
+  display: flex; align-items: center; gap: 12px;
+  color: var(--red);
+  font-family: var(--h6-family);
+  font-size: var(--h6);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  z-index: 12;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: auto;
+  user-select: none;
+  background: linear-gradient(
+    to right,
+    rgba(245, 242, 238, 0) 0%,
+    rgba(245, 242, 238, 0.55) 60%,
+    rgba(245, 242, 238, 0.85) 100%
+  );
+}
+.scroll-hint-right-label {
+  white-space: nowrap;
+}
+.scroll-hint-right-arrow {
+  width: 28px; height: 28px;
+  stroke: var(--red); stroke-width: 2;
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+  animation: scroll-hint-right-nudge 1.6s ease-in-out infinite;
+}
+@keyframes scroll-hint-right-nudge {
+  0%, 100% { transform: translateX(0);    opacity: 0.85; }
+  50%      { transform: translateX(10px); opacity: 1; }
+}
+.hscroll.user-interacted .scroll-hint-right {
+  opacity: 0;
+  transform: translateY(-50%) translateX(20px);
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .scroll-hint-right {
+    padding: 18px 16px 18px 24px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    gap: 8px;
+  }
+  .scroll-hint-right-arrow { width: 22px; height: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-chevron-right.first-bounce,
+  .manifesto-arrows .scroll-chevron-right.first-bounce,
+  .scroll-hint-right-arrow,
+  #m1 .page-counter-arrow {
+    animation: none;
+  }
 }
 
 .scroll-hint-down {
