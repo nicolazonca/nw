@@ -841,7 +841,7 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   /* Reserve room beneath the text so the bar (and, on the last card, the
      down cue) never sit over a readable line. */
   .wine-card-v3 { padding-bottom: 80px !important; }
-  .wines-collections-card { padding-bottom: 180px !important; }
+  .wines-collections-card { padding-bottom: 240px !important; }
   /* The in-card down arrow drifts up with the scrolling text on mobile —
      hide it and use the pinned cue instead. */
   .scroll-hint-down--incard { display: none; }
