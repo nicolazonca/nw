@@ -810,35 +810,31 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .wine-card-v3 .wine-col-details { order: 5; }
   /* Bottle ~10% smaller on mobile (was 50vh). */
   .wine-col-bottle img { max-height: 45vh; }
-  /* Wines: opaque/blurred control bar anchored to the bottom edge so the
-     dots + arrows never show through the vertically-scrolling card text. */
+  /* Wines: slim opaque/blurred control bar anchored to the bottom edge so
+     the dots + arrows never show through the vertically-scrolling card text. */
   #wines-wrapper .manifesto-controls {
     bottom: 0; left: 0; right: 0;
-    padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px));
-    background: rgba(245,242,238,0.92);
+    padding: 6px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+    background: rgba(245,242,238,0.9);
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border-top: 1px solid rgba(43,39,37,0.08);
     z-index: 30;
   }
+  #wines-wrapper .manifesto-arrows .scroll-chevron { width: 34px; height: 34px; }
+  #wines-wrapper .manifesto-arrows .scroll-chevron svg { width: 20px; height: 20px; }
   /* Reserve room beneath the text so the bar (and, on the last card, the
      down cue) never sit over a readable line. */
-  .wine-card-v3 { padding-bottom: 96px !important; }
-  .wines-collections-card { padding-bottom: 124px !important; }
+  .wine-card-v3 { padding-bottom: 74px !important; }
+  .wines-collections-card { padding-bottom: 100px !important; }
   /* The in-card down arrow drifts up with the scrolling text on mobile —
      hide it and use the pinned cue instead. */
   .scroll-hint-down--incard { display: none; }
-  /* Pinned down cue: only on the last slide, sitting just above the bar on
-     its own blurred disc so passing text never collides with it, and pinned
-     to the wrapper so it does not scroll with the card. */
+  /* Pinned down cue: shown only on the last slide, sitting just above the
+     bar, pinned to the wrapper so it does not scroll with the card text. */
   #wines-wrapper .manifesto-controls.on-last ~ .scroll-hint-down--pinned {
     display: flex;
-    bottom: calc(66px + env(safe-area-inset-bottom, 0px));
-    width: 46px; height: 46px; min-width: 0; min-height: 0;
-    border-radius: 50%;
-    background: rgba(245,242,238,0.92);
-    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    box-shadow: 0 2px 12px -4px rgba(43,39,37,0.45);
-    font-size: 1.7rem; color: var(--ink); z-index: 30;
+    bottom: calc(50px + env(safe-area-inset-bottom, 0px));
+    font-size: 1.8rem; color: var(--ink); z-index: 30;
   }
   #faces { --faces-max: min(88vw, 50vh); }
   .faces-wall-header {
