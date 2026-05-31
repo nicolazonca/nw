@@ -810,22 +810,38 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
   .wine-card-v3 .wine-col-details { order: 5; }
   /* Bottle ~10% smaller on mobile (was 50vh). */
   .wine-col-bottle img { max-height: 45vh; }
-  /* Wines: slim opaque/blurred control bar anchored to the bottom edge so
-     the dots + arrows never show through the vertically-scrolling card text. */
+  /* Allow vertical scroll inside a wine card to chain to the page once the
+     card's text reaches its end, so the user can leave the section before
+     the last slide. Horizontal overflow stays hidden for the carousel. */
+  #wines-wrapper { height: 100dvh; min-height: auto; overflow-x: hidden; overflow-y: visible; }
+  /* Wines: slim control bar anchored to the bottom edge with a progressive
+     blur backdrop (fades from no-blur at top to full-blur at bottom),
+     instead of a solid opaque strip. */
   #wines-wrapper .manifesto-controls {
     bottom: 0; left: 0; right: 0;
-    padding: 6px 0 calc(6px + env(safe-area-inset-bottom, 0px));
-    background: rgba(245,242,238,0.9);
-    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(43,39,37,0.08);
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom, 0px));
+    background: transparent;
+    border-top: none;
+    isolation: isolate;
     z-index: 30;
   }
+  #wines-wrapper .manifesto-controls::before {
+    content: '';
+    position: absolute;
+    inset: -56px 0 0 0;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  #wines-wrapper .manifesto-controls > * { position: relative; z-index: 1; }
   #wines-wrapper .manifesto-arrows .scroll-chevron { width: 34px; height: 34px; }
   #wines-wrapper .manifesto-arrows .scroll-chevron svg { width: 20px; height: 20px; }
   /* Reserve room beneath the text so the bar (and, on the last card, the
      down cue) never sit over a readable line. */
-  .wine-card-v3 { padding-bottom: 74px !important; }
-  .wines-collections-card { padding-bottom: 100px !important; }
+  .wine-card-v3 { padding-bottom: 80px !important; }
+  .wines-collections-card { padding-bottom: 140px !important; }
   /* The in-card down arrow drifts up with the scrolling text on mobile —
      hide it and use the pinned cue instead. */
   .scroll-hint-down--incard { display: none; }
