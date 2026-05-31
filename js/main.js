@@ -336,26 +336,16 @@ if (wScroll && wDots) setupDots(wScroll, wDots, wControls);
     // Left arrow before the dots, right arrow after — so row is [L | dots | R]
     arrowsHost.insertBefore(lArr, arrowsHost.firstChild);
     arrowsHost.appendChild(rArr);
-    var isManifesto = id === 'manifesto-scroll';
     function upd() {
       var pp=scrollEl.querySelectorAll('.page,.wine-card'), idx=getIdx(scrollEl);
       // Keep arrow slots in place; toggle visibility only so positions never shift.
       lArr.style.visibility = idx<=0 ? 'hidden' : 'visible';
       if (idx >= pp.length-1) {
-        if (isManifesto) {
-          // Manifesto: hide right arrow but preserve its slot (no shift)
-          rArr.style.visibility = 'hidden';
-          rArr.onclick = null;
-        } else {
-          // Wines: right arrow stays (absolutely positioned) and jumps to next section
-          rArr.style.visibility = 'visible';
-          rArr.style.opacity = '0.4';
-          rArr.onclick = function() {
-            var nextSection = wrapper.nextElementSibling;
-            while (nextSection && nextSection.classList.contains('hscroll-dots')) nextSection = nextSection.nextElementSibling;
-            if (nextSection) navScrollTo(nextSection);
-          };
-        }
+        // Last slide: hide the right chevron. The slide itself carries
+        // a .scroll-hint-down arrow so the next move (down to the next
+        // section) is signalled without misleading horizontal nav.
+        rArr.style.visibility = 'hidden';
+        rArr.onclick = null;
       } else {
         rArr.style.visibility = 'visible';
         rArr.style.opacity = '';
