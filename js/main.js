@@ -597,7 +597,7 @@ async function loadCMS(){
   COLLECTION_DESCRIPTIONS = readCollectionDescriptions();
   container.innerHTML = valid.map(renderWineV3).join('');
   container.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
-  if(wScroll && wDots) setupDots(wScroll, wDots);
+  if(wScroll && wDots) setupDots(wScroll, wDots, wControls);
 }
 
 // ── Faces & Places rendering ──────────────────────────────────────────────
