@@ -842,6 +842,15 @@ footer { scroll-snap-align: end; background: var(--ink); color: var(--faded); fo
      down cue) never sit over a readable line. */
   .wine-card-v3 { padding-bottom: 80px !important; }
   .wines-collections-card { padding-bottom: 240px !important; }
+  /* iOS Safari has a known issue where padding-bottom on an
+     overflow:auto + -webkit-overflow-scrolling:touch container is not
+     always counted toward the scrollable height. Force the spacer with
+     an ::after pseudo-element so the bottom of the Volcanica paragraph
+     can be scrolled clear of the control bar reliably. */
+  .wines-collections-card::after {
+    content: ''; display: block; width: 100%; height: 200px;
+    flex: 0 0 auto;
+  }
   /* The in-card down arrow drifts up with the scrolling text on mobile —
      hide it and use the pinned cue instead. */
   .scroll-hint-down--incard { display: none; }
