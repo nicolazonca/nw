@@ -13,6 +13,7 @@ cat \
   sections/hero.html \
   sections/wines.html \
   sections/faces.html \
+  sections/notes.html \
   sections/contact.html \
   > "$OUT.tmp"
 
