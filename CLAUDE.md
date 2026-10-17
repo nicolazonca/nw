@@ -24,7 +24,7 @@ Tone in copy: short, declarative sentences. No marketing fluff. The site reads l
 
 ## 2. Live site & repository
 
-> **⚠️ Claude session check — read this first.** This project has two Git repositories with the same name on GitHub: `hellosandro/nw` (upstream fork parent) and `nicolazonca/nw` (production, deploys to Netlify). A Claude session can only be attached to ONE at a time — same-named repos conflict on the shared checkout path, so `add_repo` for the other one is refused. **Always open the session with `nicolazonca/nw` as the source.** If you find yourself in a session attached to `hellosandro/nw`, STOP: branches pushed there will not reach https://nisyroswines.com. Ask the user to re-open the session on `nicolazonca/nw` and resume there.
+> **⚠️ Claude session check — read this first.** This project has two Git repositories with the same name on GitHub: `hellosandro/nw` (upstream fork parent) and `nicolazonca/nw` (production, deploys to Netlify). A Claude session can only be attached to ONE at a time — same-named repos conflict on the shared checkout path, so `add_repo` for the other one is refused for push (`clone_dir_collision`); only anonymous read access remains. **Always open the session with `nicolazonca/nw` as the source.** If you find yourself in a session attached to `hellosandro/nw`, STOP: branches pushed there will not reach https://nisyroswines.com. Ask the user to re-open the session on `nicolazonca/nw` and resume there.
 
 | | |
 |---|---|
@@ -163,7 +163,7 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 8. Netlify auto-deploys main to https://nisyroswines.com on merge.
 
 > **Note for Claude:**
-> - **Session must be on `nicolazonca/nw`.** If attached to `hellosandro/nw` instead, stop and ask the user to re-open the session — see the warning in §2. You cannot `add_repo` the production fork from a hellosandro-scoped session (same-name checkout conflict).
+> - **Session must be on `nicolazonca/nw`.** If attached to `hellosandro/nw` instead, stop and ask the user to re-open the session — see the warning in §2. You cannot `add_repo` the production fork for push from a hellosandro-scoped session (same-name checkout conflict); read-only access is all that remains, and it cannot deploy anything.
 > - The GitHub MCP integration cannot create PRs on this repo (`403 Resource not accessible by integration`). Push the branch, then hand Nicola the compare URL from step 6.
 
 ---
