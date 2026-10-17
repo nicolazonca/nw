@@ -29,8 +29,8 @@ Tone in copy: short, declarative sentences. No marketing fluff. The site reads l
 | | |
 |---|---|
 | Live site | https://nisyroswines.com |
-| Repo (origin) | https://github.com/hellosandro/nw |
-| Repo (production) | https://github.com/nicolazonca/nw |
+| Repo (production — push here) | https://github.com/nicolazonca/nw |
+| Repo (upstream fork parent, not in the deploy path) | https://github.com/hellosandro/nw |
 | Deployment | Netlify, auto-deploy on merge to `main` of `nicolazonca/nw` |
 | Instagram | https://www.instagram.com/nisyroswines/ |
 
@@ -110,7 +110,7 @@ Five wines currently on the site:
 4. **Apiri** — Monopàtia
 5. **Atmida** — Monopàtia
 
-Wine data is driven by the CMS (Google Sheets). The five wines hardcoded in `sections/wines.html` are a fallback; the CMS loader in `js/main.js` overwrites them at runtime.
+Wine data comes from the CMS (Google Sheets) only. `sections/wines.html` ships the intro card, an empty `#wines-container` and the collections card — there is no hardcoded wine fallback, so if the sheet is unreachable or malformed the wines section renders without cards and the error surfaces in the console. That is deliberate (§7.6).
 
 ---
 
@@ -124,14 +124,17 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 - `faces` — gid `1521558789` — drives the Faces & Places gallery.
 - `config` — gid `1620319001` — global text snippets.
 
-**Body-text format (wines):** the `body` field splits on `||` into exactly two non-empty parts — part 1 renders under *Story*, part 2 under *Winemaking & Tasting Notes*. The `specs` field splits on a single `|`, each part becoming a row.
+**Body-text format (wines):** the `body` field splits on `||` into exactly three non-empty parts — *Story*, *Winemaking*, *Tasting Notes*. `loadCMS` throws if a row splits into anything else, so one malformed body stops the whole wines render. The detail rows come from the dedicated columns (`vintages`, `type`, `variety`, `appellation`, `origin`, `altitude`, `soil`, `vinification`, `production`, `alcohol`, `volume`); the `specs` column is still in the sheet but the code no longer reads it.
+
+**Line breaks (config):** a line break inside a quoted cell of the `config` tab — or a literal `\n` — renders as `<br>` on any `data-cms` element. Keep the hardcoded fallback in `sections/` in step with it, `<br>` included.
 
 **Faces columns:** `oredr | img_url | label | text`. Display order currently follows the sheet row order. `oredr` is reserved for future numeric ordering.
 
 **Google Drive images:** the CMS accepts standard Drive share links (`https://drive.google.com/file/d/<ID>/view…`) — `js/main.js` extracts the file ID and rewrites to `https://lh3.googleusercontent.com/d/<ID>`, which is then routed through the Netlify Image CDN (`/.netlify/images?url=…&w=…`) for AVIF/WebP transcoding and CDN caching. The `[images].remote_images` whitelist in `netlify.toml` allows this.
 
 **CMS loader invariants:**
-- Wines: updates happen via `data-cms` attributes, not by replacing `innerHTML`. **Fails loud on bad data** — no silent fallbacks, no duplicated runtime templates (commit `c7c0abf`).
+- Wines: `renderWineV3` rebuilds `#wines-container.innerHTML` from the sheet — single source of truth, no duplicated runtime templates (commit `c7c0abf`). **Fails loud on bad data** — a missing required field, or a `body` that does not split into three parts, throws and the section stays empty.
+- Config: `loadConfig` overwrites every `[data-cms]` element from the `config` tab. The text in `sections/` is the pre-load fallback, so it must match the sheet verbatim.
 - Faces: replaces the hardcoded fallback `<figure>`s when the sheet returns ≥1 valid row. **Falls back gracefully** if the CMS fails or returns zero rows (the hardcoded fallback in `sections/faces.html` stays on screen).
 
 ---
