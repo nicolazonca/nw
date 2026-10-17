@@ -2,7 +2,7 @@
 
 > **Living document.** This file is the shared source of truth for the Nisyros Wines website project. It is maintained and updated by Claude across sessions so that Nicola, Sandro, and any collaborator landing on the repo have the full picture without archaeological digs through chat history.
 >
-> **Last updated:** 2026-04-29 · **Maintained by:** Claude (Cowork) · **Owners:** Nicola Zonca (nicola@nativeprime.com), Sandro (design + deploy)
+> **Last updated:** 2026-10-17 · **Maintained by:** Claude (Cowork) · **Owners:** Nicola Zonca (nicola@nativeprime.com), Sandro (design + deploy)
 
 ---
 
@@ -24,11 +24,13 @@ Tone in copy: short, declarative sentences. No marketing fluff. The site reads l
 
 ## 2. Live site & repository
 
+> **⚠️ Claude session check — read this first.** This project has two Git repositories with the same name on GitHub: `hellosandro/nw` (upstream fork parent) and `nicolazonca/nw` (production, deploys to Netlify). A Claude session can only be attached to ONE at a time — same-named repos conflict on the shared checkout path, so `add_repo` for the other one is refused for push (`clone_dir_collision`); only anonymous read access remains. **Always open the session with `nicolazonca/nw` as the source.** If you find yourself in a session attached to `hellosandro/nw`, STOP: branches pushed there will not reach https://nisyroswines.com. Ask the user to re-open the session on `nicolazonca/nw` and resume there.
+
 | | |
 |---|---|
 | Live site | https://nisyroswines.com |
-| Repo (origin) | https://github.com/hellosandro/nw |
-| Repo (production) | https://github.com/nicolazonca/nw |
+| Repo (production — push here) | https://github.com/nicolazonca/nw |
+| Repo (upstream fork parent, not in the deploy path) | https://github.com/hellosandro/nw |
 | Deployment | Netlify, auto-deploy on merge to `main` of `nicolazonca/nw` |
 | Instagram | https://www.instagram.com/nisyroswines/ |
 
@@ -108,7 +110,7 @@ Five wines currently on the site:
 4. **Apiri** — Monopàtia
 5. **Atmida** — Monopàtia
 
-Wine data is driven by the CMS (Google Sheets). The five wines hardcoded in `sections/wines.html` are a fallback; the CMS loader in `js/main.js` overwrites them at runtime.
+Wine data comes from the CMS (Google Sheets) only. `sections/wines.html` ships the intro card, an empty `#wines-container` and the collections card — there is no hardcoded wine fallback, so if the sheet is unreachable or malformed the wines section renders without cards and the error surfaces in the console. That is deliberate (§7.6).
 
 ---
 
@@ -122,14 +124,17 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 - `faces` — gid `1521558789` — drives the Faces & Places gallery.
 - `config` — gid `1620319001` — global text snippets.
 
-**Body-text format (wines):** the `body` field splits on `||` into exactly two non-empty parts — part 1 renders under *Story*, part 2 under *Winemaking & Tasting Notes*. The `specs` field splits on a single `|`, each part becoming a row.
+**Body-text format (wines):** the `body` field splits on `||` into exactly three non-empty parts — *Story*, *Winemaking*, *Tasting Notes*. `loadCMS` throws if a row splits into anything else, so one malformed body stops the whole wines render. The detail rows come from the dedicated columns (`vintages`, `type`, `variety`, `appellation`, `origin`, `altitude`, `soil`, `vinification`, `production`, `alcohol`, `volume`); the `specs` column is still in the sheet but the code no longer reads it.
+
+**Line breaks (config):** a line break inside a quoted cell of the `config` tab — or a literal `\n` — renders as `<br>` on any `data-cms` element. Keep the hardcoded fallback in `sections/` in step with it, `<br>` included.
 
 **Faces columns:** `oredr | img_url | label | text`. Display order currently follows the sheet row order. `oredr` is reserved for future numeric ordering.
 
 **Google Drive images:** the CMS accepts standard Drive share links (`https://drive.google.com/file/d/<ID>/view…`) — `js/main.js` extracts the file ID and rewrites to `https://lh3.googleusercontent.com/d/<ID>`, which is then routed through the Netlify Image CDN (`/.netlify/images?url=…&w=…`) for AVIF/WebP transcoding and CDN caching. The `[images].remote_images` whitelist in `netlify.toml` allows this.
 
 **CMS loader invariants:**
-- Wines: updates happen via `data-cms` attributes, not by replacing `innerHTML`. **Fails loud on bad data** — no silent fallbacks, no duplicated runtime templates (commit `c7c0abf`).
+- Wines: `renderWineV3` rebuilds `#wines-container.innerHTML` from the sheet — single source of truth, no duplicated runtime templates (commit `c7c0abf`). **Fails loud on bad data** — a missing required field, or a `body` that does not split into three parts, throws and the section stays empty.
+- Config: `loadConfig` overwrites every `[data-cms]` element from the `config` tab. The text in `sections/` is the pre-load fallback, so it must match the sheet verbatim.
 - Faces: replaces the hardcoded fallback `<figure>`s when the sheet returns ≥1 valid row. **Falls back gracefully** if the CMS fails or returns zero rows (the hardcoded fallback in `sections/faces.html` stays on screen).
 
 ---
@@ -157,11 +162,13 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 7. Nicola opens the PR via the link, reviews the deploy preview at `https://deploy-preview-<N>--nisyros-wines.netlify.app`, and merges.
 8. Netlify auto-deploys main to https://nisyroswines.com on merge.
 
-> **Note for Claude:** the GitHub MCP integration cannot create PRs on this repo (`403 Resource not accessible by integration`). Push the branch, then hand Nicola the compare URL above.
+> **Note for Claude:**
+> - **Session must be on `nicolazonca/nw`.** If attached to `hellosandro/nw` instead, stop and ask the user to re-open the session — see the warning in §2. You cannot `add_repo` the production fork for push from a hellosandro-scoped session (same-name checkout conflict); read-only access is all that remains, and it cannot deploy anything.
+> - The GitHub MCP integration cannot create PRs on this repo (`403 Resource not accessible by integration`). Push the branch, then hand Nicola the compare URL from step 6.
 
 ---
 
-## 9. Current state (as of 2026-04-29)
+## 9. Current state (as of 2026-10-17)
 
 **Deployment:** Netlify only. Production repo is the fork `nicolazonca/nw`; merging to its `main` triggers an auto-deploy to https://nisyroswines.com. `hellosandro/nw` is the upstream of the fork relationship but is **not** in the deploy path — Nicola's repo is fully independent. DNS is hosted on Google Cloud DNS (`ns-cloud-d1.googledomains.com`), with the apex pointing to Netlify's load balancer (`75.2.60.5`) and `www` CNAME'd to `nisyros-wines.netlify.app`.
 
@@ -169,10 +176,19 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 **Faces section:** wired to the `faces` tab of the CMS sheet. Polaroids load at `w=800`, lightbox at `w=1600`. Lightbox shows label + caption text overlaid on the photo, anchored to the photo's own bounds (not the viewport). Falls back to the hardcoded `<figure>`s in `sections/faces.html` if the CMS fails or is empty.
 
-**Branches in play:**
+**Wines section:** rendered entirely from the `wines` tab. `sections/wines.html` ships the intro card, an empty `#wines-container` and the collections card — there is no hardcoded wine fallback any more. Five wines on the sheet; the sixth row holds the Drive-link instructions and is skipped because it has no `name`.
 
-- `main` — production. Last sync: 2026-04-29.
-- `claude/organize-photo-management-BYsdN` — Faces CMS wiring + lightbox caption overlay + scroll fixes. PR pending merge.
+**Last changes (2026-10-17):**
+
+- PR #21 — the `data-cms` fallbacks in `sections/` were re-synced with the config sheet (credo, m1, m3, m6, contact), and the CMS loader now keeps the line breaks authored in the sheet: `joinCSVLines` preserves a newline inside a quoted cell, and `loadConfig` renders both real newlines and the literal `\n` as `<br>` on every `data-cms` element — not just on `_sub` keys. Verified live on https://nisyroswines.com.
+- A Claude session attached to `hellosandro/nw` pushed three PRs there; none of them could reach the site, because Netlify builds only from `nicolazonca/nw`. The work was re-applied here afterwards — nothing is left outstanding on that side. Hence the session check at the top of §2.
+
+**Branches:**
+
+- `main` — production. Last sync: 2026-10-17 (`6ac510d`, PR #21).
+- `claude/clarify-production-repo` — this CLAUDE.md update. Open.
+- `claude/organize-photo-management-BYsdN` — merged long ago (PR #7); the remote branch is still there but adds nothing to `main`.
+- Stale on the remote, never merged into `main`: `claude/add-greek-translation-6OE2d`, `claude/nisyros-wines-site-GwFmO`, `claude/notebook-preview`, `claude/test-write-permissions-T427X`, `claude/transparent-nav`. Delete them unless someone is still working on one.
 
 ---
 
