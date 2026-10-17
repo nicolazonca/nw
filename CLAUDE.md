@@ -181,7 +181,7 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 **Last changes (2026-10-17):**
 
 - PR #21 — the `data-cms` fallbacks in `sections/` were re-synced with the config sheet (credo, m1, m3, m6, contact), and the CMS loader now keeps the line breaks authored in the sheet: `joinCSVLines` preserves a newline inside a quoted cell, and `loadConfig` renders both real newlines and the literal `\n` as `<br>` on every `data-cms` element — not just on `_sub` keys. Verified live on https://nisyroswines.com.
-- A Claude session attached to `hellosandro/nw` pushed three PRs there; none of them could reach the site, because Netlify builds only from `nicolazonca/nw`. Hence the session check at the top of §2.
+- A Claude session attached to `hellosandro/nw` pushed three PRs there; none of them could reach the site, because Netlify builds only from `nicolazonca/nw`. The work was re-applied here afterwards — nothing is left outstanding on that side. Hence the session check at the top of §2.
 
 **Branches:**
 
