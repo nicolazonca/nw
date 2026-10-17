@@ -165,7 +165,7 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 ---
 
-## 9. Current state (as of 2026-04-29)
+## 9. Current state (as of 2026-10-17)
 
 **Deployment:** Netlify only. Production repo is the fork `nicolazonca/nw`; merging to its `main` triggers an auto-deploy to https://nisyroswines.com. `hellosandro/nw` is the upstream of the fork relationship but is **not** in the deploy path — Nicola's repo is fully independent. DNS is hosted on Google Cloud DNS (`ns-cloud-d1.googledomains.com`), with the apex pointing to Netlify's load balancer (`75.2.60.5`) and `www` CNAME'd to `nisyros-wines.netlify.app`.
 
@@ -173,10 +173,19 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 **Faces section:** wired to the `faces` tab of the CMS sheet. Polaroids load at `w=800`, lightbox at `w=1600`. Lightbox shows label + caption text overlaid on the photo, anchored to the photo's own bounds (not the viewport). Falls back to the hardcoded `<figure>`s in `sections/faces.html` if the CMS fails or is empty.
 
-**Branches in play:**
+**Wines section:** rendered entirely from the `wines` tab. `sections/wines.html` ships the intro card, an empty `#wines-container` and the collections card — there is no hardcoded wine fallback any more. Five wines on the sheet; the sixth row holds the Drive-link instructions and is skipped because it has no `name`.
 
-- `main` — production. Last sync: 2026-04-29.
-- `claude/organize-photo-management-BYsdN` — Faces CMS wiring + lightbox caption overlay + scroll fixes. PR pending merge.
+**Last changes (2026-10-17):**
+
+- PR #21 — the `data-cms` fallbacks in `sections/` were re-synced with the config sheet (credo, m1, m3, m6, contact), and the CMS loader now keeps the line breaks authored in the sheet: `joinCSVLines` preserves a newline inside a quoted cell, and `loadConfig` renders both real newlines and the literal `\n` as `<br>` on every `data-cms` element — not just on `_sub` keys. Verified live on https://nisyroswines.com.
+- A Claude session attached to `hellosandro/nw` pushed three PRs there; none of them could reach the site, because Netlify builds only from `nicolazonca/nw`. Hence the session check at the top of §2.
+
+**Branches:**
+
+- `main` — production. Last sync: 2026-10-17 (`6ac510d`, PR #21).
+- `claude/clarify-production-repo` — this CLAUDE.md update. Open.
+- `claude/organize-photo-management-BYsdN` — merged long ago (PR #7); the remote branch is still there but adds nothing to `main`.
+- Stale on the remote, never merged into `main`: `claude/add-greek-translation-6OE2d`, `claude/nisyros-wines-site-GwFmO`, `claude/notebook-preview`, `claude/test-write-permissions-T427X`, `claude/transparent-nav`. Delete them unless someone is still working on one.
 
 ---
 
