@@ -92,7 +92,7 @@
         <div class="big line2 reveal d1 on" data-cms="m1_line2">from the</div>
         <div class="big red line3 reveal d2 on" data-cms="m1_line3">Edge</div>
         <hr class="slash reveal d3 on">
-        <p class="quote reveal d3 on" data-cms="m1_body">Nisyros is a Volcano. Alive. It breathes, it trembles, it reminds you who is in charge. We make our wine here — on the edge of the crater.</p>
+        <p class="quote reveal d3 on" data-cms="m1_body">Nisyros is a Volcano. Alive. It breathes, it trembles, it reminds you who is in charge. We make our wine here, on the edge of the crater.</p>
       </div>
       <div class="panel-illust reveal d2 on">
         <img src="assets/1.svg" alt="Edge illustration">
@@ -124,7 +124,7 @@
         <div class="big line1 reveal" data-cms="m3_line1">With the</div>
         <div class="big red line2 reveal d1" data-cms="m3_line2">Land</div>
         <hr class="slash reveal d2">
-        <p class="quote reveal d2" data-cms="m3_body">The volcanic soil of Nisyros is a blessed land. We are guests and, for a moment, caretakers. For millennia agriculture sustained this island. We revive that tradition, with respect and endless dedication. The vine must live here long after we are gone.</p>
+        <p class="quote reveal d2" data-cms="m3_body">The volcanic soil of Nisyros is a blessed land. We are guests and, for a moment, caretakers. For millennia agriculture sustained this island. We revive that tradition, with respect and endless dedication.</p>
       </div>
       <div class="panel-illust reveal d2">
         <img src="assets/3.svg" alt="Land illustration">
@@ -168,7 +168,7 @@
         <div class="big line1 reveal" data-cms="m6_line1">We Do</div>
         <div class="big red line2 reveal d1" data-cms="m6_line2">What we Say</div>
         <hr class="slash reveal d2">
-        <p class="quote reveal d2" data-cms="m6_body">We share with you the story, the vineyard, the vintage, every step of the process. The bright moments, the dark hours. We do what we say. We say what we do. Trust is part of the bottle.</p>
+        <p class="quote reveal d2" data-cms="m6_body">We share with you the story, the vineyard, the vintage, every step of the process.<br>The bright moments, the dark hours. We do what we say. We say what we do. Trust is part of the bottle.</p>
       </div>
       <div class="panel-illust reveal d1">
         <img src="assets/6.svg" alt="We Do illustration">
@@ -183,7 +183,7 @@
         <div class="big line2 reveal d1" data-cms="credo_line2">in the</div>
         <div class="big red line3 reveal d2" style="margin-top:0.08em;" data-cms="credo_line3">bottle</div>
         <hr class="slash reveal d3">
-        <p class="sub reveal d3" data-cms="credo_body">The endless summer. The Aegean light at sunset. The wind, the waves, the freedom. These islands are a gift. So are these wines. Unique, unrepeatable. True to the land. Clean in the glass.</p>
+        <p class="sub reveal d3" data-cms="credo_body">The endless summer. The Aegean light at sunset. The wind, the waves, the freedom.<br>These islands are a gift.<br>So are these wines: Alive, free, elemental.<br>True to the land. Clean in the glass.</p>
       </div>
       <div class="panel-illust reveal d2">
         <img src="assets/8.svg" alt="Credo illustration">
@@ -429,7 +429,7 @@
     <div class="contact-block reveal d1" id="contact-visits">
       <p class="contact-label">Visits &amp; Tastings</p>
       <div class="contact-value contact-value--sm" data-cms="contact_visits_value">By Appointment</div>
-      <p class="contact-sub" data-cms="contact_visits_sub">We welcome curious visitors. We prefer real conversation over guided tours, so please write to us in advance — especially for tastings. But if you're passing by, knock on the door. If we're around, we'll open it.</p>
+      <p class="contact-sub" data-cms="contact_visits_sub">We welcome curious visitors. We prefer real conversation over guided tours, so please write to us in advance - especially for tastings. But if you're passing by, knock on the door. If we're around, we'll open it.</p>
     </div>
 
     <div class="contact-block reveal d2" id="contact-social">
@@ -894,7 +894,7 @@ const SHEET_CONFIG = '/api/cms?sheet=config';
 const SHEET_WINES  = '/api/cms?sheet=wines';
 const SHEET_FACES  = '/api/cms?sheet=faces';
 function driveUrl(u){if(!u)return'';var m=u.match(/\/d\/([a-zA-Z0-9_-]+)/)||u.match(/[?&]id=([a-zA-Z0-9_-]+)/);return m?'https://lh3.googleusercontent.com/d/'+m[1]+'=s1600':u;}
-function joinCSVLines(t){var r=[],c='',q=false;for(var i=0;i<t.length;i++){var ch=t[i];if(ch==='"'){q=!q;c+=ch;}else if((ch==='\n'||(ch==='\r'&&t[i+1]==='\n'))&&q){c+=' ';if(ch==='\r')i++;}else if(ch==='\r'){}else if(ch==='\n'){r.push(c);c='';}else c+=ch;}if(c)r.push(c);return r;}
+function joinCSVLines(t){var r=[],c='',q=false;for(var i=0;i<t.length;i++){var ch=t[i];if(ch==='"'){q=!q;c+=ch;}else if((ch==='\n'||(ch==='\r'&&t[i+1]==='\n'))&&q){c+='\n';if(ch==='\r')i++;}else if(ch==='\r'){}else if(ch==='\n'){r.push(c);c='';}else c+=ch;}if(c)r.push(c);return r;}
 function splitRow(row){var r=[],c='',q=false;for(var i=0;i<row.length;i++){var ch=row[i];if(ch==='"'){if(q&&row[i+1]==='"'){c+='"';i++;}else q=!q;}else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}r.push(c);return r;}
 function parseCSV(text,headerFirstCell){var key=(headerFirstCell||'id').toLowerCase();var rows=[],lines=joinCSVLines(text.trim()),hi=-1;for(var i=0;i<lines.length;i++){if(splitRow(lines[i])[0].replace(/^"|"$/g,'').trim().toLowerCase()===key){hi=i;break;}}if(hi===-1)return rows;var headers=splitRow(lines[hi]).map(h=>h.replace(/^"|"$/g,'').trim().split('\n')[0].replace(/\s*\(.*$/,'').trim().toLowerCase());for(var i=hi+1;i<lines.length;i++){var vals=splitRow(lines[i]);if(vals.every(v=>!v.trim()))continue;var fv=vals[0].replace(/^"|"$/g,'').trim();if(!fv||fv.charCodeAt(0)===0x25b8)continue;var obj={};headers.forEach((h,idx)=>{obj[h]=(vals[idx]||'').replace(/^"|"$/g,'').trim();});rows.push(obj);}return rows;}
 async function fetchSheet(url){
@@ -926,11 +926,14 @@ async function loadConfig(){
   if(!Object.keys(cfg).length) throw new Error('[CMS] config sheet returned no rows');
   document.querySelectorAll('[data-cms]').forEach(function(el){
     var key = el.dataset.cms;
-    if(cfg[key] !== undefined && cfg[key] !== ''){
-      if(el.dataset.cms.endsWith('_sub') && cfg[key].indexOf('\\n') > -1){
-        el.innerHTML = cfg[key].replace(/\\n/g,'<br>');
+    var val = cfg[key];
+    if(val !== undefined && val !== ''){
+      // Line breaks authored in the sheet — real newlines inside a quoted cell
+      // or a literal \n — become <br> on any data-cms element, not just _sub.
+      if(/\\n|\n/.test(val)){
+        el.innerHTML = val.replace(/\\n|\n/g,'<br>');
       } else {
-        el.textContent = cfg[key];
+        el.textContent = val;
       }
     }
   });
