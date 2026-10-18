@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nisyros Wines — workflow</title>
+<style>
+  @page { size: 297mm 210mm; margin: 0; }
+  html, body { margin: 0; padding: 0; background: #F5F2EE; }
+  svg { display: block; width: 297mm; height: 210mm; }
+  .serif { font-family: "Bitstream Charter", Charter, Georgia, serif; }
+  .mono  { font-family: "DejaVu Sans Mono", monospace; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1123 794" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="ar-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#C46E4B"/>
+    </marker>
+    <marker id="ar-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#EA9332"/>
+    </marker>
+    <marker id="ar-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#A49B92"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1123" height="794" fill="#F5F2EE"/>
+
+  <!-- ── header ── -->
+  <text class="serif" x="56" y="58" font-size="30" fill="#2B2725">How a change reaches nisyroswines.com</text>
+  <text class="mono"  x="56" y="84" font-size="11.5" fill="#6B625C">Two independent paths. Code travels through Git and Netlify. Text and photos go live straight from the Google Sheet.</text>
+  <line x1="56" y1="104" x2="1067" y2="104" stroke="#D8D1C8" stroke-width="1"/>
+
+  <!-- ══ CODE PATH ══ -->
+  <rect x="56" y="124" width="9" height="9" fill="#C46E4B"/>
+  <text class="mono" x="73" y="133" font-size="11" fill="#C46E4B" letter-spacing="1.4">CODE PATH — sections/ · js/main.js · nisyros.css</text>
+  <text class="mono" x="470" y="133" font-size="10" fill="#9A9089">minutes · needs a deploy</text>
+
+  <!-- box 1 -->
+  <rect x="56" y="150" width="210" height="140" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="56" y="150" width="210" height="4" fill="#C46E4B"/>
+  <text class="mono"  x="70" y="178" font-size="9" fill="#C46E4B" letter-spacing="1.2">SESSION</text>
+  <text class="serif" x="70" y="202" font-size="19" fill="#2B2725">Claude Code</text>
+  <text class="mono"  x="70" y="228" font-size="9.5" fill="#6B625C">attached to</text>
+  <text class="mono"  x="70" y="244" font-size="9.5" fill="#6B625C">nicolazonca/nw</text>
+  <text class="mono"  x="70" y="260" font-size="9.5" fill="#6B625C">edits the source files,</text>
+  <text class="mono"  x="70" y="276" font-size="9.5" fill="#6B625C">runs build.sh</text>
+
+  <!-- box 2 -->
+  <rect x="323" y="150" width="210" height="140" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="323" y="150" width="210" height="4" fill="#C46E4B"/>
+  <text class="mono"  x="337" y="178" font-size="9" fill="#C46E4B" letter-spacing="1.2">PRODUCTION REPO</text>
+  <text class="serif" x="337" y="202" font-size="19" fill="#2B2725">GitHub</text>
+  <text class="mono"  x="337" y="228" font-size="9.5" fill="#6B625C">nicolazonca/nw</text>
+  <text class="mono"  x="337" y="244" font-size="9.5" fill="#6B625C">branch claude/… pushed</text>
+  <text class="mono"  x="337" y="260" font-size="9.5" fill="#6B625C">index.html committed</text>
+  <text class="mono"  x="337" y="276" font-size="9.5" fill="#6B625C">with the sources</text>
+
+  <!-- box 3 -->
+  <rect x="590" y="150" width="210" height="140" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="590" y="150" width="210" height="4" fill="#C46E4B"/>
+  <text class="mono"  x="604" y="178" font-size="9" fill="#C46E4B" letter-spacing="1.2">REVIEW</text>
+  <text class="serif" x="604" y="202" font-size="19" fill="#2B2725">Pull request</text>
+  <text class="mono"  x="604" y="228" font-size="9.5" fill="#6B625C">Nicola opens it from</text>
+  <text class="mono"  x="604" y="244" font-size="9.5" fill="#6B625C">the compare URL, checks</text>
+  <text class="mono"  x="604" y="260" font-size="9.5" fill="#6B625C">the deploy preview,</text>
+  <text class="mono"  x="604" y="276" font-size="9.5" fill="#6B625C">merges into main</text>
+
+  <!-- box 4 -->
+  <rect x="857" y="150" width="210" height="140" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="857" y="150" width="210" height="4" fill="#C46E4B"/>
+  <text class="mono"  x="871" y="178" font-size="9" fill="#C46E4B" letter-spacing="1.2">DEPLOY</text>
+  <text class="serif" x="871" y="202" font-size="19" fill="#2B2725">Netlify</text>
+  <text class="mono"  x="871" y="228" font-size="9.5" fill="#6B625C">auto-build on merge</text>
+  <text class="mono"  x="871" y="244" font-size="9.5" fill="#6B625C">to main: bash build.sh</text>
+  <text class="mono"  x="871" y="260" font-size="9.5" fill="#6B625C">→ index.html, served</text>
+  <text class="mono"  x="871" y="276" font-size="9.5" fill="#6B625C">from the CDN</text>
+
+  <!-- arrows across the code path -->
+  <line x1="272" y1="220" x2="317" y2="220" stroke="#C46E4B" stroke-width="1.6" marker-end="url(#ar-red)"/>
+  <line x1="539" y1="220" x2="584" y2="220" stroke="#C46E4B" stroke-width="1.6" marker-end="url(#ar-red)"/>
+  <line x1="806" y1="220" x2="851" y2="220" stroke="#C46E4B" stroke-width="1.6" marker-end="url(#ar-red)"/>
+
+  <!-- ── the wrong turn: hellosandro/nw ── -->
+  <path d="M161,290 L161,373 L317,373" fill="none" stroke="#A49B92" stroke-width="1.4"
+        stroke-dasharray="5 4" marker-end="url(#ar-grey)"/>
+  <text class="mono" x="172" y="331" font-size="9" fill="#A49B92">session opened</text>
+  <text class="mono" x="172" y="345" font-size="9" fill="#A49B92">on the wrong repo</text>
+
+  <rect x="323" y="330" width="210" height="86" rx="4" fill="#EDE8E1" stroke="#A49B92" stroke-width="1.1" stroke-dasharray="5 4"/>
+  <text class="mono"  x="337" y="354" font-size="9" fill="#A49B92" letter-spacing="1.2">UPSTREAM FORK PARENT</text>
+  <text class="serif" x="337" y="378" font-size="17" fill="#8A8077">GitHub · hellosandro/nw</text>
+  <text class="mono"  x="337" y="400" font-size="9.5" fill="#A49B92">not in the deploy path</text>
+
+  <path d="M533,373 L618,373" fill="none" stroke="#A49B92" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <line x1="624" y1="365" x2="640" y2="381" stroke="#C46E4B" stroke-width="2"/>
+  <line x1="640" y1="365" x2="624" y2="381" stroke="#C46E4B" stroke-width="2"/>
+  <text class="mono" x="654" y="370" font-size="10" fill="#2B2725">Netlify never builds from here.</text>
+  <text class="mono" x="654" y="386" font-size="10" fill="#6B625C">A branch pushed here cannot reach the site.</text>
+
+  <!-- ══ CONTENT PATH ══ -->
+  <rect x="56" y="446" width="9" height="9" fill="#EA9332"/>
+  <text class="mono" x="73" y="455" font-size="11" fill="#EA9332" letter-spacing="1.4">CONTENT PATH — wines · faces · config</text>
+  <text class="mono" x="470" y="455" font-size="10" fill="#9A9089">instant · no deploy</text>
+
+  <!-- box A -->
+  <rect x="56" y="472" width="210" height="130" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="56" y="472" width="210" height="4" fill="#EA9332"/>
+  <text class="mono"  x="70" y="500" font-size="9" fill="#EA9332" letter-spacing="1.2">CMS</text>
+  <text class="serif" x="70" y="524" font-size="19" fill="#2B2725">Google Sheet</text>
+  <text class="mono"  x="70" y="550" font-size="9.5" fill="#6B625C">three tabs: wines,</text>
+  <text class="mono"  x="70" y="566" font-size="9.5" fill="#6B625C">faces, config — copy,</text>
+  <text class="mono"  x="70" y="582" font-size="9.5" fill="#6B625C">specs, Drive photo links</text>
+
+  <!-- box B -->
+  <rect x="323" y="472" width="210" height="130" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="323" y="472" width="210" height="4" fill="#EA9332"/>
+  <text class="mono"  x="337" y="500" font-size="9" fill="#EA9332" letter-spacing="1.2">PUBLISHED</text>
+  <text class="serif" x="337" y="524" font-size="19" fill="#2B2725">CSV per tab</text>
+  <text class="mono"  x="337" y="550" font-size="9.5" fill="#6B625C">one Google URL for</text>
+  <text class="mono"  x="337" y="566" font-size="9.5" fill="#6B625C">each tab, refreshed</text>
+  <text class="mono"  x="337" y="582" font-size="9.5" fill="#6B625C">when the sheet is saved</text>
+
+  <!-- box C -->
+  <rect x="590" y="472" width="210" height="130" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="590" y="472" width="210" height="4" fill="#EA9332"/>
+  <text class="mono"  x="604" y="500" font-size="9" fill="#EA9332" letter-spacing="1.2">PROXY</text>
+  <text class="serif" x="604" y="524" font-size="19" fill="#2B2725">Netlify redirect</text>
+  <text class="mono"  x="604" y="550" font-size="9.5" fill="#6B625C">/api/cms?sheet=…</text>
+  <text class="mono"  x="604" y="566" font-size="9.5" fill="#6B625C">200-redirect to Google,</text>
+  <text class="mono"  x="604" y="582" font-size="9.5" fill="#6B625C">same origin, no CORS</text>
+
+  <!-- rule of thumb -->
+  <rect x="857" y="472" width="168" height="130" rx="4" fill="#FFFFFF" stroke="#2B2725" stroke-width="1.1"/>
+  <rect x="857" y="472" width="168" height="4" fill="#C7BCA3"/>
+  <text class="mono"  x="871" y="500" font-size="9" fill="#9A9089" letter-spacing="1.2">RULE OF THUMB</text>
+  <text class="mono"  x="871" y="526" font-size="9.5" fill="#2B2725">words, specs, photos</text>
+  <text class="mono"  x="871" y="542" font-size="9.5" fill="#6B625C">→ the Google Sheet</text>
+  <text class="mono"  x="871" y="568" font-size="9.5" fill="#2B2725">layout, styles, scripts</text>
+  <text class="mono"  x="871" y="584" font-size="9.5" fill="#6B625C">→ the repo, then a PR</text>
+
+  <line x1="272" y1="537" x2="317" y2="537" stroke="#EA9332" stroke-width="1.6" marker-end="url(#ar-amber)"/>
+  <line x1="539" y1="537" x2="584" y2="537" stroke="#EA9332" stroke-width="1.6" marker-end="url(#ar-amber)"/>
+
+  <!-- ── live site ── -->
+  <path d="M1046,290 L1046,688 L813,688" fill="none" stroke="#C46E4B" stroke-width="1.6" marker-end="url(#ar-red)"/>
+  <text class="mono" x="1036" y="634" font-size="9.5" fill="#C46E4B" text-anchor="end">on merge</text>
+  <path d="M695,602 L695,636" fill="none" stroke="#EA9332" stroke-width="1.6" marker-end="url(#ar-amber)"/>
+  <text class="mono" x="706" y="624" font-size="9.5" fill="#EA9332">on page load</text>
+
+  <rect x="323" y="642" width="484" height="92" rx="4" fill="#2B2725"/>
+  <text class="mono"  x="347" y="670" font-size="9" fill="#C7BCA3" letter-spacing="1.2">LIVE</text>
+  <text class="serif" x="347" y="698" font-size="23" fill="#F5F2EE">nisyroswines.com</text>
+  <text class="mono"  x="347" y="718" font-size="9.5" fill="#C7BCA3">index.html from the Netlify CDN, then the sheet is fetched in the browser</text>
+
+  <text class="mono" x="56" y="766" font-size="9.5" fill="#9A9089">Code change → branch → pull request → merge → build.  Content change → save the sheet → reload the page.</text>
+  <text class="mono" x="1067" y="766" font-size="9.5" fill="#9A9089" text-anchor="end">Nisyros Wines · 2026-10-17</text>
+</svg>
+</body>
+</html>

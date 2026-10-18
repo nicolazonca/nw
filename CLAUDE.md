@@ -2,7 +2,7 @@
 
 > **Living document.** This file is the shared source of truth for the Nisyros Wines website project. It is maintained and updated by Claude across sessions so that Nicola, Sandro, and any collaborator landing on the repo have the full picture without archaeological digs through chat history.
 >
-> **Last updated:** 2026-10-17 · **Maintained by:** Claude (Cowork) · **Owners:** Nicola Zonca (nicola@nativeprime.com), Sandro (design + deploy)
+> **Last updated:** 2026-10-18 · **Maintained by:** Claude (Cowork) · **Owners:** Nicola Zonca (nicola@nativeprime.com), Sandro (design + deploy)
 
 ---
 
@@ -24,13 +24,13 @@ Tone in copy: short, declarative sentences. No marketing fluff. The site reads l
 
 ## 2. Live site & repository
 
-> **⚠️ Claude session check — read this first.** This project has two Git repositories with the same name on GitHub: `hellosandro/nw` (upstream fork parent) and `nicolazonca/nw` (production, deploys to Netlify). A Claude session can only be attached to ONE at a time — same-named repos conflict on the shared checkout path, so `add_repo` for the other one is refused for push (`clone_dir_collision`); only anonymous read access remains. **Always open the session with `nicolazonca/nw` as the source.** If you find yourself in a session attached to `hellosandro/nw`, STOP: branches pushed there will not reach https://nisyroswines.com. Ask the user to re-open the session on `nicolazonca/nw` and resume there.
+> **⚠️ Claude session check — read this first.** This project has two Git repositories with the same name on GitHub: `hellosandro/nw` (upstream fork parent) and `nicolazonca/nw` (production, deploys to Netlify). A Claude session can only be attached to ONE at a time — same-named repos conflict on the shared checkout path, so `add_repo` for the other one is refused for push (`clone_dir_collision`); only anonymous read access remains. **Always open the session with `nicolazonca/nw` as the source.** If you find yourself in a session attached to `hellosandro/nw`, STOP: branches pushed there will not reach https://nisyroswines.com. Ask the user to re-open the session on `nicolazonca/nw` and resume there. `hellosandro/nw` is frozen as of 2026-10-17: never use GitHub’s **Sync fork** button either — see §7.8.
 
 | | |
 |---|---|
 | Live site | https://nisyroswines.com |
 | Repo (production — push here) | https://github.com/nicolazonca/nw |
-| Repo (upstream fork parent, not in the deploy path) | https://github.com/hellosandro/nw |
+| Repo (upstream fork parent — frozen, never sync) | https://github.com/hellosandro/nw |
 | Deployment | Netlify, auto-deploy on merge to `main` of `nicolazonca/nw` |
 | Instagram | https://www.instagram.com/nisyroswines/ |
 
@@ -148,6 +148,7 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 5. **Confirm exact wording before applying copy changes.**
 6. **No silent failures.** If the CMS returns bad data, the site should fail visibly, not quietly degrade.
 7. **Git identity:** commit as `nicolazonca` / `nicolazonca@me.com`. Nicola has a second GitHub account that should not be used here.
+8. **Never sync the fork.** Do not press GitHub’s *Sync fork* button and do not merge `hellosandro/main` into this repo. The upstream parent is frozen: its `main` carries work that duplicates what already shipped here, and merging it conflicts (see §9). Anything from Sandro comes in as a pull request opened against `nicolazonca/nw`.
 
 ---
 
@@ -168,7 +169,7 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 ---
 
-## 9. Current state (as of 2026-10-17)
+## 9. Current state (as of 2026-10-18)
 
 **Deployment:** Netlify only. Production repo is the fork `nicolazonca/nw`; merging to its `main` triggers an auto-deploy to https://nisyroswines.com. `hellosandro/nw` is the upstream of the fork relationship but is **not** in the deploy path — Nicola's repo is fully independent. DNS is hosted on Google Cloud DNS (`ns-cloud-d1.googledomains.com`), with the apex pointing to Netlify's load balancer (`75.2.60.5`) and `www` CNAME'd to `nisyros-wines.netlify.app`.
 
@@ -182,6 +183,8 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 - PR #21 — the `data-cms` fallbacks in `sections/` were re-synced with the config sheet (credo, m1, m3, m6, contact), and the CMS loader now keeps the line breaks authored in the sheet: `joinCSVLines` preserves a newline inside a quoted cell, and `loadConfig` renders both real newlines and the literal `\n` as `<br>` on every `data-cms` element — not just on `_sub` keys. Verified live on https://nisyroswines.com.
 - A Claude session attached to `hellosandro/nw` pushed three PRs there; none of them could reach the site, because Netlify builds only from `nicolazonca/nw`. The work was re-applied here afterwards — nothing is left outstanding on that side. Hence the session check at the top of §2.
+
+**Fork relationship — decided 2026-10-18:** the fork link to `hellosandro/nw` stays (detaching it is a GitHub Support request), but it is no longer a channel: no more Sync fork, and no merges from upstream. State measured when the decision was taken — upstream `main` is at `e31bb40`, four commits of 2026-10-17 (its PRs #32 and #33) that re-implement, as separate commits, the two fixes shipped here in PR #21: the manifesto fallback sync and the CMS line breaks. Nothing there is worth porting — the two implementations are equivalent, and this repo’s credo fallback also carries the `<br>`, theirs does not. `nicolazonca/main` is 32 commits ahead of it, and `git merge-tree` shows a merge of the two would conflict in `index.html`, `js/main.js` and `sections/manifesto.html`. Sandro’s last commit here is 2026-04-21; his work used to arrive through two fork syncs (2026-04-21 and 2026-06-30). From now on it arrives as a pull request against this repo.
 
 **Branches:**
 
@@ -220,4 +223,4 @@ If you are Nicola or Sandro and something in this doc is wrong or out of date, f
 | DNS | Google Cloud DNS |
 | Social | Instagram `@nisyroswines` |
 | Repo (production) | GitHub `nicolazonca/nw` |
-| Repo (upstream fork parent) | GitHub `hellosandro/nw` (not in the deploy path) |
+| Repo (upstream fork parent) | GitHub `hellosandro/nw` — not in the deploy path, frozen, never synced (§7.8) |
