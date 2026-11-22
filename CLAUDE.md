@@ -2,7 +2,7 @@
 
 > **Living document.** This file is the shared source of truth for the Nisyros Wines website project. It is maintained and updated by Claude across sessions so that Nicola, Sandro, and any collaborator landing on the repo have the full picture without archaeological digs through chat history.
 >
-> **Last updated:** 2026-10-18 · **Maintained by:** Claude (Cowork) · **Owners:** Nicola Zonca (nicola@nativeprime.com), Sandro (design + deploy)
+> **Last updated:** 2026-11-22 · **Maintained by:** Claude (Cowork) · **Owners:** Nicola Zonca (nicola@nativeprime.com), Sandro (design + deploy)
 
 ---
 
@@ -24,7 +24,7 @@ Tone in copy: short, declarative sentences. No marketing fluff. The site reads l
 
 ## 2. Live site & repository
 
-> **⚠️ Claude session check — read this first.** This project has two Git repositories with the same name on GitHub: `hellosandro/nw` (upstream fork parent) and `nicolazonca/nw` (production, deploys to Netlify). A Claude session can only be attached to ONE at a time — same-named repos conflict on the shared checkout path, so `add_repo` for the other one is refused for push (`clone_dir_collision`); only anonymous read access remains. **Always open the session with `nicolazonca/nw` as the source.** If you find yourself in a session attached to `hellosandro/nw`, STOP: branches pushed there will not reach https://nisyroswines.com. Ask the user to re-open the session on `nicolazonca/nw` and resume there. `hellosandro/nw` is frozen as of 2026-10-17: never use GitHub’s **Sync fork** button either — see §7.8.
+> **⚠️ Claude session check — read this first.** This project has two Git repositories with the same name on GitHub: `hellosandro/nw` (upstream fork parent) and `nicolazonca/nw` (production, deploys to Netlify). A Claude session can only be attached to ONE at a time — same-named repos conflict on the shared checkout path, so `add_repo` for the other one is refused for push (`clone_dir_collision`); only anonymous read access remains. **Always open the session with `nicolazonca/nw` as the source.** If you find yourself in a session attached to `hellosandro/nw`, STOP: branches pushed there will not reach https://nisyroswines.com. Ask the user to re-open the session on `nicolazonca/nw` and resume there. `hellosandro/nw` is frozen as of 2026-10-17: never use GitHub’s **Sync fork** button either — see §7.9.
 
 | | |
 |---|---|
@@ -57,8 +57,16 @@ nw/
 ├── build.sh              # concatenates sections + JS → index.html
 ├── index.html            # BUILD ARTIFACT — never edit by hand
 ├── styleguide.html       # internal design reference
+├── styleguide2.html      # internal design reference
+├── styleguide3.html      # internal design reference
+├── docs/                 # internal docs (publishing workflow diagram)
 └── server.py             # local dev server
 ```
+
+**Everything in the repo root is deployed.** `netlify.toml` sets `publish = "."`, so
+any file added at the root is reachable on nisyroswines.com unless a `status = 404`
+redirect blocks it. The internal files above are blocked that way (§9, 2026-11-22).
+Add a new one whenever an internal file lands in the repo.
 
 **Build step:** run `./build.sh` inside the repo root. It produces `index.html`, which Netlify serves at the site root.
 
@@ -147,8 +155,13 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 4. **Propose options before implementing visual changes.** No surprise redesigns.
 5. **Confirm exact wording before applying copy changes.**
 6. **No silent failures.** If the CMS returns bad data, the site should fail visibly, not quietly degrade.
-7. **Git identity:** commit as `nicolazonca` / `nicolazonca@me.com`. Nicola has a second GitHub account that should not be used here.
-8. **Never sync the fork.** Do not press GitHub’s *Sync fork* button and do not merge `hellosandro/main` into this repo. The upstream parent is frozen: its `main` carries work that duplicates what already shipped here, and merging it conflicts (see §9). Anything from Sandro comes in as a pull request opened against `nicolazonca/nw`.
+7. **Local photos go through the Image CDN.** Reference a repo JPG as
+   `/.netlify/images?url=/assets/<file>.jpg&w=<width>`, never as a bare `assets/…` path —
+   the raw files are 500 KB–1 MB each. SVGs stay direct. Side effect: `/.netlify/images`
+   only resolves on Netlify, so photos are blank under `server.py`; check visuals on the
+   deploy preview, not locally.
+8. **Git identity:** commit as `nicolazonca` / `nicolazonca@me.com`. Nicola has a second GitHub account that should not be used here.
+9. **Never sync the fork.** Do not press GitHub’s *Sync fork* button and do not merge `hellosandro/main` into this repo. The upstream parent is frozen: its `main` carries work that duplicates what already shipped here, and merging it conflicts (see §9). Anything from Sandro comes in as a pull request opened against `nicolazonca/nw`.
 
 ---
 
@@ -178,6 +191,29 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 **Faces section:** wired to the `faces` tab of the CMS sheet. Polaroids load at `w=800`, lightbox at `w=1600`. Lightbox shows label + caption text overlaid on the photo, anchored to the photo's own bounds (not the viewport). Falls back to the hardcoded `<figure>`s in `sections/faces.html` if the CMS fails or is empty.
 
 **Wines section:** rendered entirely from the `wines` tab. `sections/wines.html` ships the intro card, an empty `#wines-container` and the collections card — there is no hardcoded wine fallback any more. Five wines on the sheet; the sixth row holds the Drive-link instructions and is skipped because it has no `name`.
+
+**Last changes (2026-11-22) — technical maintenance:**
+
+- **Internal files are no longer public.** `publish = "."` was serving `/CLAUDE.md`,
+  `/README.md`, `/build.sh`, `/server.py`, `/styleguide*.html` and `/docs/*` as 200 OK on
+  nisyroswines.com — CLAUDE.md exposed both of Nicola's email addresses. `netlify.toml` now
+  returns 404 for all of them (`force = true`, otherwise the static file wins).
+- **Local photos moved to the Netlify Image CDN.** The hero background in `nisyros.css` and
+  the eight fallback `<figure>` photos in `sections/faces.html` now go through
+  `/.netlify/images?url=/assets/…&w=…`. The hero alone drops from 772 KB to ~168 KB at
+  w=1920 and ~71 KB at w=1200, in AVIF/WebP. Three CSS media queries (1920 / 1280 / 900)
+  with matching `<link rel="preload">` hints in `head.html`. No visual change.
+- **Caching.** Netlify's default was `max-age=0, must-revalidate` on everything. `/assets/*`
+  now caches for a week with background revalidation; `nisyros.css` for a day (it is
+  versioned by hand with `?v=N`, bumped to `v=8`).
+- **Security headers** added for every route: `X-Content-Type-Options`, `X-Frame-Options`,
+  `Referrer-Policy`, `Permissions-Policy`. No CSP yet — the page runs inline scripts plus
+  Typekit, Google Fonts and GA4, so it needs its own pass.
+- **SEO.** `sitemap.xml` `lastmod` was stuck at 2026-05-02. Removed the duplicate
+  `<meta name="description" lang="el">` and `keywords lang="el"` (the `lang` attribute does
+  nothing on a meta description — Google saw two and picked one) and the three `hreflang`
+  annotations that all pointed at the same URL. The Greek strings are in git history and
+  come back when a real `/el/` page ships. Added `preconnect` for the font hosts.
 
 **Last changes (2026-10-17):**
 
@@ -223,4 +259,4 @@ If you are Nicola or Sandro and something in this doc is wrong or out of date, f
 | DNS | Google Cloud DNS |
 | Social | Instagram `@nisyroswines` |
 | Repo (production) | GitHub `nicolazonca/nw` |
-| Repo (upstream fork parent) | GitHub `hellosandro/nw` — not in the deploy path, frozen, never synced (§7.8) |
+| Repo (upstream fork parent) | GitHub `hellosandro/nw` — not in the deploy path, frozen, never synced (§7.9) |

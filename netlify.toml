@@ -23,6 +23,90 @@
   status = 200
   force = true
 
+# ──────────────────────────────────────────────────────────────
+#  Internal files must not be reachable on the public site.
+#  publish = "." deploys the whole repo root, so these are
+#  served unless explicitly blocked. force = true is required:
+#  without it an existing static file wins over the rule.
+# ──────────────────────────────────────────────────────────────
+[[redirects]]
+  from = "/CLAUDE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/build.sh"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/server.py"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/styleguide.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/styleguide2.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/styleguide3.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# ──────────────────────────────────────────────────────────────
+#  Headers
+# ──────────────────────────────────────────────────────────────
+
+# Security headers on every route. No CSP here on purpose: the page
+# runs inline scripts and pulls Typekit + Google Fonts + GA4, so a CSP
+# needs its own pass to avoid breaking the site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=(), usb=()"
+
+# Static assets. Netlify's default is max-age=0, must-revalidate, so
+# every visit re-checks every image. Filenames carry no content hash,
+# so this is a week rather than a year, with background revalidation.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# The stylesheet is versioned by hand (nisyros.css?v=N in head.html).
+# A day of cache keeps a forgotten version bump from stranding anyone.
+[[headers]]
+  for = "/nisyros.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
 # Allow Netlify Image CDN to transform Google Drive-hosted photos.
 # Source links come from the CMS as https://lh3.googleusercontent.com/d/<file_id>
 # and are requested via /.netlify/images?url=...&w=...
