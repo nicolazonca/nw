@@ -272,8 +272,27 @@ if (wScroll && wDots) setupDots(wScroll, wDots, wControls);
         if ((delta>0 && canDown) || (delta<0 && canUp)) { accum=0; return; }
       }
     }
-    if (delta>0&&idx>=pp.length-1){accum=0;var wr=el.closest('.hscroll-wrapper'),nx=wr?wr.nextElementSibling:null;if(nx)navScrollTo(nx);return;}
-    if (delta<0&&idx<=0){accum=0;return;}
+    // Leaving the carousel for the next section goes through the same gate as a
+    // slide change: it waits for `locked` to clear and needs the same deliberate
+    // accumulation. Without that, the momentum tail of the swipe that just landed
+    // on the last slide is read against the slide it is still animating toward —
+    // getIdx() reports the last index as soon as the animation passes the
+    // midpoint — so the last slide flashes by and the page drops to the next
+    // section before anyone can read it.
+    if (delta>0 && idx>=pp.length-1) {
+      var nx = wr ? wr.nextElementSibling : null;
+      if (!nx) { accum=0; return; }          // nothing below: leave the page alone
+      e.preventDefault();
+      if (locked) return;
+      accum+=delta; clearTimeout(rt); rt=setTimeout(()=>accum=0,150);
+      if (Math.abs(accum)<80) return;
+      locked=true; accum=0; navScrollTo(nx);
+      setTimeout(()=>{locked=false;},1200);
+      return;
+    }
+    // Mirror of the above at the other end: while a slide change is in flight,
+    // swallow the tail instead of letting it scroll the page off this section.
+    if (delta<0 && idx<=0) { accum=0; if (locked) e.preventDefault(); return; }
     e.preventDefault();
     if (locked) return;
     accum+=delta; clearTimeout(rt); rt=setTimeout(()=>accum=0,150);
