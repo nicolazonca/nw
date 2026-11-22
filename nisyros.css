@@ -68,8 +68,10 @@ body::before {
   line-height: 1;
   text-transform: uppercase;
   transition: color 0.3s ease;
+  display: inline-flex; align-items: center; gap: 12px;
 }
 #nav .nav-logo span { color: inherit; }
+#nav .nav-mark { display: block; flex: none; width: 32px; height: 30px; fill: currentColor; }
 #nav.on-dark .nav-logo { color: #fff; }
 
 .hamburger {

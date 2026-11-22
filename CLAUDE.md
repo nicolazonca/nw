@@ -44,7 +44,7 @@ Multi-file source repo, assembled by a shell build script into a single deployab
 nw/
 ├── sections/         # HTML fragments, one per page section
 │   ├── head.html         # <head>, meta, fonts, CSS link
-│   ├── nav.html          # fixed nav bar + full-screen overlay menu
+│   ├── nav.html          # fixed nav bar (logo mark + wordmark) + full-screen overlay menu
 │   ├── manifesto.html    # horizontal-scroll manifesto (VII slides + credo)
 │   ├── hero.html         # hero section with inline SVG logo
 │   ├── wines.html        # horizontal-scroll wine cards (CMS overwrites at runtime)
@@ -52,7 +52,7 @@ nw/
 │   └── contact.html      # contact blocks + footer
 ├── js/
 │   └── main.js           # scroll engine, CMS loader, nav, animations
-├── assets/               # local images + SVG illustrations (1.svg–8.svg)
+├── assets/               # local images + SVG illustrations (1–6.svg and 8.svg; there is no 7)
 ├── nisyros.css           # all styles
 ├── build.sh              # concatenates sections + JS → index.html
 ├── index.html            # BUILD ARTIFACT — never edit by hand
@@ -78,9 +78,13 @@ Manifesto-style, quiet, confident, deliberately spare.
 
 **Type:**
 
-- **Bookmania** (Adobe Typekit — `https://use.typekit.net/jyf6llr.css`) — all display type.
+- **Bookmania** (Adobe Typekit kit `jyf6llr` — `https://use.typekit.net/jyf6llr.css`) — the page's base font (set on `html`) and all display type.
+- **Tasman**, weight 700 (same Typekit kit) — the "NISYROS WINES" wordmark in the nav, and nothing else (`#nav .nav-logo`). It is the typeface of the logo's own lettering; the logo sets it with wider letter-spacing, the nav at 0.
 - **JetBrains Mono**, weight 300 (Google Fonts) — body copy and labels.
+- **Raleway**, weight 500 (Google Fonts) — wine card subtitles only (`.wine-subtitle`).
 - No ghost / stroke / outlined text. Type is always solid color.
+
+**Logo:** the full logo — mark, wordmark and the "Volcanic Nature" baseline — is an inline SVG in `sections/hero.html`. The nav carries the mark only, beside the Tasman wordmark: an inline SVG in `sections/nav.html` holding subpaths 14–22 of the hero's `logo-wordmark` path (the mark; 0–13 are the letters), copied verbatim and filled with `currentColor`, so it turns white with the text over the hero. **If the logo artwork changes, update both.**
 
 **Color palette:**
 
@@ -182,7 +186,7 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 ---
 
-## 9. Current state (as of 2026-10-18)
+## 9. Current state (as of 2026-11-22)
 
 **Deployment:** Netlify only. Production repo is the fork `nicolazonca/nw`; merging to its `main` triggers an auto-deploy to https://nisyroswines.com. `hellosandro/nw` is the upstream of the fork relationship but is **not** in the deploy path — Nicola's repo is fully independent. DNS is hosted on Google Cloud DNS (`ns-cloud-d1.googledomains.com`), with the apex pointing to Netlify's load balancer (`75.2.60.5`) and `www` CNAME'd to `nisyros-wines.netlify.app`.
 
@@ -191,6 +195,17 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 **Faces section:** wired to the `faces` tab of the CMS sheet. Polaroids load at `w=800`, lightbox at `w=1600`. Lightbox shows label + caption text overlaid on the photo, anchored to the photo's own bounds (not the viewport). Falls back to the hardcoded `<figure>`s in `sections/faces.html` if the CMS fails or is empty.
 
 **Wines section:** rendered entirely from the `wines` tab. `sections/wines.html` ships the intro card, an empty `#wines-container` and the collections card — there is no hardcoded wine fallback any more. Five wines on the sheet; the sixth row holds the Drive-link instructions and is skipped because it has no `name`.
+
+**Last changes (2026-11-22) — logo mark in the nav:**
+
+- The nav showed only the "NISYROS WINES" wordmark, never the mark — that was Sandro's design from
+  the first upload (2026-04-16, `35f2990`), not a regression. Nicola chose to add it (option B of
+  three mockups: wordmark only / mark + wordmark / mark only). The mark sits left of the wordmark at
+  32×30 px with a 12 px gap; see §4 *Logo* for where it comes from. Fixed width and height rather than
+  `width: auto`, which Safari handles badly on inline SVG. Checked at 320 px wide: one line, 26 px
+  clear of the hamburger. `nisyros.css` bumped to `?v=9`.
+- §4 corrected: it said Bookmania was used for all display type, but the nav wordmark has always
+  been Tasman, and Raleway (wine subtitles) was not listed at all.
 
 **Last changes (2026-11-22) — manifesto scroll bug:**
 
@@ -237,8 +252,9 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 **Branches:**
 
-- `main` — production. Last sync: 2026-10-17 (`6ac510d`, PR #21).
-- `claude/clarify-production-repo` — this CLAUDE.md update. Open.
+- `main` — production. Last merge: 2026-10-18 (`bd8ba14`, PR #23).
+- `claude/quirky-cannon-6to0ly` — the 2026-11-22 work above (maintenance, scroll fix, nav mark). Open.
+- `claude/clarify-production-repo` — merged as PRs #22 and #23; the remote branch adds nothing to `main`.
 - `claude/organize-photo-management-BYsdN` — merged long ago (PR #7); the remote branch is still there but adds nothing to `main`.
 - Stale on the remote, never merged into `main`: `claude/add-greek-translation-6OE2d`, `claude/nisyros-wines-site-GwFmO`, `claude/notebook-preview`, `claude/test-write-permissions-T427X`, `claude/transparent-nav`. Delete them unless someone is still working on one.
 
@@ -264,8 +280,8 @@ If you are Nicola or Sandro and something in this doc is wrong or out of date, f
 
 | Purpose | Resource |
 |---|---|
-| Display type | Adobe Typekit — `https://use.typekit.net/jyf6llr.css` |
-| Body type | Google Fonts JetBrains Mono |
+| Display type | Adobe Typekit kit `jyf6llr` — Bookmania (display) + Tasman (nav wordmark) |
+| Body type | Google Fonts — JetBrains Mono (body), Raleway (wine subtitles) |
 | Deployment | Netlify (auto-deploy from `nicolazonca/nw` main) |
 | Image CDN | Netlify Image CDN (`/.netlify/images?…`) |
 | CMS | Google Sheets, proxied via Netlify redirects in `netlify.toml` |
