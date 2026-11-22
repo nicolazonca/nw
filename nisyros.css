@@ -431,8 +431,19 @@ hr.slash { border: none; border-top: 2px solid var(--red); width: 50px; margin: 
 }
 #hero .hero-bg {
   position: absolute; inset: 0;
-  background-image: url('assets/nw-hero.jpg');
+  /* Served through the Netlify Image CDN: the source JPG is 772 KB, the
+     transformed variants are ~168 KB (w=1920) and ~71 KB (w=1200), in
+     AVIF/WebP where the browser accepts them. Same pixels, same crop.
+     Note: /.netlify/images only resolves on Netlify, so this background
+     is blank under the plain local server.py — use a deploy preview. */
+  background-image: url('/.netlify/images?url=/assets/nw-hero.jpg&w=1920');
   background-size: cover; background-position: center 40%; z-index: 0;
+}
+@media (max-width: 1280px) {
+  #hero .hero-bg { background-image: url('/.netlify/images?url=/assets/nw-hero.jpg&w=1280'); }
+}
+@media (max-width: 768px) {
+  #hero .hero-bg { background-image: url('/.netlify/images?url=/assets/nw-hero.jpg&w=900'); }
 }
 #hero .hero-bg::after {
   content: ''; position: absolute; inset: 0;
