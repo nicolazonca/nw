@@ -192,6 +192,19 @@ Wines and faces are edited in a Google Sheet, published as CSV per tab, and fetc
 
 **Wines section:** rendered entirely from the `wines` tab. `sections/wines.html` ships the intro card, an empty `#wines-container` and the collections card — there is no hardcoded wine fallback any more. Five wines on the sheet; the sixth row holds the Drive-link instructions and is skipped because it has no `name`.
 
+**Last changes (2026-11-22) — manifesto scroll bug:**
+
+- **The last manifesto slide was being skipped on desktop.** Swiping right from slide 6
+  showed the credo for a moment and then dropped the page to the hero. In the `wheel`
+  handler in `js/main.js`, the branch that leaves the carousel for the next section sat
+  *above* the `if (locked) return;` guard, so it never saw the lock. Once `goPanel()` had
+  started its 480 ms animation toward the last slide, `getIdx()` began reporting the last
+  index as soon as the scroll passed the midpoint — and the first wheel event from the
+  trackpad's momentum tail hit that branch and fired `navScrollTo()`. The section jump now
+  goes through the same gate as a slide change (lock + 80-unit accumulation), so it takes
+  a deliberate gesture rather than leftover inertia. The mirror case at the first slide is
+  guarded too. Applies to the wines carousel as well — same handler.
+
 **Last changes (2026-11-22) — technical maintenance:**
 
 - **Internal files are no longer public.** `publish = "."` was serving `/CLAUDE.md`,
